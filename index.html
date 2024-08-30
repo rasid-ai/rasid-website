@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Single Page Promotion</title>
+  </head>
+  <body>
+    <div id="hero-section">
+    </div>
+  
+
+    <div id = "value-propsition">
+      <h2 id="value-propsition-headline">Why Rasid ?</h2>
+      <div id = "key-points">
+        <div class = "point">
+          <h3>AI-Driven Precision</h3>
+          <p>At RASID, we utilize advanced AI-based Earth Observation models to analyze geospatial data with exceptional accuracy, surpassing the capabilities of traditional mapping tools. From identifying land use patterns to detecting environmental changes and infrastructure details, we deliver insights with unmatched precision.</p>
+        </div>
+        <div class = "point">
+          <h3>Our Value Proposition</h3>
+          <p>RASID converts raw data into actionable intelligence by leveraging cutting-edge AI models and efficient geo-processing techniques. Outsourcing complex data analyses to RASID allows you to optimize time and resources, minimize manual effort, and empower decision-makers with the insights required to formulate targeted regulations and implement effective safety measures for urban development.</p>
+        </div>
+        <div class = "point">
+          <h3>Scalable & Cost-Effective Solutions</h3>
+          <p>RASID provides adaptable AI4EO services with pricing plans tailored to fit your business's size and requirements. As your data and processing needs grow, our platform allows you to scale effortlessly. With flexible upgrade options, we ensure a cost-effective solution for businesses at every stage of growth.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div id="call-to-action-section">
+      <div class="video-container">
+          <video id = "demo-video" controls>
+              <source src="./static/video/demo.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+      <button id="call-to-action-section-access-button">Access Now</button>
+  </div>
+  
+
+
+    <div class="slideshow-container">
+      <div class="slideshow-slides">
+        <h3 class = "slide-title">Advanced AI-Powered Precision</h3>
+        <div class = "slideshow-text">
+          Our platform harnesses the power of cutting-edge AI models to analyze geospatial data with exceptional accuracy. 
+          Unlike traditional mapping tools that rely on simpler algorithms, our AI-driven approach identifies subtle patterns 
+          and trends that might otherwise go unnoticed. This enables us to provide insights that are not only highly detailed 
+          but also actionable, whether you're monitoring land use changes, assessing environmental impacts, or analyzing infrastructure details. 
+          Our precision ensures that your decision-making process is informed by the most accurate data available.
+        </div>
+      </div>
+  
+      <div class="slideshow-slides">
+        <h3 class = "slide-title">Flexible and Scalable Pricing Solutions</h3>
+        <div class = "slideshow-text">
+          We offer a range of pricing plans that adapt to your business's growth and needs. 
+          Understanding that every organization is unique, our flexible plans allow you to pay only for the features you require, 
+          making it easy to scale as your data and processing demands increase. Whether you're a small startup or a large enterprise, 
+          our cost-effective solutions ensure that you can upgrade seamlessly as your operations expand, providing a tailored fit for businesses of all sizes.
+        </div>
+      </div>
+  
+      <div class="slideshow-slides">
+        <h3 class = "slide-title">Streamlined Data Processing Efficiency</h3>
+        <div class = "slideshow-text">
+          Our platform combines robust AI with efficient geo-processing architecture, 
+          enabling you to convert raw geospatial data into actionable intelligence swiftly. 
+          By automating complex analyses, our system reduces the need for manual intervention, 
+          saving you time and resources. This efficiency allows your team to focus on strategic decisions 
+          rather than getting bogged down in data processing, ultimately enhancing productivity and driving better outcomes.
+        </div>
+      </div>
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br>
+  
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+    <div class="contact-container">
+      <h1>Contact Us</h1>
+      <div class="contact-content">
+          <div class="map">
+              <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=35.563618%2C33.855980%2C35.571618%2C33.859980&amp;layer=mapnik&amp;marker=33.857980%2C35.567618" 
+                  style="border: 1px solid black"></iframe>
+              <br/>
+              <a href="https://maps.app.goo.gl/VB7Qtxv8gzzGSPdL6" target="_blank" class="map-link">View on Google Maps</a>
+          </div>
+          <div class="form-info">
+              <form action="#" class="contact-form">
+                  <input type="text" name="name" placeholder="Name" required>
+                  <input type="email" name="email" placeholder="Email" required>
+                  <textarea name="message" placeholder="Message" required></textarea>
+                  <button type="submit">Send</button>
+              </form>
+              <div class="contact-info">
+                  <div>
+                      <i class="fas fa-envelope"></i>
+                      <a href="mailto:info@geogroup.ai">info@geogroup.ai</a>
+                  </div>
+                  <div>
+                      <i class="fas fa-map-marker-alt"></i>
+                      Mansourieh, Beirut 11 828
+                  </div>
+                  <div>
+                      <i class="fab fa-linkedin"></i>
+                      <a href="https://www.linkedin.com/company/rasid-ai/">LinkedIn</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+
+  
+    <footer class="site-footer">
+      <iframe src="./static/img/Rasid logo final-01.svg" width="300" height="200" id = "rasid-logo"></iframe>
+    </footer>
+  
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

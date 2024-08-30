@@ -1,6 +1,0 @@
-[hugoVersion]
-extended = true
-min = "0.95.0"
-
-[[imports]]
-path = "github.com/gethugothemes/hugo-modules/shortcodes/image"
