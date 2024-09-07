@@ -1,144 +1,326 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>RASID</title>
-  </head>
-  <body>
-    <div id="hero-section">
-    </div>
-  
 
-    <div id="value-propsition">
-      <div id="key-points" class="row justify-content-evenly mb-5 mt-5">
-        <div class="col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
-          <div class="card shadow-sm p-4 text-center border-0 h-100">
-            <div class="card-body">
-              <h3 class="card-title mb-4">AI-Driven Precision</h3>
-              <p class="card-text">At RASID, we utilize advanced AI-based Earth Observation models to analyze geospatial data with exceptional accuracy, surpassing the capabilities of traditional mapping tools. From identifying land use patterns to detecting environmental changes and infrastructure details, we deliver insights with unmatched precision.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
-          <div class="card shadow-sm p-4 text-center border-0 h-100">
-            <div class="card-body">
-              <h3 class="card-title mb-4">Our Value Proposition</h3>
-              <p class="card-text">RASID converts raw data into actionable intelligence by leveraging cutting-edge AI models and efficient geo-processing techniques. Outsourcing complex data analyses to RASID allows you to optimize time and resources, minimize manual effort, and empower decision-makers with the insights required to formulate targeted regulations and implement effective safety measures for urban development.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
-          <div class="card shadow-sm p-4 text-center border-0 h-100">
-            <div class="card-body">
-              <h3 class="card-title mb-4">Scalable & Cost-Effective Solutions</h3>
-              <p class="card-text">RASID provides adaptable AI4EO services with pricing plans tailored to fit your business's size and requirements. As your data and processing needs grow, our platform allows you to scale effortlessly. With flexible upgrade options, we ensure a cost-effective solution for businesses at every stage of growth.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div id="call-to-action-section" class = "container mt-5 mb-5 text-center position-relative pt-5 overflow-hidden">
-      <div class="video-container">
-          <video id = "demo-video" controls>
-              <source src="./static/video/demo.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
-      </div>
-      <button id="call-to-action-section-access-button" class="btn h-auto fw-bold m-4 shadow fs-5">Access Now</button>
-  </div>
-  
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design Bootstrap</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="static/css/mdb.min.css" rel="stylesheet">
+  <style>
+    html,
+    body,
+    header,
+    .jarallax {
+      height: 700px;
+      min-height: 700px;
+    }
+    @media (max-width: 450px) {
+      html,
+      body,
+      header,
+      .jarallax {
+        height: 700px;
+        min-height: 700px;
+      }
+    }
+    @media (min-width: 451px) and (max-width: 740px) {
+      html,
+      body,
+      header,
+      .jarallax {
+        height: 500px;
+        min-height: 500px;
+      }
+    }
+    @media (min-width: 800px) and (max-width: 850px) {
+      html,
+      body,
+      header,
+      .jarallax {
+        height: 550px;
+        min-height: 550px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation & Intro -->
+  <header>
 
 
-  <div class="slideshow-container position-relative mx-auto h-auto shadow-sm overflow-hidden">
-    <div class="slideshow-slides">
-      <h3 class = "slide-title fw-bold mb-4 text-white">Advanced AI-Powered Precision</h3>
-      <div class = "slideshow-text text-white fs-4">
-        Our platform harnesses the power of cutting-edge AI models to analyze geospatial data with exceptional accuracy. 
-        Unlike traditional mapping tools that rely on simpler algorithms, our AI-driven approach identifies subtle patterns 
-        and trends that might otherwise go unnoticed. This enables us to provide insights that are not only highly detailed 
-        but also 50px;nable, whether you're monitoring land use changes, assessing environmental impacts, or analyzing infrastructure details. 
-        Our precision ensures that your decision-making process is informed by the most accurate data available.
-      </div>
-    </div>
+    <!-- Intro Section -->
+    <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('static/img/4.jpg');">
+      <div class="mask rgba-indigo-light">
+        <div class="container h-100 d-flex justify-content-center align-items-center">
+          <div class="row pt-5 mt-3">
+            <div class="col-md-12 wow fadeIn mb-3">
+              <div class="text-center white-text">
+                <ul class="list-unstyled ">
+                  <li>
+                    <h1 class="display-4 mt-md-5 mt-lg-0 mb-5 font-weight-bold white-text wow fadeIn"
+                      data-wow-delay="0.3s">
+                      <strong>Seeing Earth, Smarter</strong>
+                    </h1>
+                  </li>
 
-    <div class="slideshow-slides">
-      <h3 class = "slide-title fw-bold mb-4 text-white">Flexible and Scalable Pricing Solutions</h3>
-      <div class = "slideshow-text text-white fs-4">
-        We offer a range of pricing plans that adapt to your business's growth and needs. 
-        Understanding that every organization is unique, our flexible plans allow you to pay only for the features you require, 
-        making it easy to scale as your data and processing demands increase. Whether you're a small startup or a large enterprise, 
-        our cost-effective solutions ensure that you can upgrade seamlessly as your operations expand, providing a tailored fit for businesses of all sizes.
-      </div>
-    </div>
 
-    <div class="slideshow-slides">
-      <h3 class = "slide-title fw-bold mb-4 text-white">Streamlined Data Processing Efficiency</h3>
-      <div class = "slideshow-text text-white fs-4">
-        Our platform combines robust AI with efficient geo-processing architecture, 
-        enabling you to convert raw geospatial data into actionable intelligence swiftly. 
-        By automating complex analyses, our system reduces the need for manual intervention, 
-        saving you time and resources. This efficiency allows your team to focus on strategic decisions 
-        rather than getting bogged down in data processing, ultimately enhancing productivity and driving better outcomes.
-      </div>
-    </div>
-    <a class="prev position-absolute top-50 p-3 shadow-sm fw-bold fs-5 user-select-none text-decoration-none" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next position-absolute top-50 p-3 shadow-sm fw-bold fs-5 user-select-none text-decoration-none" onclick="plusSlides(1)">&#10095;</a>
-  </div>
-  <br>
-
-  <div class = "text-center rounded-circle">
-    <span class="dot d-inline-block rounded-circle mx-1 my-0" onclick="currentSlide(1)"></span>
-    <span class="dot d-inline-block rounded-circle mx-1 my-0" onclick="currentSlide(2)"></span>
-    <span class="dot d-inline-block rounded-circle mx-1 my-0" onclick="currentSlide(3)"></span>
-  </div>
-
-    <div class="contact-container my-5 mx-auto p-5 shadow bg-white">
-      <h1 class = "text-left mb-4">Contact Us</h1>
-      <div class="contact-content d-flex justify-content-between align-items-start">
-          <div class="map flex-fill me-3 position-relative">
-              <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=35.563618%2C33.855980%2C35.571618%2C33.859980&amp;layer=mapnik&amp;marker=33.857980%2C35.567618" 
-                  style="border: 1px solid black"></iframe>
-              <br/>
-              <a href="https://maps.app.goo.gl/VB7Qtxv8gzzGSPdL6" target="_blank" class="map-link d-block mt-2 text-decoration-none text-center">View on Google Maps</a>
-          </div>
-          <div class="form-info flex-fill">
-              <form action="#" class="contact-form d-flex flex-column mt-0">
-                  <input type="text" name="name" placeholder="Name" class = "mb-3 p-2 fs-6 border border-secondary rounded" required>
-                  <input type="email" name="email" placeholder="Email" class = "mb-3 p-2 fs-6 border border-secondary rounded" required>
-                  <textarea name="message" placeholder="Message" class = "mb-3 p-2 fs-6 border border-secondary rounded" required></textarea>
-                  <button type="submit" class = "p-2 border-0 rounded">Send</button>
-              </form>
-              <div class="contact-info mt-4 fs-5">
-                  <div class="mb-2 d-flex align-items-center">
-                      <i class="fas fa-envelope me-3"></i>
-                      <a href="mailto:info@geogroup.ai">info@geogroup.ai</a>
-                  </div>
-                  <div class="mb-2 d-flex align-items-center">
-                      <i class="fas fa-map-marker-alt me-3"></i>
-                      Mansourieh, Beirut 11 828
-                  </div>
-                  <div class="mb-2 d-flex align-items-center">
-                      <i class="fab fa-linkedin me-3"></i>
-                      <a href="https://www.linkedin.com/company/rasid-ai/">LinkedIn</a>
-                  </div>
+                </ul>
               </div>
+            </div>
           </div>
+        </div>
       </div>
-  </div>
+    </div>
 
-    <footer class="site-footer bg-white py-5">
-      <iframe src="/static/img/Rasid logo final-01.svg" width="300" height="200" id = "rasid-logo" class="mx-auto d-block"></iframe>
-    </footer>
-  
+  </header>
+  <!-- Navigation & Intro -->
 
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+  <!-- Main content -->
+  <main>
+
+    <div class="container">
+
+      <!-- Section: About 1 -->
+      <section id="about" class="mt-5 mb-5 py-3 wow fadeIn" data-wow-delay="0.2s">
+
+        <!-- Grid row -->
+        <div class="row pt-2 mt-5">
+          <!-- Grid column -->
+          <div class="col-lg-3 col-md-12 mb-3 wow fadeIn" data-wow-delay="0.4s">
+            <!-- Image -->
+            <img src="static/img/logo.svg" class="img-fluid z-depth-1 rounded"
+              alt="My photo">
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-lg-6 ml-auto col-md-12 wow fadeIn" data-wow-delay="0.4s">
+
+            <!-- Secion heading -->
+            <h3 class="mb-5 dark-grey-text title font-weight-bold wow fadeIn" data-wow-delay="0.2s">
+              <strong>RASID</strong>
+            </h3>
+
+            <!-- Description -->
+            <p align="justify" class="grey-text">RASID specializes in AI-driven analysis of satellite imagery to provide critical insights for better decision-making.
+               Our team of experts combines deep knowledge in AI, geospatial data, and industry-specific solutions.
+                
+            </p>
+            <p align="justify" class="grey-text">Our mission is to make geospatial data accessible and actionable for every industry, driving sustainable and efficient decision-making.</p>
+
+          </div>
+          <div class="col-lg-2"></div>
+
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </section>
+      <!-- Section: About 1 -->
+
+      <hr>
+
+      <!-- Section: About 2 -->
+      <section id="about" class="mt-5 mb-5 pb-3 wow fadeIn" data-wow-delay="0.2s">
+
+        <!-- Grid row -->
+        <div class="row pt-4 mt-5">
+
+          <!-- Grid column -->
+          <div class="col-lg-6 col-md-12 wow fadeIn" data-wow-delay="0.4s">
+
+            <!-- Secion heading -->
+            <h3 class="mb-5 dark-grey-text title font-weight-bold wow fadeIn" data-wow-delay="0.2s">
+              <strong>Tailored Solutions</strong>
+            </h3>
+
+            <!-- Description -->
+            <p align="justify" class="grey-text">RASID goes beyond a one-size-fits-all model, offering customized geospatial analysis projects that align with the unique requirements of your industry. Our team is prepared to act on innovative solutions.</p>
+            <p align="justify" class="grey-text">Our expertise is designed to provide actionable insights that can be directly applied to the most pressing challenges in your sector. 
+            </p>
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-lg-6 col-md-12 mb-3 wow fadeIn" data-wow-delay="0.4s">
+
+            <div class="text-left">
+              <h6 class="title font-weight-bold dark-grey-text  spacing mt-4 mx-4">
+                <i class="fas fa-square teal-text mr-2" aria-hidden="true"></i>
+                <strong>Public Sector</strong>
+              </h6>
+              <p class="grey-text font-small mx-4">urban planning, disaster management, environmental monitoring.
+
+              </p>
+            </div>
+
+            <div class="text-left">
+              <h6 class="title font-weight-bold dark-grey-text spacing mt-4 mx-4">
+                <i class="fas fa-square teal-text mr-2" aria-hidden="true"></i>
+                <strong>Agriculture</strong>
+              </h6>
+              <p class="grey-text font-small mx-4">crop health analysis, yield forecasting, land use optimization
+              </p>
+            </div>
+
+            <div class="text-left">
+              <h6 class="title font-weight-bold dark-grey-text spacing mt-4 mx-4">
+                <i class="fas fa-square teal-text mr-2" aria-hidden="true"></i>
+                <strong>Transportation</strong>
+              </h6>
+              <p class="grey-text font-small mx-4">infrastructure planning, traffic analysis, parking lots control.
+              </p>
+            </div>
+            <div class="text-left">
+              <h6 class="title font-weight-bold dark-grey-text spacing mt-4 mx-4">
+                <i class="fas fa-square teal-text mr-2" aria-hidden="true"></i>
+                <strong>Urban Development</strong>
+              </h6>
+              <p class="grey-text font-small mx-4">smart city planning, population density mapping.
+
+              </p>
+            </div>
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </section>
+      <!-- Section: About 2 -->
+
+      <hr>
+
+    </div>
+
+    <!-- Streak -->
+
+      <!-- Streak -->
+
+      <div class="container-fluid light-grey-background">
+        <div class="container py-4">
+
+          <!-- Section: Download -->
+          <section id="services" class="mt-3 mb-3 pb-3">
+
+            <!-- Grid row -->
+            <div class="row mt-5 pt-5 wow fadeIn" data-wow-delay="0.4s">
+
+              <!-- Grid column -->
+              <div class="col-md-6 mb-5 text-center">
+
+                <div class="embed-responsive embed-responsive-16by9 z-depth-1 rounded">
+                  <video  class="embed-responsive-item" controls
+                    >
+                    <source src="static/video/demo.mp4" type="video/mp4">
+</video>
+                </div>
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Second column -->
+              <div class="col-md-6 mb-5 text-center">
+
+                <!-- Section heading -->
+                <h3 class="text-center title mb-3 mt-lg-5 pt-xl-4 pb-2 dark-grey-text font-weight-bold wow fadeIn"
+                  data-wow-delay="0.2s">
+                  <strong>Rasid SaaS</strong>
+                </h3>
+                <p align="justify" class="grey-text ml-4">RASID goes beyond a one-size-fits-all model, offering customized geospatial analysis projects that align with the unique requirements of your industry. Our team is prepared to act on innovative solutions.</p>
+
+                <a class="btn btn-white btn-rounded btn-lg teal-text font-weight-bold ml-0 wow fadeIn"
+                  data-wow-delay="0.2s">
+                  Access Now </a>
+                
+
+              </div>
+              <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+          </section>
+          <!-- Section: Download -->
+
+        </div>
+      </div>
+
+  </main>
+  <!-- Main content -->
+
+  <!-- Footer -->
+  <footer class="page-footer text-center text-md-left unique-color-dark pt-1">
+
+
+
+    <!-- Footer Links -->
+    <div class="container mt-5 mb-4 text-center text-md-left">
+      <div class="row mt-3">
+
+        <!-- First column -->
+        <div class="col-md-3 col-lg-4 col-xl-2 mb-5">
+          <img src="static/img/logo.svg" class="img-fluid z-depth-1 rounded bg-white"
+              alt="My photo">
+        </div>
+        <div class="col-md-3 col-lg-4 col-xl-3 mb-5">
+          <h3 class="spacing font-weight-bold">
+            <strong>Rasid</strong>
+          </h3>
+          <hr class="teal accent-2 mb- mt-0 d-inline-block mx-auto" style="width: 80px;">
+          <p class="h5">Seeing Earth, Smarter</p>
+          <p>
+            Baabda, Lebanon
+          <br>info@rasid.ai</p>
+
+          <p>
+        </div>
+        <div class="col-md-3 col-lg-4 col-xl-3 mb-5">
+          <h5 class="spacing font-weight-bold">
+            <strong>We Are At Linkedin</strong> 
+          </h5>
+          <hr class="teal accent-2 mb- mt-0 d-inline-block mx-auto" style="width: 200px;">
+          
+        </div>
+        <!-- First column -->
+
+
+
+
+
+      </div>
+    </div>
+    <!-- Footer Links -->
+
+
+
+  </footer>
+  <!-- Footer -->
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="static/js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="static/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="static/js/mdb.min.js"></script>
+  <script>
+    // Animation init
+    new WOW().init();
+  </script>
+
+</body>
+
 </html>
