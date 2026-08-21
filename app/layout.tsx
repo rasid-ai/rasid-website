@@ -31,6 +31,12 @@ export const metadata: Metadata = {
   description,
   applicationName: 'RASID',
   metadataBase: new URL('https://rasid.earth'),
+  // Favicon / app icons live in public/logo/ (the green R). Declared here since
+  // we don't use the app/icon.png file convention.
+  icons: {
+    icon: '/logo/favicon.png',
+    apple: '/logo/apple-touch-icon.png',
+  },
   keywords: [
     'geospatial AI',
     'satellite imagery',

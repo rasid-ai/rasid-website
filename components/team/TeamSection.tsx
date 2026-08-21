@@ -43,12 +43,6 @@ export default function TeamSection() {
             </Reveal>
           ))}
         </div>
-
-        {S.note && (
-          <Reveal delay={120} className="mt-16 text-center md:mt-20">
-            <p className="text-[0.95rem] text-mist">{S.note}</p>
-          </Reveal>
-        )}
       </div>
     </section>
   );

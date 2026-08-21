@@ -253,8 +253,8 @@ export const GOPILOT_STUDIO = {
       steps: ['Understanding request', 'Ingesting imagery', 'Screening for plumes', 'Quantifying & locating'],
       model: 'rasid/methane',
       source: 'Sentinel 2 ',
-      base: '/methane-base.webp',
-      result: '/methane-overlay.webp',
+      base: '/gopilot/methane-base.webp',
+      result: '/gopilot/methane-overlay.webp',
       resultTitle: 'Plume detected',
       stats: [
         { k: 'Estimated flux', v: '1,240 kg/h' },
@@ -657,8 +657,8 @@ export const METHANE_SECTION = {
   ],
   /* Drop the real detection scene here (see /public). object-cover, same as the
      Beirut scene-parse, so base and overlay align. */
-  baseImage: '/methane-base.webp',
-  overlayImage: '/methane-overlay.webp',
+  baseImage: '/gopilot/methane-base.webp',
+  overlayImage: '/gopilot/methane-overlay.webp',
   source: 'Sentinel-5P TROPOMI · methane column (ppb)',
   resultTitle: 'Plume detected',
   stats: [
