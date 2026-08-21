@@ -1,0 +1,82 @@
+/* ============================================================================
+ * RASID — color modes (design tokens)
+ * ----------------------------------------------------------------------------
+ * Two modes: DARK (default) and LIGHT. Components never name a literal colour —
+ * they use a token, and Tailwind maps each token to one of these vars (see
+ * tailwind.config.ts). So "primary text" is the `chalk` token, "background" is
+ * `void`, "accent" is `signal` — never "white".
+ *
+ * Each value is an "R G B" triplet (no rgb() wrapper) so Tailwind can apply
+ * opacity: rgb(var(--c-signal) / <alpha>) powers text-signal, bg-signal/40,
+ * border-white/[0.08], etc.
+ *
+ * TOKEN ROLES
+ *   --c-void / abyss / ink   backgrounds & surfaces (deep → panel)
+ *   --c-line / edge          hairlines & borders
+ *   --c-signal (+variants)   ACCENT (brand)
+ *   --c-chalk / mist / graphite   text: primary / secondary / faint
+ *   --c-white                "ink on background" — every *-white/opacity overlay
+ *                            maps here, so borders & fills flip with the mode
+ *   --c-black                shadow / scrim ink
+ *
+ * The navbar theme button toggles `data-theme` on <html> between (unset = dark)
+ * and "light".
+ *
+ * data-scene="dark":  cinematic WebGL / imagery sections (hero Earth, satellite
+ * scenes) are dark *media* in BOTH modes — space is black. Marking a section
+ * (or the navbar) with data-scene="dark" pins the dark tokens locally so its
+ * light-on-dark chrome stays correct even when the rest of the page is light.
+ * ========================================================================== */
+
+/* ── DARK — the site's default. Reproduces the original hand-tuned look exactly. */
+:root,
+[data-theme='dark'],
+[data-scene='dark'] {
+  /* Lighter & greener (feedback): backgrounds are lifted a touch off pure black
+     and carry a faint green tint; the accent is anchored on RASID green #0A8D6D
+     (its dim/deep variants are the exact brand greens), with a brighter green
+     kept for glows so it still reads on the dark cinematic scenes. */
+  --c-void: 6 12 10;
+  --c-abyss: 9 16 13;
+  --c-ink: 15 25 21;
+  --c-line: 26 38 33;
+  --c-edge: 34 50 44;
+  --c-signal: 18 176 133; /* vivid RASID green — legible accent on dark */
+  --c-signal-bright: 78 226 180; /* glow / hover */
+  --c-signal-dim: 10 141 109; /* Medium Green #0A8D6D — the brand green */
+  --c-signal-deep: 12 78 62;
+  --c-chalk: 237 243 241;
+  --c-mist: 150 166 160;
+  --c-graphite: 94 108 101;
+  --c-white: 255 255 255;
+  --c-black: 0 0 0;
+  --sig: 18 176 133;
+  color-scheme: dark;
+}
+
+/* ── LIGHT — the RASID brand palette (Light/Medium Green, Mint, White, grays).
+      Applies to all chrome/product sections; the data-scene="dark" media
+      sections above keep their dark treatment. */
+[data-theme='light'] {
+  --c-void: 255 255 255; /* White #FFFFFF — page background */
+  --c-abyss: 246 251 249; /* faint mint wash */
+  --c-ink: 230 245 240; /* Mint #E6F5F0 — panels */
+  --c-line: 95 87 90; /* Gray-Brown #5F575A — borders (used at low opacity) */
+  --c-edge: 95 87 90;
+  --c-signal: 10 141 109; /* Medium Green #0A8D6D — accent */
+  --c-signal-bright: 27 160 133; /* Light Green #1BA085 */
+  --c-signal-dim: 10 141 109;
+  --c-signal-deep: 214 238 231;
+  --c-chalk: 34 38 37; /* near-black — primary text / headings */
+  --c-mist: 74 74 74; /* Body Gray #4A4A4A — secondary text */
+  --c-graphite: 95 87 90; /* Gray-Brown #5F575A — faint text / labels */
+  --c-white: 40 48 45; /* ink-on-light → borders & subtle fills read as dark */
+  --c-black: 0 0 0;
+  --sig: 10 141 109;
+  color-scheme: light;
+}
+
+/* Nested guard: if a data-scene="dark" element sits inside the light theme, the
+   selector above ([data-scene='dark']) already re-declares the dark tokens on it,
+   and custom properties inherit from the nearest declaring ancestor — so the
+   media section and its subtree stay dark. No extra rule needed. */

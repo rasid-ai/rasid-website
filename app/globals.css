@@ -1,0 +1,217 @@
+@import './themes.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ *
+ * RASID — base layer
+ * ------------------------------------------------------------------ */
+
+@layer base {
+  :root {
+    /* Colour tokens live in themes.css; --sig is defined there per theme. */
+    --story-vh: 100vh;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    background-color: rgb(var(--c-void));
+    /* color-scheme is set per theme in themes.css */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-void text-chalk font-sans antialiased;
+    overflow-x: clip;
+    font-feature-settings: 'ss01' 1, 'cv05' 1, 'tnum' 0;
+  }
+
+  /* Lenis requirements (inlined so we do not depend on the package stylesheet) */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+
+  ::selection {
+    background: rgb(var(--sig) / 0.22);
+    color: rgb(var(--c-chalk));
+  }
+
+  /* Slim, near-invisible scrollbar — the scroll indicator is bespoke. */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--c-void));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--c-edge));
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--c-graphite));
+  }
+
+  canvas {
+    display: block;
+    touch-action: pan-y;
+  }
+
+  :focus-visible {
+    outline: 1px solid rgb(var(--sig) / 0.9);
+    outline-offset: 3px;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Components / utilities
+ * ------------------------------------------------------------------ */
+
+@layer components {
+  /* Monospaced technical micro-label — used for all instrumentation text. */
+  .label {
+    @apply font-mono text-[10px] uppercase tracking-widest text-mist;
+  }
+  .label-sm {
+    @apply font-mono text-[9px] uppercase tracking-widest text-graphite;
+  }
+
+  /* Editorial display type. Optical sizing handled per-instance. */
+  .display {
+    @apply font-sans font-medium tracking-tightest;
+    line-height: 0.88;
+    text-wrap: balance;
+  }
+
+  /* 1px technical rule that survives fractional DPR. */
+  .hairline {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--c-white) / 0.11) 12%,
+      rgb(var(--c-white) / 0.11) 88%,
+      transparent
+    );
+    height: 1px;
+  }
+
+  .glass {
+    background: linear-gradient(180deg, rgb(var(--c-ink) / 0.72), rgb(var(--c-abyss) / 0.85));
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    border: 1px solid rgb(var(--c-white) / 0.08);
+  }
+
+  /* Corner brackets — recurring geospatial framing motif. */
+  .brackets::before,
+  .brackets::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid rgb(var(--sig) / 0.55);
+    pointer-events: none;
+  }
+  .brackets::before {
+    top: -1px;
+    left: -1px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .brackets::after {
+    right: -1px;
+    bottom: -1px;
+    border-left: 0;
+    border-top: 0;
+  }
+}
+
+@layer utilities {
+  .fade-y {
+    mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent);
+  }
+  .fade-b {
+    mask-image: linear-gradient(180deg, #000 55%, transparent);
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent);
+  }
+  /* `.grain` only needs *a* containing block for its ::after, so it must not
+     hardcode `position: relative`: that has the same specificity as Tailwind's
+     `absolute` and wins on source order, silently cancelling the `inset-0` that
+     imagery panels rely on. The panels then collapsed to zero height and every
+     satellite plate on the page rendered as an invisible 1px canvas. `static` is
+     the only value that would fail to contain the pseudo-element, so exclude
+     just that. */
+  .grain:where(:not(.absolute):not(.fixed):not(.sticky)) {
+    position: relative;
+  }
+  /* Film grain + scanline substrate applied to imagery panels. */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgb(var(--c-white) / 0.014) 0px,
+      rgb(var(--c-white) / 0.014) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+  .will-transform {
+    will-change: transform;
+  }
+  /* The RASID logo asset is white-on-transparent. In light mode invert it to a
+     dark mark so it stays visible on light chrome. */
+  [data-theme='light'] .rasid-mark {
+    filter: invert(1) brightness(0.28);
+  }
+  /* Partner logos are mixed brand colours; flatten them to a single monochrome
+     so the wall reads as one — white on the dark strip, black in light mode. */
+  .partner-logo {
+    filter: brightness(0) invert(1);
+  }
+  [data-theme='light'] .partner-logo {
+    filter: brightness(0);
+  }
+  .pause-anim {
+    animation-play-state: paused !important;
+  }
+  /* Hides the native cursor where the bespoke reticle takes over. */
+  .reticle-zone {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reticle-zone {
+    cursor: crosshair;
+  }
+}
