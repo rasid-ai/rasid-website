@@ -1,0 +1,11 @@
+# Netlify build config. Netlify auto-detects Next.js and installs its official
+# Next runtime plugin (@netlify/plugin-nextjs) — no publish dir needed here.
+[build]
+  command = "npm run build"
+
+[build.environment]
+  # Pin Node to a version the toolchain is happy with.
+  NODE_VERSION = "20"
+  # Puppeteer is only used by local dev scripts, never at build/runtime — skip
+  # its ~150MB Chromium download so builds are fast and don't fail.
+  PUPPETEER_SKIP_DOWNLOAD = "true"
