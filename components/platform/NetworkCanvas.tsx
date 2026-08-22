@@ -148,15 +148,18 @@ export default function NetworkCanvas({
             const fade = Math.sin(pk.t * Math.PI);
             const alpha = fade * flowLive;
             const r = pk.size * (1 + fade * 0.5);
-            // additive core + halo
-            const g = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, r * 5);
-            g.addColorStop(0, `rgba(150,255,236,${0.85 * alpha})`);
-            g.addColorStop(0.35, `rgb(var(--c-signal) / ${0.34 * alpha})`);
-            g.addColorStop(1, 'rgb(var(--c-signal) / 0)');
-            ctx.fillStyle = g;
+            // Two-pass glow: core + soft halo, no per-frame gradient alloc.
+            ctx.globalAlpha = alpha * 0.85;
+            ctx.fillStyle = 'rgba(150,255,236,1)';
             ctx.beginPath();
-            ctx.arc(pt.x, pt.y, r * 5, 0, Math.PI * 2);
+            ctx.arc(pt.x, pt.y, r, 0, Math.PI * 2);
             ctx.fill();
+            ctx.globalAlpha = alpha * 0.3;
+            ctx.fillStyle = 'rgba(124,255,230,1)';
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y, r * 3.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
           }
           ctx.globalCompositeOperation = 'source-over';
         }

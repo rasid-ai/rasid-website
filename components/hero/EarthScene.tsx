@@ -96,7 +96,7 @@ export default function EarthScene({
     if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => setRender((prev) => (prev === e.isIntersecting ? prev : e.isIntersecting)),
-      { rootMargin: '12% 0px' },
+      { rootMargin: '2% 0px' },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -113,7 +113,7 @@ export default function EarthScene({
            fragment count is what decides whether the hero holds 60fps. MSAA is
            off everywhere too — the shader antialiases its own edges via fwidth,
            and the limb is the only hard geometric edge in frame. */
-        dpr={caps.tier === 'low' ? [1, 1] : caps.tier === 'mid' ? [1, 1.25] : [1, 1.5]}
+        dpr={caps.tier === 'low' ? [1, 1] : caps.tier === 'mid' ? [1, 1.1] : [1, 1.25]}
         gl={{
           antialias: false,
           alpha: true,
@@ -306,11 +306,19 @@ function SceneContents({
   );
 
   const smoothed = useRef({ alt: mode === 'final' ? 1.4 : 2.1, spin: 0, init: false });
+  const lastFrameRef = useRef(0);
 
   useFrame((state, dt) => {
     const t = state.clock.elapsedTime;
     const p = getProgress(channel);
     const dtc = Math.min(dt, 1 / 30); // clamp so a stutter can't jump the camera
+
+    // Throttle to 30fps while idle (no active dive) — the earth shader is
+    // fill-rate bound and the slow rotation is imperceptible above 30fps.
+    const isScrolling = p > (mode === 'final' ? 0.01 : ORBIT_STAGES.idle[1]);
+    const minInterval = isScrolling ? 1 / 60 : 1 / 30;
+    if (t - lastFrameRef.current < minInterval) return;
+    lastFrameRef.current = t;
 
     uniforms.uTime.value = t;
     uniforms.uResolution.value.set(state.size.width, state.size.height);

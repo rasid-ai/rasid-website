@@ -77,7 +77,7 @@ function detectTier(mobile: boolean): Tier {
     return 'mid';
   }
   if (weak) return 'mid';
-  if (cores <= 4 || (mem !== undefined && mem <= 4)) return 'mid';
+  if (cores < 8 || (mem !== undefined && mem <= 4)) return 'mid';
   return 'high';
 }
 
@@ -126,7 +126,7 @@ export function useCapabilities(): Capabilities {
  * pixels of DPR 1 for a difference that is hard to see on any real display.
  */
 export const BUDGET = {
-  high: { stars: 1800, satellites: 4, dataPoints: 160, sphereSeg: 96, renderScale: 0.8, particles: 460 },
-  mid: { stars: 1000, satellites: 3, dataPoints: 100, sphereSeg: 72, renderScale: 0.65, particles: 260 },
+  high: { stars: 1200, satellites: 3, dataPoints: 120, sphereSeg: 80, renderScale: 0.65, particles: 320 },
+  mid: { stars: 700, satellites: 2, dataPoints: 70, sphereSeg: 64, renderScale: 0.5, particles: 180 },
   low: { stars: 550, satellites: 2, dataPoints: 55, sphereSeg: 56, renderScale: 0.5, particles: 120 },
 } as const satisfies Record<Tier, Record<string, number>>;
