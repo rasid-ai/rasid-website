@@ -452,8 +452,8 @@ export const PRICING_SECTION = {
     {
       id: 'free',
       name: 'Free',
-      price: 'forever',
-      cadence: '',
+      price: '€0',
+      cadence: 'forever',
       tokens: '500',
       unit: 'tokens',
       cta: 'Sign up free',
