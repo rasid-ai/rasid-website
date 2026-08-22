@@ -614,11 +614,9 @@ export const PARTNERS_SECTION = {
   partners: [
     { name: 'AWS', slug: 'aws', logo: '/partners/aws.png' },
     { name: 'World Bank', slug: 'world-bank', logo: '/partners/world-bank.png' },
-    { name: 'CNRS Lebanon', slug: 'cnrs', logo: '/partners/cnrs.svg' },
     { name: 'ESA', slug: 'esa', logo: '/partners/esa.svg' },
     { name: 'DAIS', slug: 'dais', logo: '/partners/dais.png' },
     { name: 'BeyondBlue Consulting', slug: 'beyondblue', logo: '/partners/beyondblue.svg' },
-    { name: 'Khatib & Alami', slug: 'khatib-alami', logo: '/partners/khatib-alami.png' },
   ] as { name: string; slug: string; logo?: string }[],
 } as const;
 
