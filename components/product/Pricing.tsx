@@ -38,13 +38,20 @@ export default function Pricing() {
           <h2 className="display text-[clamp(2.2rem,5.6vw,4.6rem)] text-chalk">{S.headline}</h2>
         </Reveal>
 
-        {/* items-stretch (default) + h-full cards + the featured card's -my
-            makes it stand slightly taller, the reference's "popular" lift. */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-stretch md:gap-5">
+        {/* Columns adapt to the number of plans: 3 → 3-across; 4 → 2×2 on tablet
+            then 4-across on desktop, so a 4th card never dangles under the row.
+            items-stretch + h-full cards + the featured card's -my give the lift. */}
+        <div
+          className={[
+            'grid grid-cols-1 gap-4 md:gap-5 lg:items-stretch',
+            (S.plans.length as number) === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3 md:items-stretch',
+          ].join(' ')}
+        >
           {S.plans.map((plan, i) => {
             const isContact = plan.cta.toLowerCase().includes('sales');
+            const lift = plan.featured ? ((S.plans.length as number) === 4 ? 'lg:-my-3' : 'md:-my-3') : '';
             return (
-              <Reveal key={plan.id} delay={i * 90} className={plan.featured ? 'md:-my-3' : ''}>
+              <Reveal key={plan.id} delay={i * 90} className={lift}>
                 <div
                   className={[
                     'relative flex h-full flex-col border p-7 md:p-8',

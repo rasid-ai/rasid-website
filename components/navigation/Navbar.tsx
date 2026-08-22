@@ -218,7 +218,10 @@ export default function Navbar() {
 
       {/* Mobile sheet */}
       <div
-        className={['fixed inset-0 z-40 md:hidden', menuOpen ? 'pointer-events-auto' : 'pointer-events-none'].join(' ')}
+        className={[
+          'fixed inset-0 z-40 transition-[opacity,visibility] duration-500 md:hidden',
+          menuOpen ? 'pointer-events-auto visible opacity-100' : 'pointer-events-none invisible opacity-0',
+        ].join(' ')}
         aria-hidden={!menuOpen}
       >
         <div
