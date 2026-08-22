@@ -1,0 +1,60 @@
+# dependencies
+/node_modules
+
+# next.js build output
+/.next
+/out
+
+# production
+/build
+
+# local env files
+.env
+.env*.local
+
+# verification / scratch artifacts
+/.verify
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# os / editor
+.DS_Store
+Thumbs.db
+*.pem
+
+.vercel
+
+# large source data — NOT shipped; huge GeoTIFFs exceed GitHub's 100MB limit
+/raw_data
+
+# build metadata
+*.tsbuildinfo
+
+# unused source originals (served /public/*.webp are generated from these)
+/public/team/*.png
+/public/partners/*.orig
+
+# dev-only scripts (keep build_gopilot.py, drop the puppeteer harnesses)
+/scripts/*.mjs
+
+# local tooling
+.claude/
+
+# large source data — NOT shipped; huge GeoTIFFs exceed GitHub's 100MB limit
+/raw_data
+
+# build metadata
+*.tsbuildinfo
+
+# unused source originals (served /public/*.webp are generated from these)
+/public/team/*.png
+/public/partners/*.orig
+
+# dev-only scripts (keep build_gopilot.py, drop the puppeteer harnesses)
+/scripts/*.mjs
+
+# local tooling
+.claude/
