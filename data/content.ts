@@ -459,8 +459,8 @@ export const PARTNERS_SECTION = {
     { name: 'ESA', slug: 'esa', logo: '/partners/esa.svg' },
     { name: 'DAIS', slug: 'dais', logo: '/partners/dais.svg' },
     { name: 'BeyondBlue Consulting', slug: 'beyondblue', logo: '/partners/beyondblue.svg' },
-    { name: 'TEAMS International', slug: 'teams', logo: '/partners/teams.jpg' },
-    { name: 'METAPLANET', slug: 'metaplanet', logo: '/partners/metaplanet.jfif' },
+    { name: 'TEAMS International', slug: 'teams', logo: '/partners/teams.png' },
+    { name: 'METAPLANET', slug: 'metaplanet', logo: '/partners/metaplanet.png' },
     { name: 'CGI', slug: 'cgi', logo: '/partners/cgi.png' },
   ] as { name: string; slug: string; logo?: string }[],
 } as const;
