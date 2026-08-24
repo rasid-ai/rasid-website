@@ -62,7 +62,7 @@ export default function GoPilotStudio() {
             href="/products"
             className="group mt-6 inline-flex items-center gap-2 text-[13px] font-medium tracking-wide text-signal transition-colors duration-300 hover:text-signal-bright"
           >
-            GoPilot is one of three, see all products
+            See All Products
             <span aria-hidden className="transition-transform duration-500 ease-cinema group-hover:translate-x-1">→</span>
           </Link>
         </Reveal>
