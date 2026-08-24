@@ -606,7 +606,7 @@ export const TEAM_SECTION = {
 /* ── Contact — a booking embed (Calendly or similar). Set CONTACT_BOOKING_URL to
  * the real scheduling link; until then the section shows the direct channels and
  * a disabled "booking coming" state instead of an empty iframe. */
-export const CONTACT_BOOKING_URL = 'https://calendly.com/alighandour/30min'; // TODO(rasid): paste Calendly/booking URL
+export const CONTACT_BOOKING_URL = 'https://calendly.com/rasid/30mins'; // TODO(rasid): paste Calendly/booking URL
 export const CONTACT_SECTION = {
   eyebrow: 'Contact',
   headline: 'Let’s talk.',
