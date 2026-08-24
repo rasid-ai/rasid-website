@@ -114,7 +114,7 @@ export default function ImageryPanel({
          count goes as the square, so an unclamped 2× DPR retina panel was drawing
          ~4× the fragments of a 1× one — the single largest cost on the page for a
          difference that is invisible on procedural, band-limited imagery. */
-      maxDpr: caps.tier === 'low' ? 1 : caps.tier === 'mid' ? 1.25 : 1.5,
+      maxDpr: caps.tier === 'low' ? 1 : caps.tier === 'mid' ? 1.1 : 1.25,
       uniforms: (): Record<string, UniformValue> => {
         const s = stateRef.current;
         return {

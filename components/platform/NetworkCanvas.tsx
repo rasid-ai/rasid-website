@@ -81,6 +81,7 @@ export default function NetworkCanvas({
     const draw = (now: number) => {
       raf = requestAnimationFrame(draw);
       if (!visible) return;
+      if (now - last < 1000 / 30) return;
 
       const dt = Math.min((now - last) / 1000, 1 / 20);
       last = now;
