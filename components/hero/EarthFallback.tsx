@@ -79,6 +79,7 @@ export default function EarthFallback({
     let x = 0;
     let last = performance.now();
     const tick = (now: number) => {
+      if (now - last < 1000 / 30) { raf = requestAnimationFrame(tick); return; }
       const dt = Math.min(now - last, 100);
       last = now;
       x = (x + dt * 0.0022) % 100;

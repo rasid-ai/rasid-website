@@ -38,6 +38,8 @@ export default function TreeLayer({
     let w = 0;
     let h = 0;
     let raf = 0;
+    let last = performance.now();
+
 
     const resize = () => {
       const r = canvas.getBoundingClientRect();
@@ -49,8 +51,10 @@ export default function TreeLayer({
     };
     resize();
 
-    const draw = () => {
+    const draw = (now: number) => {
       raf = requestAnimationFrame(draw);
+      if (now - last < 1000 / 30) return;
+      last = now;
       const p = clamp(progressRef.current);
       ctx.clearRect(0, 0, w, h);
       if (p <= 0) return;

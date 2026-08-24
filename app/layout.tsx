@@ -22,29 +22,37 @@ const mono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
-const title = 'RASID — Seeing Earth smarter.';
+const title = 'RASID — Seeing Earth, Smarter.';
 const description =
-  'RASID turns satellite imagery into decisions. GoPilot is an AI geospatial agent that plans the workflow, retrieves imagery, runs models and returns insight — from one sentence.';
+  'Meet GoPilot, RASID’s AI geospatial agent. Ask a geospatial question in plain language, and GoPilot finds the right data, selects the right models, runs the analysis, and returns the answer.';
 
 export const metadata: Metadata = {
   title,
   description,
   applicationName: 'RASID',
-  metadataBase: new URL('https://rasid.earth'),
+  metadataBase: new URL('https://rasid.ai'),
   // Favicon / app icons live in public/logo/ (the green R). Declared here since
   // we don't use the app/icon.png file convention.
   icons: {
     icon: '/logo/favicon.png',
     apple: '/logo/apple-touch-icon.png',
   },
+  
   keywords: [
     'geospatial AI',
+	  'GeoAI',
+	  'AI geospatial agent',
     'satellite imagery',
+	  'satellite data',
     'Earth observation',
     'remote sensing',
     'GoPilot',
+	  'RASID',
     'MCP',
-    'SAM 3',
+	  'QGIS',
+	  'ArcGIS Pro',
+    'SAM3',
+	  'DINOv3',
     'change detection',
     'solar detection',
     'field delineation',

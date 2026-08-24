@@ -15,7 +15,7 @@
  *   deliberately NOT a fabricated real-looking URL.
  * ▸ CONTACT_HREF — "Talk to RASID" (bespoke projects / contact).
  */
-export const GOPILOT_APP_URL = 'https://app.rasid.ai'; // TODO(rasid): set to https://app.rasid… when live
+export const GOPILOT_APP_URL = 'https://app.rasid.ai/try-gopilot'; // TODO(rasid): set to https://app.rasid… when live
 export const CONTACT_HREF = '#contact';
 
 /** True once GOPILOT_APP_URL points at a real external app (drives target=_blank). */
@@ -58,13 +58,13 @@ export const NAV = {
 
 export const HERO = {
   eyebrow: 'ASK THE EARTH',
-  title: ['MEET GOPILOT,', 'YOUR #1 GEOAI AGENT.'],
-  tagline: 'Ask in plain language. GoPilot finds the data, chooses the right models, runs the analysis, and gives you the answer.',
+  title: ['MEET GOPILOT,', 'YOUR #1 GeoAI AGENT.'],
+  tagline: 'Ask in plain language. GoPilot finds the data, selects the right models, runs the analysis, and gives you the answer.',
   body: 'One platform. 10,000+ datasets. Hundreds of AI models. One natural-language interface.',
   // Value-forward acquisition CTA (§12) — this targets new users, so it names the
   // free tokens rather than "sign in". Points at the SaaS app via GOPILOT_APP_URL.
-  primary: { label: 'Sign up free. Get 200 tokens', href: GOPILOT_APP_URL },
-  secondary: { label: 'Explore RASID', href: '#gopilot' },
+  primary: { label: 'Sign up free. Get 500 tokens', href: GOPILOT_APP_URL },
+  //secondary: { label: 'Explore RASID', href: '#gopilot' },
   scrollHint: 'Scroll to descend',
 } as const;
 
@@ -77,53 +77,9 @@ export const HERO_DATA = [
   'Earth is data.',
   'Billions of pixels.',
   'Almost none of them mean anything\nuntil you ask the right question.',
-  'We turn satellite pixels into measurable information \n & \n measurable information into decisions.',
+  'RASID turns Earth observation data into intelligence. \n GoPilot makes it accessible to everyone.',
+  //'We turn satellite pixels into measurable information \n & \n measurable information into decisions.',
 ] as const;
-
-export const DATA_SECTION = {
-  headline: 'Earth is data.',
-  body: ['Billions of pixels.', 'Almost none of them mean anything', 'until you ask the right question.'],
-  // The value statement (§14): data → measurable information → decisions.
-  value: 'We turn satellite pixels into measurable information and measurable information into decisions.',
-  // Subtle, cinematic scene metadata (§15). The RGB/NIR/GRID/NDVI band strip was
-  // removed — it distracted from the story. This is all that remains.
-  meta: [
-    { label: 'Scene', value: 'BEIRUT, LEBANON' },
-    { label: 'Projection', value: 'UTM 36N' },
-    { label: 'Acquired', value: '2026-07-28' },
-  ],
-} as const;
-
-export const GOPILOT_SECTION = {
-  eyebrow: 'Featured product · GoPilot',
-  headline: 'What if you could simply ask?',
-  body: 'GoPilot is an AI geospatial agent that understands your question, finds the right data, uses the right tools and models, performs the analysis, and returns the result directly on your map.',
-  question: 'Segment everything in this scene.',
-  steps: [
-    { id: 'understand', label: 'Understanding request', detail: 'Intent · scene parsing · AOI resolved' },
-    { id: 'search', label: 'Searching satellite imagery', detail: 'STAC · VHR optical · 8 scenes' },
-    { id: 'select', label: 'Selecting optimal imagery', detail: '2026-07-28 · 1.4% cloud · 50 cm' },
-    { id: 'run', label: 'Running scene segmentation', detail: 'rasid/scene-parse · v1.4 · tiled inference' },
-    { id: 'analyze', label: 'Analyzing results', detail: 'Per-class coverage · vectorise · statistics' },
-  ],
-  resultTitle: 'Scene parsed',
-  /* Source line shown on the map chrome. This is VHR — the parse resolves
-     individual buildings and streets, which 10 m Sentinel-2 could not. */
-  source: 'VHR optical · 50 cm · 2026-07-28',
-  /* Class legend for the result panel. Percentages are the real coverage of the
-     supplied Beirut scene-parse overlay (public/beirut-parse.webp), measured
-     from its pixels (scripts/seg-histogram.mjs), and the swatch colours match
-     the overlay's palette. */
-  model: 'rasid/scene-parse v1.4',
-  classes: [
-    { name: 'Buildings', pct: 47, color: '#2f6db0' },
-    { name: 'Water', pct: 18, color: '#c22a2a' },
-    { name: 'Roads', pct: 12, color: '#e0700a' },
-    { name: 'Bare ground', pct: 10, color: '#8e5aa8' },
-    { name: 'Other', pct: 10, color: '#6b7785' },
-    { name: 'Vegetation', pct: 3, color: '#3fae5a' },
-  ],
-} as const;
 
 /* ── GoPilot use-case studio (landing feature) ───────────────────────────────
  * The interactive gallery: a list of use cases; picking one plays a short
@@ -135,13 +91,13 @@ export const GOPILOT_SECTION = {
 export const GOPILOT_STUDIO = {
   eyebrow: 'Featured product · GoPilot',
   headline: 'What if you could simply ask?',
-  body: 'Pick a question. GoPilot plans the workflow, finds the imagery, runs the right model and returns the answer the same loop, whatever you ask.',
+  body: 'Ask. GoPilot plans the workflow, finds the right data, selects the right models, runs the analysis, and returns the answer.',
   cases: [
     {
       id: 'scene-parse',
       title: 'Scene parsing',
       place: 'Coastal marina · USA',
-      question: 'Segment everything in this scene.',
+      question: 'What’s in this scene? Segment everything.',
       steps: [
         'Understanding request',
         'Searching satellite imagery',
@@ -164,7 +120,7 @@ export const GOPILOT_STUDIO = {
       id: 'buildings',
       title: 'Building footprints',
       place: 'Paris · Eiffel 2 km',
-      question: 'Map every building within 2 km of the Eiffel Tower.',
+      question: 'What’s around the Eiffel Tower? Map every building within 2 km.',
       steps: ['Understanding request', 'Fetching building footprints', 'Filtering to 2 km radius', 'Counting'],
       model: 'rasid/footprints',
       source: 'Building footprints',
@@ -179,9 +135,9 @@ export const GOPILOT_STUDIO = {
     },
     {
       id: 'solar',
-      title: 'Solar-panel detection',
+      title: 'Solar panels mapping',
       place: 'Datong, China',
-      question: 'Find the solar installations here.',
+      question: 'What’s here? Find the solar installations.',
       steps: ['Understanding request', 'Searching imagery', 'Detecting panels', 'Measuring area'],
       model: 'rasid/solar-pv v3.2',
       source: 'VHR optical',
@@ -198,7 +154,7 @@ export const GOPILOT_STUDIO = {
       id: 'trees',
       title: 'Tree counting',
       place: 'Nairobi, Kenya',
-      question: 'Count the trees and map the canopy.',
+      question: 'How many trees are here? Map the canopy.',
       steps: ['Understanding request', 'Searching imagery', 'Detecting crowns', 'Counting canopy'],
       model: 'rasid/canopy v1.8',
       source: 'VHR optical',
@@ -213,9 +169,9 @@ export const GOPILOT_STUDIO = {
     },
     {
       id: 'water',
-      title: 'Water-body monitoring',
+      title: 'Waterbody monitoring',
       place: 'Lakeland, USA',
-      question: 'Map the water bodies here.',
+      question: 'What waterbodies are here? Map them.',
       steps: ['Understanding request', 'Computing NDWI', 'Extracting water', 'Filtering lakes'],
       model: 'rasid/water',
       source: 'Sentinel-2 · NDWI',
@@ -249,7 +205,7 @@ export const GOPILOT_STUDIO = {
       id: 'methane',
       title: 'Methane detection',
       place: 'Emissions AOI',
-      question: 'Screen this area for methane plumes.',
+      question: 'Where are the methane plumes here?',
       steps: ['Understanding request', 'Ingesting imagery', 'Screening for plumes', 'Quantifying & locating'],
       model: 'rasid/methane',
       source: 'Sentinel 2 ',
@@ -264,9 +220,9 @@ export const GOPILOT_STUDIO = {
     },
     {
       id: 'dinov3',
-      title: 'Embeddings · DINOv3',
+      title: 'Semantic Embeddings',
       place: 'Dubai, UAE',
-      question: 'Show semantic embeddings for this scene.',
+      question: 'What patterns are similar in this scene?',
       steps: ['Understanding request', 'Fetching imagery', 'Running DINOv3', 'PCA → RGB'],
       model: 'DINOv3',
       source: 'VHR optical',
@@ -282,150 +238,7 @@ export const GOPILOT_STUDIO = {
   ],
 } as const;
 
-export const NETWORK_SECTION = {
-  eyebrow: 'Platform',
-  headline: 'GoPilot uses the tools the question requires.',
-  body: 'Every capability is a tool exposed over MCP. GoPilot selects, sequences and chains them — so the workflow is composed for the question, not fixed in advance.',
-  center: 'GoPilot',
-  nodes: [
-    {
-      id: 'data',
-      label: 'Satellite Data',
-      angle: -90,
-      items: ['Sentinel-1 / 2', 'Landsat 8 / 9', 'Public imagery archives', 'Commercial tasking'],
-    },
-    {
-      id: 'models',
-      label: 'AI Models',
-      angle: 180,
-      items: ['SAM 3', 'Solar detection', 'Tree detection', 'Field delineation', 'Change detection'],
-    },
-    {
-      id: 'tools',
-      label: 'Geospatial Tools',
-      angle: 0,
-      items: ['Spatial analysis', 'Area calculation', 'Intersection', 'Reprojection', 'Vectorisation'],
-    },
-    {
-      id: 'analysis',
-      label: 'Analysis',
-      angle: 90,
-      items: ['Statistics', 'Time series', 'Visualisation', 'Reporting', 'Export'],
-    },
-  ],
-} as const;
-
-export const MODEL_SECTION = {
-  eyebrow: 'Model ecosystem',
-  headline: ['One image.', 'Infinite questions.'],
-  body: 'The same scene, interrogated by different models. Nothing about the imagery changed — only the question.',
-  stages: [
-    {
-      id: 'raw',
-      label: 'Raw imagery',
-      model: 'Sentinel-2 L2A',
-      question: 'What does this place look like?',
-      detail: '10 m · true colour',
-    },
-    {
-      id: 'fields',
-      label: 'Field delineation',
-      model: 'rasid/field-delineate v2.4',
-      question: 'Where are the field boundaries?',
-      detail: 'Instance segmentation → polygons',
-    },
-    {
-      id: 'solar',
-      label: 'Solar detection',
-      model: 'rasid/solar-pv v3.2',
-      question: 'Where are the solar installations?',
-      detail: 'Oriented object detection',
-    },
-    {
-      id: 'trees',
-      label: 'Tree detection',
-      model: 'rasid/canopy v1.8',
-      question: 'Where is the tree canopy?',
-      detail: 'Crown delineation · height estimate',
-    },
-    {
-      id: 'sam',
-      label: 'Object segmentation',
-      model: 'SAM 3',
-      question: 'Segment everything.',
-      detail: 'Promptable universal segmentation',
-    },
-    {
-      id: 'analysis',
-      label: 'Geospatial analysis',
-      model: 'rasid/analysis',
-      question: 'What does it add up to?',
-      detail: 'Areas · counts · densities',
-    },
-  ],
-} as const;
-
-export const USE_CASES = [
-  {
-    id: 'agriculture',
-    index: '01',
-    sector: 'Agriculture',
-    question: 'Show me the agricultural fields that changed between 2024 and 2026.',
-    stages: ['Satellite imagery', 'Field segmentation', 'Temporal comparison', 'Change detection', 'Result'],
-    stats: [
-      { label: 'Fields delineated', value: '3,418', unit: '' },
-      { label: 'Changed', value: '486', unit: 'fields' },
-      { label: 'Affected area', value: '11,240', unit: 'ha' },
-      { label: 'Mean parcel', value: '3.2', unit: 'ha' },
-    ],
-    conclusion: 'Cropping patterns shifted across 14% of the surveyed parcels.',
-  },
-  {
-    id: 'solar',
-    index: '02',
-    sector: 'Energy',
-    question: 'Find solar installations in this region.',
-    stages: ['Satellite imagery', 'Solar detection', 'Polygon extraction', 'Statistics'],
-    stats: [
-      { label: 'Installations', value: '1,284', unit: '' },
-      { label: 'Module area', value: '184,320', unit: 'm²' },
-      { label: 'Estimated capacity', value: '36.9', unit: 'MWp' },
-      { label: 'Coverage analysed', value: '24.6', unit: 'km²' },
-    ],
-    conclusion: 'Rooftop capacity grew fastest in the eastern districts.',
-  },
-  {
-    id: 'urban',
-    index: '03',
-    sector: 'Urban',
-    question: 'Identify newly developed areas.',
-    stages: ['Before imagery', 'After imagery', 'Change detection', 'Highlighted areas'],
-    stats: [
-      { label: 'New structures', value: '2,741', unit: '' },
-      { label: 'Built-up gain', value: '+8.4', unit: '%' },
-      { label: 'New footprint', value: '1,960,400', unit: 'm²' },
-      { label: 'Period', value: '24', unit: 'months' },
-    ],
-    conclusion: 'Development concentrated along the northern transport corridor.',
-  },
-] as const;
-
 /* ── Product ecosystem (asset-free sections) ─────────────────────────────── */
-
-export const HOWITWORKS_SECTION = {
-  eyebrow: 'How GoPilot works',
-  headline: 'Ask. Analyze. See.',
-  steps: [
-    { n: '01', title: 'Ask', body: 'Tell GoPilot what you want to know.' },
-    {
-      n: '02',
-      title: 'Think, fetch & analyze',
-      body: 'GoPilot finds the data, chooses the right tools and models, and performs the analysis.',
-    },
-    { n: '03', title: 'See the answer', body: 'Results appear directly in your RASID map.' },
-  ],
-} as const;
-
 export const GOBOX_SECTION = {
   eyebrow: 'GoBox',
   headline: 'Know what you want to run?',
@@ -444,6 +257,8 @@ export const GOBOX_SECTION = {
   ],
 } as const;
 
+/* ── Product ecosystem (asset-free sections) ─────────────────────────────── */
+
 export const PRICING_SECTION = {
   eyebrow: 'Pricing',
   headline: 'Start free. Scale when you need to.',
@@ -461,10 +276,11 @@ export const PRICING_SECTION = {
       desc: 'Explore GoPilot and run your first analyses.',
       tagline: 'Includes',
       features: [
-        { t: 'GoPilot + GoBox', on: true },
-        { t: 'Area of interest up to 20 km²', on: true },
-        { t: 'GoServers / MCP for AI agents', on: false },
-        { t: 'Exports & batch processing', on: false },
+        { t: 'Basic datasets', on: true },
+        { t: 'Basic AI models', on: true },
+        { t: 'Export Raster and Vector results', on: true },
+        { t: 'Session History Management', on: true },
+        { t: 'Storage 1 GB', on: true },
       ],
     },
     {
@@ -479,44 +295,53 @@ export const PRICING_SECTION = {
       desc: 'For analysts running recurring geospatial work.',
       tagline: 'Everything in Free, plus',
       features: [
-        { t: 'GoServers MCP for your AI agents', on: true },
-        { t: 'Batch processing across GoBox', on: true },
-        { t: 'Export GeoTIFF, GeoJSON & model outputs', on: true },
-        { t: 'Area of interest up to 50 km²', on: true },
+        { t: 'Pro datasets', on: true },
+        { t: 'Pro AI models', on: true },
+        { t: 'Dashboard', on: true },
+        { t: 'GoBox', on: true },
+        { t: 'QGIS Plugin', on: true },
+        { t: 'Storage 100 GB', on: true },
+        { t: 'Personal license', on: true },
+        { t: '1 named user', on: true },
       ],
     },
     {
       id: 'scale',
-      name: 'Premium',
+      name: 'Business',
       price: '€499',
       cadence: '/mo',
       tokens: '25,000',
       unit: 'tokens',
-      cta: 'Start Premium',
+      cta: 'Start Business',
       featured: false,
-      desc: 'For teams operating at national scale.',
+      desc: 'For organizations scaling geospatial intelligence.',
       tagline: 'Everything in Pro, plus',
       features: [
-        { t: 'Host your own & fine-tuned models in GoBox', on: true },
-        { t: 'Extend GoPilot with your own MCP & datasets', on: true },
-        { t: 'Inference AOI up to 100 km²', on: true },
+        { t: 'Premium datasets', on: true },
+        { t: 'Premium AI models', on: true },
+        { t: 'ArcGIS Pro Add-in', on: true },
+        { t: 'Storage 1 TB', on: true },
+        { t: 'Priority email support', on: true },
+        { t: 'Commercial license', on: true },
+        { t: '1 named user', on: true },
       ],
     },
     {
       id: 'enterprise',
       name: 'Enterprise',
-      price: 'Contact Us',
+      price: '',
       cadence: '',
       tokens: '',
       unit: '',
       cta: 'Talk to sales',
       featured: false,
-      desc: 'For teams operating at national scale.',
-      tagline: 'Everything in Pro, plus',
+      desc: 'For organizations with custom deployment needs.',
+      tagline: 'Everything in Business, plus',
       features: [
-        { t: 'MCP connector, plug GoPilot into your Agent', on: true },
+        { t: 'MCP connector for AI agents', on: true },
         { t: 'Custom on-prem installation', on: true },
         { t: 'Custom Cloud installation', on: true },
+        { t: 'Dedicated account manager', on: true },
       ],
     },
   ],
@@ -610,8 +435,8 @@ export const PLUGINS_SECTION = {
     video: '', // e.g. '/plugins/qgis.mp4' once the video is ready
   },
   links: [
-    { label: 'QGIS Plugin', href: '#' },
-    { label: 'ArcGIS Pro Add-in', href: '#' },
+    { label: 'QGIS Plugin', href: 'https://plugins.qgis.org/plugins/rasid_plugin/version/0.2.5/download/' },
+    { label: 'ArcGIS Pro Add-in', href: 'https://github.com/rasid-ai/arcgispro_addin_gopilot/releases/latest/download/RASID.esriAddinX' },
   ],
 } as const;
 
@@ -634,6 +459,9 @@ export const PARTNERS_SECTION = {
     { name: 'ESA', slug: 'esa', logo: '/partners/esa.svg' },
     { name: 'DAIS', slug: 'dais', logo: '/partners/dais.svg' },
     { name: 'BeyondBlue Consulting', slug: 'beyondblue', logo: '/partners/beyondblue.svg' },
+    { name: 'TEAMS International', slug: 'teams', logo: '/partners/teams.png' },
+    { name: 'METAPLANET', slug: 'metaplanet', logo: '/partners/metaplanet.png' },
+    { name: 'CGI', slug: 'cgi', logo: '/partners/cgi.png' },
   ] as { name: string; slug: string; logo?: string }[],
 } as const;
 
@@ -778,7 +606,7 @@ export const TEAM_SECTION = {
 /* ── Contact — a booking embed (Calendly or similar). Set CONTACT_BOOKING_URL to
  * the real scheduling link; until then the section shows the direct channels and
  * a disabled "booking coming" state instead of an empty iframe. */
-export const CONTACT_BOOKING_URL = ''; // TODO(rasid): paste Calendly/booking URL
+export const CONTACT_BOOKING_URL = 'https://calendly.com/rasid/30mins'; // TODO(rasid): paste Calendly/booking URL
 export const CONTACT_SECTION = {
   eyebrow: 'Contact',
   headline: 'Let’s talk.',
