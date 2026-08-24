@@ -77,7 +77,7 @@ export const HERO_DATA = [
   'Earth is data.',
   'Billions of pixels.',
   'Almost none of them mean anything\nuntil you ask the right question.',
-  'RASID turns Earth observation data into intelligence. \n GoPilot makes that intelligence accessible to everyone.',
+  'RASID turns Earth observation data into intelligence. \n GoPilot makes it accessible to everyone.',
   //'We turn satellite pixels into measurable information \n & \n measurable information into decisions.',
 ] as const;
 
