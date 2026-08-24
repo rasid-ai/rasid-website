@@ -435,8 +435,8 @@ export const PLUGINS_SECTION = {
     video: '', // e.g. '/plugins/qgis.mp4' once the video is ready
   },
   links: [
-    { label: 'QGIS Plugin', href: '#' },
-    { label: 'ArcGIS Pro Add-in', href: '#' },
+    { label: 'QGIS Plugin', href: 'https://plugins.qgis.org/plugins/rasid_plugin/version/0.2.5/download/' },
+    { label: 'ArcGIS Pro Add-in', href: 'https://github.com/rasid-ai/arcgispro_addin_gopilot/releases/latest/download/RASID.esriAddinX' },
   ],
 } as const;
 
