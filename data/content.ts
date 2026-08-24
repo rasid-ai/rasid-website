@@ -65,7 +65,6 @@ export const HERO = {
   // free tokens rather than "sign in". Points at the SaaS app via GOPILOT_APP_URL.
   primary: { label: 'Sign up free. Get 500 tokens', href: GOPILOT_APP_URL },
   //secondary: { label: 'Explore RASID', href: '#gopilot' },
-  secondary: { label: '', href: '' },
   scrollHint: 'Scroll to descend',
 } as const;
 

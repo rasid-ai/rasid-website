@@ -227,9 +227,9 @@ export default function Hero() {
               <HeroButton href={HERO.primary.href} variant="primary">
                 {HERO.primary.label}
               </HeroButton>
-              <HeroButton href={HERO.secondary.href} variant="ghost">
+              {/* <HeroButton href={HERO.secondary.href} variant="ghost">
                 {HERO.secondary.label}
-              </HeroButton>
+              </HeroButton> */}
             </div>
           </div>
         </div>
