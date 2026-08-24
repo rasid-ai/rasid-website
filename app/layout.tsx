@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     'Earth observation',
     'remote sensing',
     'GoPilot',
-	'RASID'
+	'RASID',
     'MCP',
 	'QGIS',
 	'ArcGIS Pro',
