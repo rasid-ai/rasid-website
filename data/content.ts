@@ -241,6 +241,25 @@ export const GOPILOT_STUDIO = {
 } as const;
 
 /* ── Product ecosystem (asset-free sections) ─────────────────────────────── */
+export const GOBOX_SECTION = {
+  eyebrow: 'GoBox',
+  headline: 'Know what you want to run?',
+  body: "GoBox gives GIS professionals direct access to RASID's geospatial models and tools without needing to interact with GoPilot.",
+  compare: [
+    { name: 'GoPilot', line: 'Tell us what you want.' },
+    { name: 'GoBox', line: 'Tell us what to run.' },
+  ],
+  catalogueTitle: 'Model catalogue',
+  models: [
+    { name: 'SAM 3', kind: 'Promptable segmentation', io: 'Image → masks' },
+    { name: 'Field Delineation', kind: 'Instance segmentation', io: 'Image → parcels' },
+    { name: 'Solar Detection', kind: 'Oriented object detection', io: 'Image → installations' },
+    { name: 'Tree Detection', kind: 'Crown delineation', io: 'Image → canopy' },
+    { name: 'Change Detection', kind: 'Temporal comparison', io: 'Image pair → changes' },
+  ],
+} as const;
+
+/* ── Product ecosystem (asset-free sections) ─────────────────────────────── */
 
 export const PRICING_SECTION = {
   eyebrow: 'Pricing',
