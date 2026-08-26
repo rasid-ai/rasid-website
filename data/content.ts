@@ -456,7 +456,7 @@ export const PARTNERS_SECTION = {
   partners: [
     { name: 'AWS', slug: 'aws', logo: '/partners/aws.png' },
     { name: 'World Bank', slug: 'world-bank', logo: '/partners/world-bank.png' },
-    { name: 'ESA', slug: 'esa', logo: '/partners/esa.svg' },
+    { name: 'OGC', slug: 'ogc', logo: '/partners/ogc.svg' },
     { name: 'DAIS', slug: 'dais', logo: '/partners/dais.svg' },
     { name: 'BeyondBlue Consulting', slug: 'beyondblue', logo: '/partners/beyondblue.svg' },
     { name: 'TEAMS International', slug: 'teams', logo: '/partners/teams.png' },
