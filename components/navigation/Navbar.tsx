@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NAV } from '@/data/content';
+import { trackGoPilotClick } from '@/lib/analytics';
 import { useScrollContext } from '@/lib/story/ScrollProvider';
 import { convergeScroll } from '@/lib/story/anchorScroll';
 import RasidMark from './RasidMark';
@@ -189,7 +190,10 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href={NAV.cta.href}
-              onClick={onNav(NAV.cta.href)}
+              onClick={(e) => {
+                trackGoPilotClick('navbar', { href: NAV.cta.href });
+                onNav(NAV.cta.href)(e);
+              }}
               {...ctaExtraProps}
               className="group relative hidden overflow-hidden border border-signal/35 px-5 py-2 text-[12px] font-medium tracking-wider text-signal transition-colors duration-500 hover:text-void md:block"
             >
@@ -291,7 +295,10 @@ export default function Navbar() {
           </ul>
           <a
             href={NAV.cta.href}
-            onClick={onNav(NAV.cta.href)}
+            onClick={(e) => {
+              trackGoPilotClick('navbar_mobile', { href: NAV.cta.href });
+              onNav(NAV.cta.href)(e);
+            }}
             {...ctaExtraProps}
             className={['mt-10 inline-flex w-fit items-center gap-3 border border-signal/40 px-6 py-3 text-[13px] tracking-wider text-signal transition-all duration-700 ease-cinema', menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'].join(' ')}
             style={{ transitionDelay: menuOpen ? '420ms' : '0ms' }}

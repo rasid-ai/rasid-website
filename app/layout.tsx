@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { PostHogProvider } from './providers'
 import './globals.css';
 
 /**
@@ -88,7 +89,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
-      <body className="bg-void text-chalk">{children}</body>
+      <body className="bg-void text-chalk">
+        <PostHogProvider>  
+          {children}  
+        </PostHogProvider>  
+      </body>
     </html>
   );
 }

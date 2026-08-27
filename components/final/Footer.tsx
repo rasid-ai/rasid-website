@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { FOOTER, NAV } from '@/data/content';
+import { socialPlatformFromHref, trackGoPilotClick, trackSocialClick } from '@/lib/analytics';
 import { useScrollContext } from '@/lib/story/ScrollProvider';
 import { convergeScroll } from '@/lib/story/anchorScroll';
 
@@ -82,7 +83,10 @@ export default function Footer() {
 
             <a
               href={NAV.cta.href}
-              onClick={onAnchor(NAV.cta.href)}
+              onClick={(e) => {
+                trackGoPilotClick('footer', { href: NAV.cta.href });
+                onAnchor(NAV.cta.href)(e);
+              }}
               {...(/^https?:\/\//.test(NAV.cta.href)
                 ? { target: '_blank' as const, rel: 'noopener noreferrer' }
                 : {})}
@@ -109,7 +113,11 @@ export default function Footer() {
                         open in a new tab; mailto: hands off to the mail client. */}
                     <a
                       href={link.href}
-                      onClick={onAnchor(link.href)}
+                      onClick={(e) => {
+                        const platform = socialPlatformFromHref(link.href);
+                        if (platform) trackSocialClick(platform, { location: 'footer', href: link.href });
+                        onAnchor(link.href)(e);
+                      }}
                       {...(/^https?:\/\//.test(link.href)
                         ? { target: '_blank' as const, rel: 'noopener noreferrer' }
                         : {})}

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { HERO } from '@/data/content';
+import { trackGoPilotClick, type GoPilotCtaLocation } from '@/lib/analytics';
 import { DIVE_TARGET, ORBIT_STAGES, onProgress } from '@/lib/story/store';
 import { useStoryTrigger } from '@/lib/hooks/useStoryTrigger';
 import { useScrollContext } from '@/lib/story/ScrollProvider';
@@ -224,7 +225,7 @@ export default function Hero() {
 
             {/* Buttons */}
             <div data-hero-fade className="mt-7 flex flex-wrap items-center gap-3 opacity-0 md:mt-8">
-              <HeroButton href={HERO.primary.href} variant="primary">
+              <HeroButton href={HERO.primary.href} variant="primary" track="hero">
                 {HERO.primary.label}
               </HeroButton>
               {/* <HeroButton href={HERO.secondary.href} variant="ghost">
@@ -289,14 +290,18 @@ function HeroButton({
   href,
   variant,
   children,
+  track,
 }: {
   href: string;
   variant: 'primary' | 'ghost';
   children: React.ReactNode;
+  /** When set, clicking fires the SaaS-app conversion event for this location. */
+  track?: GoPilotCtaLocation;
 }) {
   const { scrollTo } = useScrollContext();
   const external = !href.startsWith('#');
   const onClick = (e: React.MouseEvent) => {
+    if (track) trackGoPilotClick(track, { href });
     if (href.startsWith('#') && document.querySelector(href)) {
       e.preventDefault();
       scrollTo(href, { offset: -10 });

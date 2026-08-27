@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { FINAL_SECTION } from '@/data/content';
+import { trackGoPilotClick } from '@/lib/analytics';
 import { useStoryTrigger } from '@/lib/hooks/useStoryTrigger';
 import { useScrollContext } from '@/lib/story/ScrollProvider';
 import { onProgress } from '@/lib/story/store';
@@ -126,7 +127,10 @@ export default function FinalEarth() {
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
                 href={FINAL_SECTION.primary.href}
-                onClick={onCta(FINAL_SECTION.primary.href)}
+                onClick={(e) => {
+                  trackGoPilotClick('final', { href: FINAL_SECTION.primary.href });
+                  onCta(FINAL_SECTION.primary.href)(e);
+                }}
                 {...ext(FINAL_SECTION.primary.href)}
                 className="group relative inline-flex items-center gap-2.5 overflow-hidden bg-chalk px-7 py-3.5 text-[13px] font-medium tracking-wide text-void transition-colors duration-500"
               >

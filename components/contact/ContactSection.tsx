@@ -1,6 +1,7 @@
 'use client';
 
 import { CONTACT_SECTION as S } from '@/data/content';
+import { socialPlatformFromHref, trackSocialClick } from '@/lib/analytics';
 import Reveal from '@/components/common/Reveal';
 
 /**
@@ -32,6 +33,10 @@ export default function ContactSection() {
                 <li key={c.label}>
                   <a
                     href={c.href}
+                    onClick={() => {
+                      const platform = socialPlatformFromHref(c.href);
+                      if (platform) trackSocialClick(platform, { location: 'contact', href: c.href });
+                    }}
                     {...(/^https?:\/\//.test(c.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     className="group flex items-center justify-between border-b border-white/[0.08] pb-4 transition-colors duration-300 hover:border-signal/40"
                   >
