@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { PostHogProvider } from './providers'
 import './globals.css';
 
 /**
@@ -22,7 +23,7 @@ const mono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
-const title = 'RASID — Seeing Earth, Smarter.';
+const title = 'RASID | Seeing Earth, Smarter.';
 const description =
   'Meet GoPilot, RASID’s AI geospatial agent. Ask a geospatial question in plain language, and GoPilot finds the right data, selects the right models, runs the analysis, and returns the answer.';
 
@@ -88,7 +89,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
-      <body className="bg-void text-chalk">{children}</body>
+      <body className="bg-void text-chalk">
+        <PostHogProvider>  
+          {children}  
+        </PostHogProvider>  
+      </body>
     </html>
   );
 }

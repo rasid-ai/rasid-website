@@ -9,3 +9,8 @@
   # Puppeteer is only used by local dev scripts, never at build/runtime — skip
   # its ~150MB Chromium download so builds are fast and don't fail.
   PUPPETEER_SKIP_DOWNLOAD = "true"
+  # The PostHog project token is a NEXT_PUBLIC_ var — it's meant to ship in the
+  # client bundle (it's a public, write-only analytics key, like a GA id), so it
+  # legitimately appears in build output. Exempt it from Netlify's secret scanner
+  # to stop that expected exposure from failing the build.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN"

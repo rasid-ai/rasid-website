@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { PLUGINS_SECTION as S, GOPILOT_APP_URL } from '@/data/content';
+import { PLUGINS_SECTION as S } from '@/data/content';
+import { trackPluginDownload } from '@/lib/analytics';
 import Reveal from '@/components/common/Reveal';
 
 /**
@@ -124,6 +125,7 @@ export default function Plugins() {
               <a
                 key={l.label}
                 href={l.href}
+                onClick={() => trackPluginDownload(l.label, l.href)}
                 {...ext(l.href)}
                 className={[
                   'group inline-flex items-center gap-2 px-5 py-3 text-[12px] font-medium tracking-wider transition-colors duration-500',

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { TEAM_SECTION as S } from '@/data/content';
+import { trackSocialClick } from '@/lib/analytics';
 import Reveal from '@/components/common/Reveal';
 
 /**
@@ -101,6 +102,7 @@ function Member({
           <div className="pointer-events-auto mt-4 flex items-center gap-2">
             <a
               href={li}
+              onClick={() => trackSocialClick('linkedin', { location: 'team', member: name })}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${name} on LinkedIn`}

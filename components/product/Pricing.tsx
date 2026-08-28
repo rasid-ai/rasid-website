@@ -1,6 +1,7 @@
 'use client';
 
 import { PRICING_SECTION as S, GOPILOT_APP_URL, CONTACT_HREF } from '@/data/content';
+import { trackGoPilotClick } from '@/lib/analytics';
 import Reveal from '@/components/common/Reveal';
 
 /**
@@ -130,6 +131,11 @@ export default function Pricing() {
 
                   <a
                     href={isContact ? CONTACT_HREF : GOPILOT_APP_URL}
+                    onClick={
+                      isContact
+                        ? undefined
+                        : () => trackGoPilotClick('pricing', { plan: plan.id })
+                    }
                     {...(isContact ? {} : extAttrs)}
                     className={[
                       'group mt-8 inline-flex w-full items-center justify-center gap-2 px-5 py-3.5 text-[12px] font-medium tracking-wider transition-colors duration-500',
