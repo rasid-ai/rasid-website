@@ -23,7 +23,7 @@ const mono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
-const title = 'RASID — Seeing Earth, Smarter.';
+const title = 'RASID | Seeing Earth, Smarter.';
 const description =
   'Meet GoPilot, RASID’s AI geospatial agent. Ask a geospatial question in plain language, and GoPilot finds the right data, selects the right models, runs the analysis, and returns the answer.';
 
