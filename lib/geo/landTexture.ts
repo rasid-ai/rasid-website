@@ -69,21 +69,31 @@ async function buildLandTexture(width: number): Promise<LandTextureResult> {
   // come out as ocean automatically.
   mctx.fill('nonzero');
 
-  /* --- inland-ness: successive blurs approximate a distance transform ---- */
-  const blurStage = (src: HTMLCanvasElement, radius: number): HTMLCanvasElement => {
+  /* --- inland-ness: successive blurs approximate a distance transform ------
+     Computed at HALF resolution. The blur passes and their getImageData
+     readbacks are the load-blocking part of this build (each full-res read is
+     ~2MB and forces a canvas flush), but "inland-ness" and the coastal band are
+     inherently low-frequency — a half-res version is visually identical once
+     sampled on the globe. So the three blurs draw the mask *downscaled* into
+     half-size canvases (blur + downscale in one draw), the radii halve to match
+     the halved pixel space, and the final loop samples them with x>>1 / y>>1.
+     The sharp land mask (R channel) stays full-res for crisp coastlines. */
+  const hw = width >> 1;
+  const hh = height >> 1;
+  const blurStage = (radius: number): HTMLCanvasElement => {
     const c = document.createElement('canvas');
-    c.width = width;
-    c.height = height;
+    c.width = hw;
+    c.height = hh;
     const ctx = c.getContext('2d')!;
     ctx.filter = `blur(${radius}px)`;
-    ctx.drawImage(src, 0, 0);
+    ctx.drawImage(mask, 0, 0, hw, hh);
     ctx.filter = 'none';
     return c;
   };
 
-  const near = blurStage(mask, Math.max(1, Math.round(width / 512)));
-  const mid = blurStage(mask, Math.max(2, Math.round(width / 128)));
-  const far = blurStage(mask, Math.max(4, Math.round(width / 44)));
+  const near = blurStage(Math.max(1, Math.round(width / 1024)));
+  const mid = blurStage(Math.max(1, Math.round(width / 256)));
+  const far = blurStage(Math.max(2, Math.round(width / 88)));
 
   const out = document.createElement('canvas');
   out.width = width;
@@ -91,27 +101,31 @@ async function buildLandTexture(width: number): Promise<LandTextureResult> {
   const octx = out.getContext('2d', { willReadFrequently: false })!;
 
   const readData = (c: HTMLCanvasElement): Uint8ClampedArray =>
-    c.getContext('2d')!.getImageData(0, 0, width, height).data;
+    c.getContext('2d')!.getImageData(0, 0, c.width, c.height).data;
 
-  const mData = readData(mask);
-  const nData = readData(near);
+  const mData = readData(mask); // full res
+  const nData = readData(near); // half res
   const midData = readData(mid);
   const fData = readData(far);
 
   const img = octx.createImageData(width, height);
   const d = img.data;
-  for (let i = 0; i < width * height; i++) {
-    const j = i * 4;
-    const land = mData[j]!;
-    // Multi-scale sum → smooth ramp that peaks at continental interiors.
-    const inland = (nData[j]! * 0.25 + midData[j]! * 0.4 + fData[j]! * 0.35) | 0;
-    // Coastal band: high where the near-blur is mid-valued (i.e. at an edge).
-    const nb = nData[j]! / 255;
-    const coast = Math.round(255 * Math.max(0, 1 - Math.abs(nb - 0.5) * 4));
-    d[j] = land;
-    d[j + 1] = inland;
-    d[j + 2] = coast;
-    d[j + 3] = 255;
+  for (let y = 0; y < height; y++) {
+    const hyRow = (y >> 1) * hw;
+    for (let x = 0; x < width; x++) {
+      const j = (y * width + x) * 4;
+      const hj = (hyRow + (x >> 1)) * 4; // matching half-res blur sample
+      const land = mData[j]!;
+      // Multi-scale sum → smooth ramp that peaks at continental interiors.
+      const inland = (nData[hj]! * 0.25 + midData[hj]! * 0.4 + fData[hj]! * 0.35) | 0;
+      // Coastal band: high where the near-blur is mid-valued (i.e. at an edge).
+      const nb = nData[hj]! / 255;
+      const coast = Math.round(255 * Math.max(0, 1 - Math.abs(nb - 0.5) * 4));
+      d[j] = land;
+      d[j + 1] = inland;
+      d[j + 2] = coast;
+      d[j + 3] = 255;
+    }
   }
   octx.putImageData(img, 0, 0);
 

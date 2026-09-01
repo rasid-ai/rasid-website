@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { PostHogProvider } from './providers'
+import { OFFICES } from '@/data/content';
 import './globals.css';
 
 /**
@@ -83,11 +84,38 @@ export const viewport: Viewport = {
    theme doesn't flash the default on reload. Kept tiny and dependency-free. */
 const themeInit = `(function(){try{var t=localStorage.getItem('rasid-theme');if(t&&t!=='dark')document.documentElement.dataset.theme=t;}catch(e){}})();`;
 
+/* Organization structured data. This is how search engines associate RASID with
+   its France and Lebanon offices (rich results / Knowledge Panel / local
+   relevance). */
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'RASID',
+  url: 'https://rasid.ai',
+  logo: 'https://rasid.ai/logo/apple-touch-icon.png',
+  email: 'info@rasid.ai',
+  sameAs: [
+    'https://www.linkedin.com/company/rasid-ai/',
+    'https://www.youtube.com/@RASIDAI',
+  ],
+  address: OFFICES.map((o) => ({
+    '@type': 'PostalAddress',
+    streetAddress: o.postal.streetAddress,
+    postalCode: o.postal.postalCode,
+    addressLocality: o.postal.addressLocality,
+    addressCountry: o.postal.addressCountry,
+  })),
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
       </head>
       <body className="bg-void text-chalk">
         <PostHogProvider>  

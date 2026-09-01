@@ -1,6 +1,7 @@
 'use client';
 
-import { CONTACT_SECTION as S } from '@/data/content';
+import { useEffect, useState } from 'react';
+import { CONTACT_SECTION as S, OFFICES } from '@/data/content';
 import { socialPlatformFromHref, trackSocialClick } from '@/lib/analytics';
 import Reveal from '@/components/common/Reveal';
 
@@ -50,19 +51,33 @@ export default function ContactSection() {
               ))}
             </ul>
           </Reveal>
+
+          {/* offices — RASID is based in France and Lebanon */}
+          <Reveal delay={150}>
+            <div className="mt-12">
+              <span className="label-sm text-graphite">Offices</span>
+              <div className="mt-5 grid gap-8 sm:grid-cols-2">
+                {OFFICES.map((office) => (
+                  <address key={office.city} className="not-italic">
+                    <div className="label text-signal/90">{office.city}</div>
+                    <p className="mt-2 text-[0.92rem] leading-relaxed text-mist">
+                      {office.lines.map((line, i) => (
+                        <span key={i} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </p>
+                  </address>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
 
         {/* right: booking */}
         <Reveal delay={120}>
           {hasBooking ? (
-            <div className="overflow-hidden border border-white/[0.1] bg-white/[0.015]">
-              <iframe
-                src={S.bookingUrl}
-                title="Book a call with RASID"
-                className="h-[640px] w-full"
-                loading="lazy"
-              />
-            </div>
+            <BookingEmbed url={S.bookingUrl} />
           ) : (
             <div className="flex min-h-[360px] flex-col items-center justify-center border border-white/[0.1] bg-white/[0.015] p-10 text-center">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-signal/30 bg-signal/[0.06] text-signal">
@@ -87,5 +102,55 @@ export default function ContactSection() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/**
+ * Calendly booking embed.
+ *
+ * The scheduler is a heavy third-party SPA we can't speed up, so we minimise the
+ * time the reader stares at a blank frame:
+ *  - `preconnect` to Calendly the moment this section mounts. It's a lazily-
+ *    mounted section (~0.9 screens before it enters view), so the DNS lookup +
+ *    TLS handshake happen well ahead of the iframe request — no cold connection.
+ *  - the iframe loads eagerly on mount (not `loading="lazy"`), for the same
+ *    head-start reason, so Calendly is usually booted by the time it's on screen.
+ *  - a skeleton shows until `onLoad`, and the frame fades in, so any residual
+ *    wait reads as intentional rather than broken.
+ */
+function BookingEmbed({ url }: { url: string }) {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const hosts = ['https://calendly.com', 'https://assets.calendly.com'];
+    const links = hosts.map((href) => {
+      const l = document.createElement('link');
+      l.rel = 'preconnect';
+      l.href = href;
+      l.crossOrigin = 'anonymous';
+      document.head.appendChild(l);
+      return l;
+    });
+    return () => links.forEach((l) => l.remove());
+  }, []);
+
+  return (
+    <div className="relative h-[640px] overflow-hidden border border-white/[0.1] bg-white/[0.015]">
+      {!loaded && (
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 text-mist">
+          <span className="h-6 w-6 animate-spin rounded-full border-2 border-white/15 border-t-signal" />
+          <span className="label-sm">Loading scheduler…</span>
+        </div>
+      )}
+      <iframe
+        src={url}
+        title="Book a call with RASID"
+        className={[
+          'h-full w-full transition-opacity duration-500',
+          loaded ? 'opacity-100' : 'opacity-0',
+        ].join(' ')}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
   );
 }
