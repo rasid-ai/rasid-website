@@ -76,12 +76,21 @@ export default function Pricing() {
                     {plan.desc}
                   </p>
 
-                  {/* price */}
-                  <div className="mt-4 flex items-baseline gap-1.5">
-                    <span className="text-[2.7rem] font-medium leading-none tracking-tight text-chalk">
+                  {/* price — cadence sits on its own line below so the number
+                      (or "Custom") is always the dominant mark and the token
+                      badge below stays on one baseline across all four cards,
+                      whatever the cadence copy is. min-h reserves the two-line
+                      slot so a one-word cadence ("/mo") aligns with a phrase
+                      ("tailored to your deployment"). */}
+                  <div className="mt-4 min-h-[4.25rem]">
+                    <div className="text-[2.7rem] font-medium leading-none tracking-tight text-chalk">
                       {plan.price}
-                    </span>
-                    {plan.cadence && <span className="text-[0.9rem] text-mist">{plan.cadence}</span>}
+                    </div>
+                    {plan.cadence && (
+                      <div className="mt-1.5 text-[0.85rem] leading-snug text-mist">
+                        {plan.cadence}
+                      </div>
+                    )}
                   </div>
 
                   {/* token badge — sharp, bordered, on-brand (not a pastel pill) */}

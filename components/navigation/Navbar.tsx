@@ -82,14 +82,23 @@ export default function Navbar() {
     setOpenIdx(null);
     if (/^https?:\/\//.test(href)) return; // external — let it navigate
     const h = href.indexOf('#');
-    if (h === -1) return; // real route (/services) — let Link navigate
+    if (h === -1) return; // real route with no hash (/services) — let Link navigate
+    // Split "path#hash". A hash should only smooth-scroll when it lives on the
+    // page we are ALREADY on; a hash on another route (e.g. /services#defense
+    // clicked from home) must fall through to <Link> so the browser navigates
+    // there and lands on the section. The previous check keyed only on
+    // `pathname === '/'`, so from home it hijacked EVERY hash link — including
+    // /services#… and /products#… — calling preventDefault and then finding no
+    // such id on the home page, which is why those nav items did nothing.
+    const targetPath = href.slice(0, h) || pathname; // '' => current-page anchor
     const hash = href.slice(h); // '#id'
-    if (pathname === '/') {
+    // Smooth-scroll in-page only when we're on that page AND the smooth engine is
+    // live (home, normal motion). Cross-route hashes and reduced-motion fall
+    // through to native <Link> navigation + hash scroll.
+    if (targetPath === pathname && lenis) {
       e.preventDefault();
-      if (document.querySelector(hash)) scrollToSection(hash);
-      else scrollToSection(hash); // reserved LazySection ids exist even pre-mount
+      scrollToSection(hash);
     }
-    // else: navigate to '/#id' and let the home page resolve the hash on load
   };
 
   const openDropdown = (idx: number) => {

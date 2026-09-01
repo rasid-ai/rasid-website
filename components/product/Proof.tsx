@@ -4,16 +4,15 @@ import { PROOF_SECTION as S } from '@/data/content';
 import Reveal from '@/components/common/Reveal';
 
 /**
- * §26 — Proof: AWS recognition + the Phil Cooper testimonial.
+ * §26 — Proof: AWS recognition + testimonials.
  *
- * The quote is rendered verbatim from content.ts (attributed to a real person —
- * no paraphrasing here). The key phrase is highlighted in place by splitting the
- * quote on `emphasis`. Pure DOM/CSS (§34); large and premium (§26).
+ * Quotes are rendered verbatim from content.ts (attributed to real people — no
+ * paraphrasing here). The key phrase in each is highlighted in place by
+ * splitting the quote on its `emphasis`. Pure DOM/CSS (§34); premium (§26).
  */
-function renderQuote() {
-  const { quote, emphasis } = S;
+function renderQuote(quote: string, emphasis?: string) {
   const i = emphasis ? quote.indexOf(emphasis) : -1;
-  if (i < 0) return quote;
+  if (i < 0 || !emphasis) return quote;
   return (
     <>
       {quote.slice(0, i)}
@@ -51,26 +50,37 @@ export default function Proof() {
           ))}
         </Reveal>
 
-        {/* the testimonial */}
-        <Reveal delay={160} className="mx-auto mt-16 max-w-[46rem] md:mt-24">
-          <span aria-hidden className="block font-serif text-[4rem] leading-[0.2] text-signal/40">
-            “
-          </span>
-          <blockquote className="mt-6 text-[clamp(1.4rem,3.1vw,2.5rem)] font-medium leading-[1.28] tracking-tight text-chalk">
-            {renderQuote()}
-          </blockquote>
+        {/* the testimonials — a horizontal row of equal-height cards (stacks to
+            one column on mobile). The quote grows and the attribution is pinned
+            to the card foot so every card's author line sits on one baseline. */}
+        <div className="mt-14 grid gap-5 text-left md:mt-20 md:gap-6 sm:grid-cols-2">
+          {S.testimonials.map((t, i) => (
+            <Reveal key={t.author} delay={140 + i * 80} className="h-full">
+              <figure className="flex h-full flex-col border border-white/[0.09] bg-white/[0.012] p-7 md:p-8">
+                <span aria-hidden className="block font-serif text-[3rem] leading-[0.2] text-signal/40">
+                  “
+                </span>
+                <blockquote className="mt-4 text-[0.98rem] leading-relaxed text-chalk/90">
+                  {renderQuote(t.quote, t.emphasis)}
+                </blockquote>
 
-          <figcaption className="mt-10 flex items-center justify-center gap-4">
-            {/* replaceable initials avatar */}
-            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 font-mono text-[12px] tracking-wider text-chalk/80">
-              {S.initials}
-            </span>
-            <div className="text-left">
-              <div className="text-[0.98rem] font-medium tracking-tight text-chalk">{S.author}</div>
-              <div className="mt-0.5 max-w-[24rem] text-[0.85rem] leading-snug text-mist">{S.role}</div>
-            </div>
-          </figcaption>
-        </Reveal>
+                {/* spacer keeps the attribution on a shared baseline across cards */}
+                <div className="flex-grow" />
+
+                <figcaption className="mt-8 flex items-center gap-4">
+                  {/* initials avatar */}
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 font-mono text-[12px] tracking-wider text-chalk/80">
+                    {t.initials}
+                  </span>
+                  <div>
+                    <div className="text-[0.95rem] font-medium tracking-tight text-chalk">{t.author}</div>
+                    <div className="mt-0.5 text-[0.8rem] leading-snug text-mist">{t.role}</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

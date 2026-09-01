@@ -268,7 +268,7 @@ export const PRICING_SECTION = {
       id: 'free',
       name: 'Free',
       price: '€0',
-      cadence: 'forever',
+      cadence: 'per month',
       tokens: '500',
       unit: 'tokens',
       cta: 'Sign up free',
@@ -287,7 +287,7 @@ export const PRICING_SECTION = {
       id: 'pro',
       name: 'Pro',
       price: '€149',
-      cadence: '/mo',
+      cadence: 'per month',
       tokens: '5,000',
       unit: 'tokens',
       cta: 'Start Pro',
@@ -309,7 +309,7 @@ export const PRICING_SECTION = {
       id: 'scale',
       name: 'Business',
       price: '€499',
-      cadence: '/mo',
+      cadence: 'per month',
       tokens: '25,000',
       unit: 'tokens',
       cta: 'Start Business',
@@ -329,10 +329,10 @@ export const PRICING_SECTION = {
     {
       id: 'enterprise',
       name: 'Enterprise',
-      price: '',
-      cadence: '',
-      tokens: '',
-      unit: '',
+      price: 'Custom',
+      cadence: 'tailored to your deployment',
+      tokens: 'Custom',
+      unit: 'tokens number',
       cta: 'Talk to sales',
       featured: false,
       desc: 'For organizations with custom deployment needs.',
@@ -477,12 +477,42 @@ export const PROOF_SECTION = {
     { k: 'AWS Generative AI Challenge', v: '2026 · Winner' },
     { k: 'GoPilot launch', v: 'AWS London' },
   ],
-  quote:
-    'RASID won the AWS Generative AI Challenge because they made satellite data talk back. They’re leading the market by enabling anyone to perform geospatial analysis in natural language.',
-  emphasis: 'made satellite data talk back',
-  author: 'Phil Cooper',
-  role: 'Commercial Lead, Aerospace, Satellite & Defence — AWS',
-  initials: 'PC',
+  /* Verbatim quotes from real people — no paraphrasing. `emphasis`, when it
+     appears in the quote, is highlighted in the accent colour in place. */
+  testimonials: [
+    {
+      quote:
+        'What impressed me about RASID is their ability to bring together Earth observation, geospatial technologies, and AI into practical solutions. GoPilot is a strong example of this, combining advanced AI with geospatial data and tools to simplify complex analysis. It has been exciting to see the team develop this capability and we look forward to seeing what they build next.',
+      emphasis: 'bring together Earth observation, geospatial technologies, and AI into practical solutions',
+      author: 'Miriam Puertos',
+      role: 'Partner Manager, AWS',
+      initials: 'MP',
+    },
+    {
+      quote:
+        'I was impressed by GoPilot’s detailed reasoning and its ability to autonomously adapt its workflow to complex geospatial queries. It successfully produced the requested raster and vector outputs, and its capabilities stood out compared with other geospatial AI systems I have tested.',
+      emphasis: 'stood out compared with other geospatial AI systems I have tested',
+      author: 'Giulio Poggi',
+      role: 'Post-doc researcher, Centre for Cultural Heritage Technology (CCHT), Istituto Italiano di Tecnologia (IIT)',
+      initials: 'GP',
+    },
+    {
+      quote:
+        'A lot of the work behind RASID’s success happens behind the scenes, but the results are clear to see. The team has put in a tremendous amount of work to turn their vision into a working product, and GoPilot is a great example of what they have achieved. We are happy at AWS to have contributed to this success.',
+      emphasis: 'the results are clear to see',
+      author: 'Phil Cooper',
+      role: 'Commercial Lead, Aerospace, Satellite & Defence, AWS',
+      initials: 'PC',
+    },
+    {
+      quote:
+        'Using GoPilot gave me a different perspective on how geospatial analysis can be approached. I was particularly interested in exploring how it could be applied to different challenges across the Arab region, and I see significant potential for developing practical use cases around the needs of the region.',
+      emphasis: 'significant potential for developing practical use cases around the needs of the region',
+      author: 'Dr Osama Rayis',
+      role: 'Chair of Agripreneurship, AOAD',
+      initials: 'OR',
+    },
+  ],
 } as const;
 
 /* ── Environmental service — methane monitoring (featured in the landing story).
@@ -618,6 +648,36 @@ export const CONTACT_SECTION = {
     { label: 'YouTube', value: '@RASIDAI', href: 'https://www.youtube.com/@RASIDAI' },
   ],
 } as const;
+
+/* ── Offices — RASID is based in France and Lebanon. One source of truth for the
+ * detailed addresses in the Contact section, the compact line in the footer, and
+ * the PostalAddress entries in the Organization JSON-LD (app/layout.tsx). The
+ * structured `postal` fields exist so the JSON-LD stays accurate without parsing
+ * the display `lines`. */
+export const OFFICES = [
+  {
+    city: 'Paris',
+    country: 'France',
+    lines: ['47 rue Vivienne', '75002 Paris', 'France'],
+    postal: {
+      streetAddress: '47 rue Vivienne',
+      postalCode: '75002',
+      addressLocality: 'Paris',
+      addressCountry: 'FR',
+    },
+  },
+  {
+    city: 'Beirut',
+    country: 'Lebanon',
+    lines: ['Badaro Building 4961, 3rd Floor', 'Badaro Street, Al Mathaf', 'Beirut 1100', 'Lebanon'],
+    postal: {
+      streetAddress: 'Badaro Building 4961, 3rd Floor, Badaro Street, Al Mathaf',
+      postalCode: '1100',
+      addressLocality: 'Beirut',
+      addressCountry: 'LB',
+    },
+  },
+] as const;
 
 /* ── /services full page — one card per sector. Placeholder copy; refine freely.
  * `id` matches the navbar dropdown anchors (/services#<id>). `status: 'live'`

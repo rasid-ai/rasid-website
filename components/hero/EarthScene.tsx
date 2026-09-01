@@ -12,7 +12,7 @@ import {
 import { getLandTexture } from '@/lib/geo/landTexture';
 import { useIsLight } from '@/lib/theme/useIsLight';
 import { BUDGET, type Capabilities } from '@/lib/hooks/useCapabilities';
-import { DIVE_TARGET, ORBIT_STAGES, getProgress, type Channel } from '@/lib/story/store';
+import { DIVE_TARGET, ORBIT_STAGES, getProgress, onProgress, type Channel } from '@/lib/story/store';
 import {
   clamp,
   damp,
@@ -88,26 +88,67 @@ export default function EarthScene({
      covers both the idle spin at the top and the entire dive; once you scroll
      past into the product sections it goes off-screen and stops. */
   const wrapRef = useRef<HTMLDivElement>(null);
-  const [render, setRender] = useState(true);
+  const [onScreen, setOnScreen] = useState(true);
+  // R3F's invalidate(), captured on create. We render in 'demand' mode and drive
+  // frames ourselves (see the two effects below) rather than toggling R3F's
+  // shared 'always'/'never' loop: that loop did NOT reliably restart after the
+  // canvas scrolled off-screen and back, so the globe stayed frozen on its last
+  // frame (only a reload fixed it). In 'demand' mode invalidate() always
+  // schedules a frame, so scrolling — in either direction — or returning to view
+  // reliably resumes rendering.
+  const invalidateRef = useRef<(() => void) | null>(null);
 
+  // Visibility gate for the idle-spin ticker (B) below.
   useEffect(() => {
     if (!active) return;
     const el = wrapRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([e]) => setRender((prev) => (prev === e.isIntersecting ? prev : e.isIntersecting)),
+      ([e]) => setOnScreen((prev) => (prev === e.isIntersecting ? prev : e.isIntersecting)),
       { rootMargin: '2% 0px' },
     );
     io.observe(el);
     return () => io.disconnect();
   }, [active]);
 
+  /* (A) Scroll-driven frames. Any change on this story channel demands a render,
+     in BOTH directions — this is what makes the reverse scroll work. It is
+     independent of the visibility gate, so scrolling back into the hero from
+     below revives the globe the instant the scrub resumes. */
+  useEffect(() => {
+    if (!active) return;
+    return onProgress(channel, () => invalidateRef.current?.());
+  }, [active, channel]);
+
+  /* (B) Idle animation. The globe rotates on its own with no scroll input, so
+     while it is on-screen we tick invalidate() on a RAF — throttled to 30fps at
+     idle and 60fps once the dive is being scrubbed (the shader is fill-rate
+     bound and the slow rotation is imperceptible above 30fps). Stopped while
+     off-screen, so nothing renders there — the GPU saving the old gate intended,
+     now without the freeze. */
+  useEffect(() => {
+    if (!active || !onScreen) return;
+    let raf = 0;
+    let last = 0;
+    const tick = (t: number) => {
+      raf = requestAnimationFrame(tick);
+      const p = getProgress(channel);
+      const scrolling = mode === 'final' ? p > 0.01 : p > ORBIT_STAGES.idle[1];
+      if (t - last < (scrolling ? 1000 / 60 : 1000 / 30)) return;
+      last = t;
+      invalidateRef.current?.();
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [active, onScreen, channel, mode]);
+
   return (
     <div ref={wrapRef} className={className}>
       <Canvas
-        /* Rendered only while visible AND recently scrolled — see the gating
-           note above. `active` (the caller's hard off-switch) still overrides. */
-        frameloop={active && render ? 'always' : 'never'}
+        /* We drive frames explicitly via invalidate() — see effects (A)/(B)
+           above. 'demand' renders only when we ask, which is what fixed the
+           off-screen freeze while keeping the off-screen GPU saving. */
+        frameloop="demand"
         /* Same reasoning as ImageryPanel's maxDpr: the Earth fragment shader is
            the most expensive on the page and it covers most of the viewport, so
            fragment count is what decides whether the hero holds 60fps. MSAA is
@@ -122,10 +163,11 @@ export default function EarthScene({
           depth: true,
         }}
         camera={{ fov: 32, near: 0.0002, far: 400, position: [0, 0, 3.1] }}
-        onCreated={({ gl, scene }) => {
+        onCreated={({ gl, scene, invalidate }) => {
           gl.setClearColor(0x000000, 0);
           gl.toneMapping = THREE.NoToneMapping; // the shader grades internally
           scene.matrixWorldAutoUpdate = true;
+          invalidateRef.current = invalidate;
         }}
       >
         <Suspense fallback={null}>
@@ -306,20 +348,14 @@ function SceneContents({
   );
 
   const smoothed = useRef({ alt: mode === 'final' ? 1.4 : 2.1, spin: 0, init: false });
-  const lastFrameRef = useRef(0);
 
   useFrame((state, dt) => {
     const t = state.clock.elapsedTime;
     const p = getProgress(channel);
     const dtc = Math.min(dt, 1 / 30); // clamp so a stutter can't jump the camera
 
-    // Throttle to 30fps while idle (no active dive) — the earth shader is
-    // fill-rate bound and the slow rotation is imperceptible above 30fps.
-    const isScrolling = p > (mode === 'final' ? 0.01 : ORBIT_STAGES.idle[1]);
-    const minInterval = isScrolling ? 1 / 60 : 1 / 30;
-    if (t - lastFrameRef.current < minInterval) return;
-    lastFrameRef.current = t;
-
+    // Frame cadence (30fps idle / 60fps scrubbing) is governed by the demand
+    // ticker in the parent — effect (B) — so useFrame just does the work.
     uniforms.uTime.value = t;
     uniforms.uResolution.value.set(state.size.width, state.size.height);
 

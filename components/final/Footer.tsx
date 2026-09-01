@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import { FOOTER, NAV } from '@/data/content';
+import { FOOTER, NAV, OFFICES } from '@/data/content';
 import { socialPlatformFromHref, trackGoPilotClick, trackSocialClick } from '@/lib/analytics';
 import { useScrollContext } from '@/lib/story/ScrollProvider';
 import { convergeScroll } from '@/lib/story/anchorScroll';
@@ -100,6 +100,16 @@ export default function Footer() {
                 →
               </span>
             </a>
+
+            {/* offices — France & Lebanon */}
+            <p className="mt-7 text-[0.8rem] leading-relaxed text-graphite">
+              {OFFICES.map((office, i) => (
+                <span key={office.city}>
+                  {i > 0 && <span aria-hidden className="mx-2 text-white/20">·</span>}
+                  {office.city}, {office.country}
+                </span>
+              ))}
+            </p>
           </div>
 
           {/* link columns */}
