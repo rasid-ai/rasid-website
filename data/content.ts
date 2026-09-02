@@ -354,19 +354,18 @@ export const PRICING_SECTION = {
 export const GOSERVERS_SECTION = {
   eyebrow: 'GoServers · MCP',
   headline: 'Build with RASID.',
-  body: 'Everything GoPilot can do is exposed over MCP as three GoServers. Fetch data, run geospatial operations, and run AI models. Orchestrated by GoPilot, or called directly from your own code.',
+  body: 'GoPilot\'s geospatial capabilities are exposed over MCP through four GoServers. Fetch data, run geospatial operations, and run AI models. Orchestrated by GoPilot, or called directly from your own code.',
   center: 'GoPilot',
   servers: [
     {
-      name: 'GoServer Fetch',
+      name: 'GoServer-Fetch',
       tag: 'Data',
-      desc: 'Discover and retrieve imagery, embeddings and Earth-observation data.',
+      desc: 'Discover and retrieve 10, 000+ dataet including imagery, embeddings and vector data.',
       caps: [
         'Sentinel-2 L2A / L1C',
         'Mapbox tiles · all zoom levels',
-        'Google imagery tiles',
         'ERA5 climate reanalysis',
-        'DEM elevation',
+        'DEM layer',
         'Clay embeddings',
         'AlphaEarth embeddings',
         'ESA WorldCover LULC',
@@ -375,9 +374,9 @@ export const GOSERVERS_SECTION = {
       ],
     },
     {
-      name: 'GoServer Geo',
-      tag: 'Analysis',
-      desc: 'Geospatial operations and analysis on GeoJSON and shapefiles.',
+      name: 'GoServer-Geo',
+      tag: 'Geospatial',
+      desc: 'Geospatial operations on GeoJSON and shapefiles.',
       caps: [
         'Buffer & offset',
         'Intersect · union · difference',
@@ -392,9 +391,9 @@ export const GOSERVERS_SECTION = {
       ],
     },
     {
-      name: 'GoServer AI',
+      name: 'GoServer-AI',
       tag: 'Inference',
-      desc: 'Run RASID’s geospatial AI models on imagery.',
+      desc: 'Run geospatial AI models on imagery.',
       caps: [
         'Field delineation',
         'Solar panel segmentation',
