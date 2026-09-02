@@ -355,7 +355,7 @@ export const GOSERVERS_SECTION = {
   eyebrow: 'GoServers · MCP',
   headline: 'Build with RASID.',
   body: 'GoPilot\'s geospatial capabilities are exposed over MCP through four GoServers. Fetch data, run geospatial operations, and run AI models. Orchestrated by GoPilot, or called directly from your own code.',
-  center: 'GoPilot',
+  center: 'GoPilot-MCPs',
   servers: [
     {
       name: 'GoServer-Fetch',
