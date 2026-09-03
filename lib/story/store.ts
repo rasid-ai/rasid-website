@@ -21,9 +21,6 @@ export type Channel =
   | 'decision' // Act VII — editorial
   | 'finalEarth'; // Act VIII — return to Earth
 
-/** The three use-case channels, in narrative order. */
-export const CASE_CHANNELS = ['case0', 'case1', 'case2'] as const satisfies readonly Channel[];
-
 type Listener = (value: number) => void;
 
 const values: Record<Channel, number> = {

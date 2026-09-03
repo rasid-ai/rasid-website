@@ -18,9 +18,6 @@
 export const GOPILOT_APP_URL = 'https://app.rasid.ai/try-gopilot'; // TODO(rasid): set to https://app.rasid… when live
 export const CONTACT_HREF = '#contact';
 
-/** True once GOPILOT_APP_URL points at a real external app (drives target=_blank). */
-export const APP_IS_EXTERNAL = /^https?:\/\//.test(GOPILOT_APP_URL);
-
 export const NAV = {
   brand: 'RASID',
   /* Top-level items. An item with `children` opens a hover dropdown; an item
@@ -34,7 +31,7 @@ export const NAV = {
       href: '/products',
       children: [
         { label: 'GoPilot', href: '/products#gopilot', note: 'The geospatial AI agent' },
-        { label: 'GoServers', href: '/products#platform', note: 'MCP servers & API' },
+        { label: 'GoServers', href: '/products#mcps', note: 'MCP servers & API' },
         { label: 'Plugins', href: '/products#plugins', note: 'QGIS & ArcGIS Pro' },
       ],
     },
@@ -235,25 +232,6 @@ export const GOPILOT_STUDIO = {
         { k: 'Use', v: 'Similarity search' },
       ],
     },
-  ],
-} as const;
-
-/* ── Product ecosystem (asset-free sections) ─────────────────────────────── */
-export const GOBOX_SECTION = {
-  eyebrow: 'GoBox',
-  headline: 'Know what you want to run?',
-  body: "GoBox gives GIS professionals direct access to RASID's geospatial models and tools without needing to interact with GoPilot.",
-  compare: [
-    { name: 'GoPilot', line: 'Tell us what you want.' },
-    { name: 'GoBox', line: 'Tell us what to run.' },
-  ],
-  catalogueTitle: 'Model catalogue',
-  models: [
-    { name: 'SAM 3', kind: 'Promptable segmentation', io: 'Image → masks' },
-    { name: 'Field Delineation', kind: 'Instance segmentation', io: 'Image → parcels' },
-    { name: 'Solar Detection', kind: 'Oriented object detection', io: 'Image → installations' },
-    { name: 'Tree Detection', kind: 'Crown delineation', io: 'Image → canopy' },
-    { name: 'Change Detection', kind: 'Temporal comparison', io: 'Image pair → changes' },
   ],
 } as const;
 
@@ -515,43 +493,6 @@ export const PROOF_SECTION = {
   ],
 } as const;
 
-/* ── Environmental service — methane monitoring (featured in the landing story).
- * Real detection imagery is dropped into public/ (see baseImage/overlayImage);
- * until the files exist the section falls back to a neutral grey plate. */
-export const METHANE_SECTION = {
-  eyebrow: 'Services · Environmental',
-  headline: 'See methane before it escapes.',
-  body: 'GoPilot screens satellite imagery for methane plumes across sites and pipelines — quantifying the leak rate and pinpointing the source, so operators act in hours, not months.',
-  question: 'Detect methane emissions across this site.',
-  steps: [
-    { id: 'ingest', label: 'Ingesting imagery', detail: 'Sentinel-5P · TROPOMI · VHR optical' },
-    { id: 'screen', label: 'Screening for plumes', detail: 'rasid/methane · atmospheric retrieval' },
-    { id: 'quantify', label: 'Quantifying & locating', detail: 'Flux rate · source geolocation' },
-  ],
-  /* Drop the real detection scene here (see /public). object-cover, same as the
-     Beirut scene-parse, so base and overlay align. */
-  baseImage: '/gopilot/methane-base.webp',
-  overlayImage: '/gopilot/methane-overlay.webp',
-  source: 'Sentinel-5P TROPOMI · methane column (ppb)',
-  resultTitle: 'Plume detected',
-  stats: [
-    { k: 'Estimated flux', v: '1,240 kg/h' },
-    { k: 'Source located', v: '± 30 m' },
-    { k: 'Area screened', v: '12,400 km²' },
-  ],
-  cta: { label: 'Explore all services', href: '/services' },
-} as const;
-
-/* ── Products bridge — the slim band on the LANDING page after the featured
- * GoPilot demo, pointing to the full /products page (GoPilot + GoServers +
- * Plugins). GoServers and Plugins no longer live on the landing. */
-export const PRODUCTS_BRIDGE = {
-  eyebrow: 'The product suite',
-  headline: 'GoPilot our Main Product.',
-  body: 'GoServers exposes every capability over MCP, and our plugins bring RASID into QGIS and ArcGIS Pro. See how they fit together.',
-  cta: { label: 'See all products', href: '/products' },
-} as const;
-
 /* ── /products full page — the RASID product suite (GoPilot, GoServers, Plugins
  * rendered in full). This header sits above them. */
 export const PRODUCTS_PAGE = {
@@ -579,6 +520,8 @@ export const TEAM_SECTION = {
       photo: '/team/member-1.webp',
       expertise: 'Vision & Strategy',
       bio: 'Leads RASID’s vision making geospatial intelligence accessible to anyone who can ask a question.',
+      linkedin: 'https://www.linkedin.com/in/alighandour/',
+      email: 'aghandour@rasid.ai',
     },
     {
       name: 'Reda Haidar',
@@ -587,6 +530,8 @@ export const TEAM_SECTION = {
       photo: '/team/member-2.webp',
       expertise: 'Growth & Partnerships',
       bio: 'Drives partnerships and growth across sectors and markets.',
+      linkedin: 'https://www.linkedin.com/in/redahaidar/',
+      email: 'reda@rasid.ai',
     },
     {
       name: 'Hasan Nasrallah',
@@ -595,6 +540,8 @@ export const TEAM_SECTION = {
       photo: '/team/member-3.webp',
       expertise: 'Deep Learning · EO',
       bio: 'Builds RASID’s geospatial models, segmentation, detection and change analysis.',
+      linkedin: 'https://www.linkedin.com/in/hasannasrallah-ai/',
+      email: 'hasan@rasid.ai',
     },
     {
       name: 'Hasan Wehbi',
@@ -603,6 +550,8 @@ export const TEAM_SECTION = {
       photo: '/team/member-4.webp',
       expertise: 'Research · Models',
       bio: 'Researches and prototypes the next generation of RASID’s models.',
+      linkedin: 'https://www.linkedin.com/in/hassan-wehbi-3b0b28234/',
+      email: 'hwehbi@rasid.ai',
     },
     {
       name: 'Mohamad Moussawi',
@@ -611,6 +560,8 @@ export const TEAM_SECTION = {
       photo: '/team/member-5.webp',
       expertise: 'Platform · Product',
       bio: 'Builds the RASID platform end to end from GoPilot to GoServers.',
+      linkedin: 'https://www.linkedin.com/in/lesawe/',
+      email: 'sawe@rasid.ai',
     },
     {
       name: 'Amira Al Halabi',
@@ -619,6 +570,8 @@ export const TEAM_SECTION = {
       photo: '/team/member-6.webp',
       expertise: 'Sales & Marketing',
       bio: 'Connects RASID’s capabilities to the people and sectors that need them.',
+      linkedin: 'https://www.linkedin.com/in/amira-el-halabi-6b3b77351/',
+      email: 'amira@rasid.ai',
     },
   ] as {
     name: string;
@@ -763,22 +716,6 @@ export const SERVICES_PAGE = {
   cta: { label: 'Talk to RASID', href: '/#contact' },
 } as const;
 
-export const DECISION_SECTION = {
-  lines: [
-    { id: 'pixels', text: 'Pixels aren’t decisions.' },
-    { id: 'data', text: 'Data isn’t insight.' },
-    { id: 'insight', text: 'Insight becomes valuable when it changes what you do next.' },
-    { id: 'from', text: 'From pixels to decisions.' },
-  ],
-} as const;
-
-export const FINAL_SECTION = {
-  headline: 'See Earth differently.',
-  body: 'Ask questions. Run models. Explore the planet. Turn geospatial data into decisions.',
-  primary: { label: 'Launch GoPilot', href: GOPILOT_APP_URL },
-  secondary: { label: 'Talk to RASID', href: CONTACT_HREF },
-} as const;
-
 export const FOOTER = {
   brand: 'RASID',
   tagline: 'GoPilot is the interface to Earth.',
@@ -790,9 +727,9 @@ export const FOOTER = {
       title: 'Products',
       links: [
         { label: 'GoPilot', href: '/products#gopilot' },
-        { label: 'GoServers / MCP', href: '/products#platform' },
+        { label: 'GoServers / MCP', href: '/products#mcps' },
         { label: 'Plugins', href: '/products#plugins' },
-        { label: 'API Documentation', href: '/products#platform' },
+        { label: 'API Documentation', href: '/products#mcps' },
       ],
     },
     {

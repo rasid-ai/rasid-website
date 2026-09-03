@@ -22,15 +22,9 @@ export const smootherstep = (t: number): number => {
   return x * x * x * (x * (x * 6 - 15) + 10);
 };
 
-export const easeOutCubic = (t: number): number => 1 - Math.pow(1 - clamp(t), 3);
-export const easeInCubic = (t: number): number => Math.pow(clamp(t), 3);
 export const easeInOutCubic = (t: number): number => {
   const x = clamp(t);
   return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-};
-export const easeOutExpo = (t: number): number => {
-  const x = clamp(t);
-  return x >= 1 ? 1 : 1 - Math.pow(2, -10 * x);
 };
 
 /** Frame-rate independent exponential approach. `smoothing` ≈ per-second decay. */
@@ -53,6 +47,3 @@ export function latLonToVec3(lat: number, lon: number, radius = 1): [number, num
     radius * Math.sin(phi) * Math.sin(theta),
   ];
 }
-
-/** Formats a number with thin-space thousands grouping, e.g. 1,284. */
-export const fmt = (n: number): string => Math.round(n).toLocaleString('en-US');

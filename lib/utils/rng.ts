@@ -32,11 +32,6 @@ export function cellRand(x: number, y: number, salt: number): number {
   return (uhash(ckey(x, y, salt)) & 0xffffff) / 16777216;
 }
 
-/** Two independent uniforms for a lattice cell. */
-export function cellRand2(x: number, y: number, salt: number): [number, number] {
-  return [cellRand(x, y, salt), cellRand(x, y, salt + 101)];
-}
-
 /** Seeded scalar PRNG for content that needs no GPU counterpart. */
 export function makeRng(seed: number): () => number {
   let s = seed >>> 0 || 1;

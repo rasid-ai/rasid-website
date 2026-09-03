@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { GOPILOT_STUDIO as S } from '@/data/content';
 import Reveal from '@/components/common/Reveal';
@@ -20,16 +20,51 @@ import Reveal from '@/components/common/Reveal';
  */
 type UseCase = (typeof S.cases)[number];
 
+// Plan ticker timing (ms). The result scan-reveal is animated across the SAME
+// total window, so the top→bottom sweep and the plan checklist start together
+// and finish together — see the sequence effect and ResultStage.
+const STEP_START = 520;
+const STEP_INTERVAL = 460;
+const DONE_TAIL = 420;
+const planDuration = (n: number) => STEP_START + Math.max(0, n - 1) * STEP_INTERVAL + DONE_TAIL;
+
 export default function GoPilotStudio() {
   const [activeId, setActiveId] = useState<string>(S.cases[0].id);
   const [phase, setPhase] = useState<'thinking' | 'done'>('thinking');
   const [step, setStep] = useState(0);
   const active: UseCase = S.cases.find((c) => c.id === activeId) ?? S.cases[0];
 
-  // Drive the thinking → done sequence whenever the active case changes.
+  // The section is mounted early (LazySection, ~0.9 screens ahead), so we hold
+  // the sequence until it's actually on screen — otherwise the first case plays
+  // out before the reader ever sees it. Fires once, on first entry.
+  const rootRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setInView(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Drive the thinking → done sequence: once when the studio first enters view,
+  // then again on every case change (the reader is already looking by then).
   useEffect(() => {
     setPhase('thinking');
     setStep(0);
+    if (!inView) return;
     const steps = active.steps;
     const timers: number[] = [];
     let i = 0;
@@ -37,18 +72,18 @@ export default function GoPilotStudio() {
       i += 1;
       if (i < steps.length) {
         setStep(i);
-        timers.push(window.setTimeout(tick, 460));
+        timers.push(window.setTimeout(tick, STEP_INTERVAL));
       } else {
-        timers.push(window.setTimeout(() => setPhase('done'), 420));
+        timers.push(window.setTimeout(() => setPhase('done'), DONE_TAIL));
       }
     };
-    timers.push(window.setTimeout(tick, 520));
+    timers.push(window.setTimeout(tick, STEP_START));
     return () => timers.forEach((t) => clearTimeout(t));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeId]);
+  }, [activeId, inView]);
 
   return (
-    <section id="gopilot" className="relative w-full overflow-hidden bg-void py-24 md:py-32" aria-label="GoPilot">
+    <section ref={rootRef} id="gopilot" className="relative w-full overflow-hidden bg-void py-24 md:py-32" aria-label="GoPilot">
 <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10">
         <Reveal className="mx-auto mb-12 max-w-[52ch] text-center md:mb-16">
           <div className="mb-5 flex items-center justify-center gap-3">
@@ -108,7 +143,7 @@ export default function GoPilotStudio() {
 
             {/* 3 · result */}
             <div className="relative min-h-[360px] bg-ink lg:min-h-[520px]">
-              <ResultStage active={active} phase={phase} />
+              <ResultStage active={active} phase={phase} inView={inView} />
             </div>
           </div>
         </Reveal>
@@ -193,7 +228,7 @@ function StepDot({ state }: { state: 'done' | 'active' | 'pending' }) {
 }
 
 /** The right zone: imagery base + result overlay reveal + stats, or a placeholder. */
-function ResultStage({ active, phase }: { active: UseCase; phase: 'thinking' | 'done' }) {
+function ResultStage({ active, phase, inView }: { active: UseCase; phase: 'thinking' | 'done'; inView: boolean }) {
   const done = phase === 'done';
   const [baseOk, setBaseOk] = useState(false);
   const [resultOk, setResultOk] = useState(false);
@@ -218,6 +253,33 @@ function ResultStage({ active, phase }: { active: UseCase; phase: 'thinking' | '
     };
   }, [active.base, active.result]);
 
+  // Result reveal — a single top→bottom scan-line wipe (replaces the old
+  // blur-then-fade). It is synced to the plan: it starts with the first step and
+  // reaches the bottom as the last step completes, animating across the SAME
+  // total window as the plan ticker (planDuration), so the sweep and the
+  // checklist start and finish together. Keyed on `active`, so it restarts each
+  // time a new case begins its thinking sequence.
+  const [reveal, setReveal] = useState(0);
+  useEffect(() => {
+    setReveal(0);
+    if (!inView) return;
+    const total = planDuration(active.steps.length);
+    let raf = 0;
+    let start = 0;
+    const frame = (t: number) => {
+      if (!start) start = t;
+      const p = Math.min(1, (t - start) / total);
+      setReveal(p);
+      if (p < 1) raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(raf);
+  }, [active, inView]);
+
+  // Scan edge (%), padded so it starts fully hidden and ends fully shown.
+  const edge = reveal * 114 - 7;
+  const resultMask = `linear-gradient(to bottom, #000 ${edge}%, rgba(0,0,0,0) ${edge + 7}%)`;
+
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* grey plate */}
@@ -232,27 +294,39 @@ function ResultStage({ active, phase }: { active: UseCase; phase: 'thinking' | '
           aria-hidden
           className="absolute inset-0 h-full w-full object-cover will-transform"
           style={{
-            // "analyzing" → sharpen into focus: blurred + dim while thinking,
-            // crisp when done. Slight scale so the blur doesn't reveal edges.
-            filter: done ? 'none' : 'blur(14px) brightness(0.6)',
-            transform: done ? 'none' : 'scale(1.06)',
-            transition: 'filter 800ms ease, transform 800ms ease',
+            // Dim (not blurred) while analyzing, then crisp — the result is
+            // revealed by the scan wipe below, so there is no blur-in here.
+            filter: done ? 'none' : 'brightness(0.55)',
+            transition: 'filter 700ms ease',
           }}
         />
       )}
 
-      {/* result overlay — fades in when done */}
+      {/* result overlay — revealed by a single top→bottom scan wipe */}
       {resultOk && active.result && (
         <>
-          <div aria-hidden className="absolute inset-0 bg-void transition-opacity duration-1000" style={{ opacity: done ? 0.35 : 0 }} />
+          <div aria-hidden className="absolute inset-0 bg-void" style={{ opacity: reveal * 0.4 }} />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={active.result}
             alt=""
             aria-hidden
-            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
-            style={{ opacity: done ? 0.92 : 0 }}
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ opacity: 0.92, WebkitMaskImage: resultMask, maskImage: resultMask }}
           />
+          {/* scan front riding the reveal edge */}
+          {reveal > 0.02 && reveal < 0.99 && (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 z-[5]"
+              style={{
+                top: `calc(${edge}% - 20px)`,
+                height: 40,
+                background:
+                  'linear-gradient(to bottom, transparent, rgb(var(--c-signal) / 0.35) 46%, rgba(180,255,244,0.85) 50%, rgb(var(--c-signal) / 0.35) 54%, transparent)',
+              }}
+            />
+          )}
         </>
       )}
 
@@ -275,7 +349,7 @@ function ResultStage({ active, phase }: { active: UseCase; phase: 'thinking' | '
       {/* result panel — appears when done */}
       <div
         className="absolute bottom-3 right-3 z-10 w-[min(220px,60%)] border border-signal/30 bg-void/85 p-3 backdrop-blur-sm transition-all duration-700"
-        style={{ opacity: done ? 1 : 0, transform: done ? 'none' : 'translateY(8px)' }}
+        style={{ opacity: reveal > 0.85 ? 1 : 0, transform: reveal > 0.85 ? 'none' : 'translateY(8px)' }}
       >
         <div className="mb-2 flex items-center gap-2 font-mono text-[9px] uppercase tracking-widest text-signal">
           <span className="h-1 w-1 rounded-full bg-signal" /> {active.resultTitle}
