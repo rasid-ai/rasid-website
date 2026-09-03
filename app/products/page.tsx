@@ -5,7 +5,7 @@ import ScrollProvider from '@/lib/story/ScrollProvider';
 import ProductsPage from '@/components/products/ProductsPage';
 
 export const metadata: Metadata = {
-  title: 'Products — RASID',
+  title: 'RASID | Products',
   description:
     'The RASID product suite: GoPilot (the geospatial AI agent), GoServers (capabilities over MCP), and plugins for QGIS and ArcGIS Pro.',
 };

@@ -4,7 +4,7 @@ import Footer from '@/components/final/Footer';
 import ServicesPage from '@/components/services/ServicesPage';
 
 export const metadata: Metadata = {
-  title: 'Services — RASID',
+  title: 'RASID | Services',
   description:
     'RASID Earth-intelligence services by sector: environmental (methane & emissions monitoring), urban, agriculture, transportation, energy and disaster response.',
 };
