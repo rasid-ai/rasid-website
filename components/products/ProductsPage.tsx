@@ -38,7 +38,7 @@ export default function ProductsPage() {
       {/* GoPilot — interactive use-case studio (carries its own #gopilot id) */}
       <GoPilotStudio />
 
-      {/* GoServers and Plugins carry their own ids (#platform, #plugins) */}
+      {/* GoServers and Plugins carry their own ids (#mcps, #plugins) */}
       <GoServers />
       <Plugins />
     </div>

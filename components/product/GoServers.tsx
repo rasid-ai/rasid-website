@@ -10,7 +10,7 @@ import Reveal from '@/components/common/Reveal';
  */
 export default function GoServers() {
   return (
-    <section id="platform" className="relative w-full bg-void py-28 md:py-40" aria-label="GoServers and MCP">
+    <section id="mcps" className="relative w-full bg-void py-28 md:py-40" aria-label="GoServers and MCP">
       <div className="mx-auto max-w-[1280px] px-6 md:px-10">
         <Reveal className="text-center">
           <div className="mb-5 flex items-center justify-center gap-3">

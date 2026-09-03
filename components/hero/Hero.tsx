@@ -180,7 +180,7 @@ export default function Hero() {
         <div className="mx-auto w-full max-w-[1600px] px-6 md:px-10">
           <div className="max-w-[46rem]">
             {/* Eyebrow */}
-            <div data-hero-fade className="mb-5 flex items-center gap-3 opacity-0 md:mb-7">
+            <div data-hero-fade className="mb-5 flex items-center gap-3 opacity-0 md:mb-7 [@media(max-height:820px)]:mb-3">
               <span className="h-px w-8 bg-signal/60" />
               <span className="label text-signal/90">{HERO.eyebrow}</span>
               <span className="label-sm hidden sm:inline">
@@ -194,7 +194,7 @@ export default function Hero() {
                 ("SEEING" read as "SFEING") before the reveal settled. Giving the
                 animated lines leading-[1.05] fits the full glyph inside the mask;
                 a small negative margin between the boxes keeps the tight stack. */}
-            <h1 className="display text-[clamp(2.3rem,6.6vw,5.6rem)] text-chalk">
+            <h1 className="display text-[clamp(2.3rem,6.6vw,5.6rem)] text-chalk [@media(max-height:820px)]:text-[clamp(1.9rem,4.4vw,3.4rem)]">
               <span className="block overflow-hidden">
                 <span ref={titleLine1} className="block leading-[1.05] will-transform">
                   {HERO.title[0]}
@@ -210,7 +210,7 @@ export default function Hero() {
             {/* Tagline */}
             <p
               data-hero-fade
-              className="mt-5 text-[clamp(1.05rem,2.1vw,1.5rem)] font-normal leading-snug tracking-tight text-chalk/90 opacity-0 md:mt-6"
+              className="mt-5 text-[clamp(1.05rem,2.1vw,1.5rem)] font-normal leading-snug tracking-tight text-chalk/90 opacity-0 md:mt-6 [@media(max-height:820px)]:mt-3 [@media(max-height:820px)]:text-[clamp(1rem,1.8vw,1.2rem)]"
             >
               {HERO.tagline}
             </p>
@@ -218,13 +218,13 @@ export default function Hero() {
             {/* Supporting copy */}
             <p
               data-hero-fade
-              className="mt-4 max-w-[30rem] text-[0.94rem] leading-relaxed text-mist opacity-0"
+              className="mt-4 max-w-[30rem] text-[0.94rem] leading-relaxed text-mist opacity-0 [@media(max-height:820px)]:mt-3 [@media(max-height:760px)]:hidden"
             >
               {HERO.body}
             </p>
 
             {/* Buttons */}
-            <div data-hero-fade className="mt-7 flex flex-wrap items-center gap-3 opacity-0 md:mt-8">
+            <div data-hero-fade className="mt-7 flex flex-wrap items-center gap-3 opacity-0 md:mt-8 [@media(max-height:820px)]:mt-5">
               <HeroButton href={HERO.primary.href} variant="primary" track="hero">
                 {HERO.primary.label}
               </HeroButton>
