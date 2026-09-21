@@ -1,8 +1,45 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { SERVICES_PAGE as S } from '@/data/content';
 import Reveal from '@/components/common/Reveal';
+
+/** Service card image that falls back to a labelled placeholder if the file is
+ *  missing (e.g. a newly-added service before its webp is dropped in). */
+function ShowcaseImage({ src, label }: { src: string; label: string }) {
+  const [ok, setOk] = useState(true);
+  return (
+    <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink">
+      {ok ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt={`${label} project`}
+          decoding="async"
+          onError={() => setOk(false)}
+          className="h-full w-full object-cover transition-transform duration-700 ease-cinema group-hover:scale-[1.04]"
+        />
+      ) : (
+        <div
+          aria-hidden
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            background:
+              'linear-gradient(135% 120% at 25% 15%, rgb(var(--c-signal-deep) / 0.35) 0%, rgb(var(--c-ink)) 55%, rgb(var(--c-abyss)) 100%)',
+          }}
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-signal/50">{label}</span>
+        </div>
+      )}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'linear-gradient(to top, rgb(var(--c-void) / 0.5), transparent 55%)' }}
+      />
+    </div>
+  );
+}
 
 /**
  * Services showcase (landing) — the breadth of RASID's bespoke work.
@@ -12,6 +49,13 @@ import Reveal from '@/components/common/Reveal';
  * cards linking to /services#<id>, mirroring the Products treatment. Keeps the
  * #service anchor so existing nav/links still land here.
  */
+// The landing showcase features a curated 5 sectors; the "See all services"
+// card is the 6th cell, filling a clean 3×2 grid. The full set (incl. the
+// excluded ones) always lives on the /services page. Edit HOME_EXCLUDE to
+// curate which sectors appear on the home page.
+const HOME_EXCLUDE = ['transportation'];
+const FEATURED = S.services.filter((s) => !HOME_EXCLUDE.includes(s.id));
+
 export default function ServicesShowcase() {
   return (
     <section id="service" className="relative w-full bg-void py-24 md:py-32" aria-label="Services">
@@ -27,22 +71,13 @@ export default function ServicesShowcase() {
         </Reveal>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-          {S.services.map((svc, i) => (
+          {FEATURED.map((svc, i) => (
             <Reveal key={svc.id} delay={(i % 3) * 80}>
               <Link
                 href={`/services#${svc.id}`}
                 className="group block h-full overflow-hidden border border-white/[0.08] bg-white/[0.012] transition-colors duration-500 hover:border-signal/40"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={svc.image}
-                    alt={`${svc.name} — RASID project`}
-                    decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-700 ease-cinema group-hover:scale-[1.04]"
-                  />
-                  <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, rgb(var(--c-void) / 0.5), transparent 55%)' }} />
-                </div>
+                <ShowcaseImage src={svc.image} label={svc.name} />
                 <div className="p-5">
                   <div className="flex items-center gap-2.5">
                     <h3 className="text-[1.05rem] font-medium tracking-tight text-chalk transition-colors group-hover:text-signal">

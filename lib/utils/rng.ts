@@ -1,18 +1,13 @@
 /**
- * Deterministic hashing shared between CPU and GPU.
+ * Deterministic PRNG for content that needs reproducible randomness on the CPU.
  *
- * The satellite imagery is synthesised in a fragment shader, but the detection
- * overlays (field boundaries, tree canopies) are SVG generated in TypeScript.
- * For the overlays to land *on* what the shader drew, both sides must agree
- * bit-for-bit. These functions are the contract: they are mirrored exactly by
- * `HASH_GLSL` in lib/webgl/glsl/hash.ts.
- *
- * `Math.imul` gives us GLSL's uint multiply (mod 2^32); `>>>` gives us its
- * logical shift. Every operation below is therefore reproducible on the GPU.
+ * The hero Starfield and DataPoints seed their layouts from a fixed seed via
+ * `makeRng`, so every render lays points out identically. `uhash` is Chris
+ * Wellons' lowbias32 integer avalanche; `Math.imul` gives a mod-2^32 multiply.
  */
 
 /** Integer avalanche (Chris Wellons' lowbias32). */
-export function uhash(x: number): number {
+function uhash(x: number): number {
   let h = x >>> 0;
   h ^= h >>> 16;
   h = Math.imul(h, 0x7feb352d);
@@ -22,17 +17,7 @@ export function uhash(x: number): number {
   return h >>> 0;
 }
 
-/** Cell key for integer lattice coordinates + a salt (mirrors GLSL `ckey`). */
-export function ckey(x: number, y: number, salt: number): number {
-  return (Math.imul(x >>> 0, 1973) ^ Math.imul(y >>> 0, 9277) ^ Math.imul(salt >>> 0, 26699)) >>> 0;
-}
-
-/** Uniform float in [0,1) for a lattice cell. */
-export function cellRand(x: number, y: number, salt: number): number {
-  return (uhash(ckey(x, y, salt)) & 0xffffff) / 16777216;
-}
-
-/** Seeded scalar PRNG for content that needs no GPU counterpart. */
+/** Seeded scalar PRNG returning uniform floats in [0,1). */
 export function makeRng(seed: number): () => number {
   let s = seed >>> 0 || 1;
   return () => {

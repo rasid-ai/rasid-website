@@ -1,0 +1,36 @@
+# RASID
+
+> RASID builds GoPilot, an AI geospatial agent. Ask a geospatial question in
+> plain language; GoPilot finds the right Earth-observation data, selects the
+> right AI models, runs the analysis, and returns raster and vector answers.
+> RASID is a B2B geospatial-AI company with offices in Paris, France and Beirut,
+> Lebanon. Winner, AWS Generative AI Challenge 2026.
+
+RASID turns satellite and Earth-observation imagery into decision-ready
+intelligence through one natural-language interface over 10,000+ datasets and
+hundreds of AI models. Everything GoPilot does is also exposed over the Model
+Context Protocol (MCP) as GoServers, and inside QGIS and ArcGIS Pro via plugins.
+
+## Products
+- [GoPilot](https://rasid.ai/products#gopilot): AI geospatial agent for plain-language questions to raster/vector answers.
+- [GoServers (MCP / API)](https://rasid.ai/products#mcps): Three MCP servers: GoServer Fetch (data), GoServer Geo (analysis), GoServer AI (model inference). Orchestrated by GoPilot on every plan; direct MCP / API access is available on the Enterprise plan.
+- [Plugins](https://rasid.ai/products#plugins): GoPilot inside QGIS and ArcGIS Pro.
+
+## Services
+- [Urban](https://rasid.ai/services#urban): Building/road counting, settlement planning, solar-panel detection, land-use mapping.
+- [Agriculture](https://rasid.ai/services#agriculture): National crop mapping, field delineation, phenology, tree/olive detection.
+- [Defense](https://rasid.ai/services#defense): Q&A on tensions and strike sites with before/after change-detection verification.
+- [Environmental](https://rasid.ai/services#environmental): Methane monitoring, deforestation, water/coastline change.
+- [Transportation](https://rasid.ai/services#transportation): Vehicle-speed mapping from satellite video, iRAP road-safety automation, network extraction.
+
+## Pricing
+- [Pricing](https://rasid.ai/#pricing): Free (€0/mo, 500 tokens); Pro (€149/mo, 5,000 tokens); Business (€499/mo, 25,000 tokens); Enterprise (custom, on-prem/cloud + MCP connector). Tokens are shared across GoPilot, GoBox, and MCP/API services.
+
+## Company
+- [Team](https://rasid.ai/#team): Geospatial scientists, ML engineers and GIS specialists.
+- [Contact](https://rasid.ai/#contact): info@rasid.ai. Offices in Paris, France and Beirut, Lebanon.
+
+## Optional
+- [LinkedIn](https://www.linkedin.com/company/rasid-ai/)
+- [YouTube](https://www.youtube.com/@RASIDAI)
+- [GoPilot deck (PDF)](https://rasid.ai/decks/GoPilot_Deck2026.pdf)

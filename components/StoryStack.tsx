@@ -30,7 +30,8 @@ const TeamSection = dynamic(() => import('./team/TeamSection'), { ssr: false });
 const Proof = dynamic(() => import('./product/Proof'), { ssr: false });
 const Partners = dynamic(() => import('./product/Partners'), { ssr: false });
 const ContactSection = dynamic(() => import('./contact/ContactSection'), { ssr: false });
-const Footer = dynamic(() => import('./final/Footer'), { ssr: false });
+// Footer is rendered by app/page.tsx directly (server-rendered, not ssr:false) so
+// its nav links + contact land in the crawlable HTML — see AboutContent note.
 
 export default function StoryStack() {
   return (
@@ -64,10 +65,6 @@ export default function StoryStack() {
 
       <LazySection id="contact" minHeight="60svh">
         <ContactSection />
-      </LazySection>
-
-      <LazySection id="contact-footer" minHeight="40svh">
-        <Footer />
       </LazySection>
     </>
   );

@@ -2,22 +2,24 @@ import Navbar from '@/components/navigation/Navbar';
 import ScrollProvider from '@/lib/story/ScrollProvider';
 import Hero from '@/components/hero/Hero';
 import StoryStack from '@/components/StoryStack';
+import Footer from '@/components/final/Footer';
 
 /**
  * The page is one continuous scroll narrative:
  *
- *   Act I    Hero            Earth → region → target → dive → imagery
- *   Act II   DataSection     "Earth is data" — the imagery becomes legible
- *   Act III  GoPilot         the question, the agent, the answer
- *   Act IV   MCPNetwork      how it does it — the tool ecosystem
- *   Act V    ModelShowcase   one image, infinite questions
- *   Act VI   UseCases        agriculture · solar · urban
- *   Act VII  Decision        pixels → decisions (editorial)
- *   Act VIII FinalEarth      the return, now instrumented
+ *   Act I    Hero        Earth → region → target → dive → imagery
+ *   Act II   GoPilot     the question, the agent, the answer
+ *   …         (product · services · pricing · team · proof · partners · contact)
  *
  * Act I is server-rendered as the shell (its copy is real HTML, so the page has
- * meaningful content and LCP text without waiting on WebGL). Everything below
- * the fold is code-split and mounted as it approaches the viewport.
+ * meaningful content and LCP text without waiting on WebGL). The StoryStack acts
+ * below the fold are code-split and mounted as they approach the viewport.
+ *
+ * Footer is rendered here directly (server-rendered, not inside the ssr:false
+ * StoryStack) so its nav links + contact land in the crawlable HTML. The
+ * substantive About/FAQ + product/service content lives on the dedicated
+ * /about, /products and /services pages (kept off the home page to keep the
+ * cinematic landing short) — all discoverable via the sitemap.
  */
 export default function Page() {
   return (
@@ -27,6 +29,7 @@ export default function Page() {
         <Hero />
         <StoryStack />
       </main>
+      <Footer />
     </ScrollProvider>
   );
 }
