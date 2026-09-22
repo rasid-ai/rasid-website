@@ -793,79 +793,332 @@ export const FOOTER = {
  * Server-rendered, crawlable content (rendered by components/content/AboutContent
  * as real <h2>/<h3>/<p>, NOT behind ssr:false/LazySection) so search engines and
  * LLMs get substantive, quotable, entity-consistent text and FAQPage structured
- * data. Direct-answer-first, self-contained sentences (GEO best practice). Keep
- * "RASID" (org) and "GoPilot" (product) spelled consistently everywhere. */
+ * data. Direct-answer-first, self-contained sentences (GEO best practice).
+ * Keep "RASID" (org) and "GoPilot" (product) spelled consistently everywhere.
+ */
 export const ABOUT_CONTENT = {
   eyebrow: 'About RASID',
   headline: 'Seeing Earth, smarter.',
   intro:
-    'RASID is a geospatial-AI company that builds GoPilot, an AI agent for Earth observation. Ask GoPilot a question about the planet in plain language, and it finds the right satellite data, selects the right AI models, runs the analysis, and returns raster and vector answers, with no GIS expertise required. RASID turns billions of satellite pixels into decision-ready intelligence through a single natural-language interface.',
+    'RASID is a boutique geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. We combine satellite data, geospatial analysis, computer vision and AI to build practical solutions for real-world challenges. Our work spans product development through GoPilot and bespoke geospatial R&D and consulting projects.',
+
   blocks: [
     {
-      h: 'What GoPilot is',
-      p: 'GoPilot is an AI geospatial agent. It connects a large language model to a toolbox of Earth-observation data sources and computer-vision models, then plans and runs the workflow needed to answer a question. Instead of manually searching imagery catalogues, writing GIS scripts, and stitching model outputs together, you describe the outcome you want and GoPilot produces it.',
+      h: 'What RASID is',
+      p: 'RASID is a geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. We combine satellite data, geospatial analysis, computer vision, AI and software engineering to turn complex Earth-observation data into actionable intelligence. Our two main activities are developing GoPilot, our flagship AI geospatial product, and delivering bespoke geospatial R&D and consulting projects.',
     },
+
+    {
+      h: 'What GoPilot is',
+      p: 'GoPilot is RASID’s flagship AI geospatial agent. It connects language models to Earth-observation data, geospatial tools and AI models, allowing users to describe what they need in natural language. GoPilot finds relevant data, selects and runs the appropriate analytical workflow, and returns maps, raster and vector layers, measurements and other results.',
+    },
+
     {
       h: 'How GoPilot works',
-      p: 'GoPilot answers a question in four steps. First it interprets the request and plans a workflow. Second it fetches the right imagery and Earth-observation data. Third it selects and runs the appropriate AI models such as segmentation, detection, or change analysis. Fourth it returns the result as downloadable raster and vector layers, alongside the numbers that matter. Every step is shown, so the analysis is auditable rather than a black box.',
+      p: 'GoPilot turns a geospatial question into an executable analysis workflow. First, it interprets the request and plans the workflow. Second, it retrieves the relevant imagery and Earth-observation data. Third, it selects and runs appropriate AI models and geospatial operations, such as segmentation, detection and change analysis. Fourth, it returns the results as downloadable raster and vector layers alongside the numbers that matter. The workflow and results are surfaced to the user, making the analysis transparent and reproducible.',
     },
+
     {
       h: 'One interface over 10,000+ datasets',
-      p: 'GoPilot reaches more than 10,000 datasets and hundreds of AI models through one interface. Data sources include Sentinel-2 optical imagery, high-resolution optical imagery, DEM elevation, ERA5 climate reanalysis, and foundation-model embeddings such as Clay and AlphaEarth. Because the whole catalogue sits behind natural language, a first-time user and a remote-sensing specialist ask in exactly the same way.',
+      p: 'GoPilot reaches more than 10,000 datasets and hundreds of AI models through one interface. Data sources include Sentinel-2 optical imagery, high-resolution optical imagery, DEM elevation, ERA5 climate reanalysis, and foundation-model embeddings such as Clay and AlphaEarth. Because the catalogue is accessible through natural language, both geospatial specialists and users who do not work directly with GIS tools can use the same interface.',
     },
+
     {
-      h: 'GoServers and plugins',
-      p: 'Everything GoPilot can do is exposed over the Model Context Protocol (MCP) as three GoServers: GoServer Fetch for data, GoServer Geo for geospatial operations, and GoServer AI for model inference. GoPilot orchestrates these on every plan; Enterprise customers can also call them directly from their own agents and code. RASID also ships plugins that bring GoPilot into QGIS and ArcGIS Pro, so existing GIS teams keep their tools and gain an AI copilot.',
+      h: 'GoServers API/MCP',
+      p: 'GoPilot capabilities are exposed through the Model Context Protocol (MCP) as four GoServers: GoServer-Fetch for data, GoServer-Geo for geospatial operations, GoServer-Analyse and GoServer-AI for model inference. GoPilot orchestrates these services to retrieve data, perform geospatial processing and run AI models.',
     },
+
+    {
+      h: 'GIS plugins',
+      p: 'RASID also provides plugins for QGIS and ArcGIS Pro, allowing existing GIS teams to use GoPilot within their established workflows.',
+    },
+
+    {
+      h: 'Beyond GoPilot',
+      p: 'RASID also delivers bespoke geospatial consultancy and R&D projects for organisations with specific Earth-observation and AI requirements. We develop custom AI models, geospatial datasets, data pipelines and software for real-world applications. This work spans environmental monitoring, agriculture, energy, infrastructure, transportation and urban analysis, combining research, engineering and operational deployment.',
+    },
+
     {
       h: 'Where RASID works',
-      p: 'RASID delivers projects across five sectors. In agriculture it maps national crops, delineates fields, and detects trees and disease. In urban analysis it counts buildings and roads and detects solar installations. In environmental monitoring it screens for methane plumes and tracks deforestation and water change. In defense it verifies strike sites with before-and-after change detection. In transportation it maps vehicle speed from satellite video and automates road-safety assessment.',
+      p: 'RASID applies Earth Observation and GeoAI across multiple sectors. In agriculture, it maps crops and fields and detects trees and disease. In environmental monitoring, it screens for methane plumes, deforestation and water change. In energy and infrastructure, it analyses facilities and assets using satellite imagery. In urban analysis, it extracts buildings, roads and solar installations. In transportation, it analyses satellite video and automates road-safety assessment.',
     },
+
+    {
+      h: 'Research and applied innovation',
+      p: 'RASID combines scientific research with applied engineering. Our work spans remote sensing, computer vision, GeoAI, agentic AI, geospatial software and cloud infrastructure. Research and consultancy projects feed new methods and capabilities into our technology, while GoPilot provides a platform for turning those capabilities into repeatable geospatial workflows.',
+    },
+
     {
       h: 'Recognition and offices',
-      p: 'RASID won the AWS Generative AI Challenge in 2026. The company is based in Paris, France and Beirut, Lebanon, and works with partners including AWS, the World Bank, OGC, and DAIS. You can reach the team at info@rasid.ai.',
+      p: 'RASID won the AWS Generative AI Challenge in 2026. The company is based in Paris, France and Beirut, Lebanon, and works internationally with research institutions, international organisations and technology partners. RASID also participates in the wider geospatial ecosystem through organisations and initiatives including AWS, the World Bank and the Open Geospatial Consortium (OGC). You can reach the team at info@rasid.ai.',
     },
   ],
 } as const;
 
-/* FAQ — visible on the page AND emitted as FAQPage JSON-LD. Each answer is a
- * complete, self-contained statement (≤3 sentences) an LLM can lift verbatim. */
+/* FAQ — visible on the page AND emitted as FAQPage JSON-LD.
+ *
+ * Each answer is:
+ * - self-contained
+ * - direct-answer-first
+ * - 1–3 sentences
+ * - written so search engines and LLMs can quote it without surrounding context
+ *
+ * Keep "RASID" (organisation) and "GoPilot" (product) spelled consistently.
+ */
 export const FAQ = [
   {
+    q: 'What is RASID?',
+    a: 'RASID is a geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. RASID develops GoPilot, its flagship AI geospatial product, and delivers bespoke geospatial R&D and consulting projects.',
+  },
+
+  {
     q: 'What is GoPilot?',
-    a: 'GoPilot is RASID’s AI geospatial agent. You ask a question about Earth in plain language, and GoPilot finds the right satellite data, selects the right AI models, runs the analysis, and returns raster and vector results, without needing GIS expertise.',
+    a: 'GoPilot is RASID’s AI geospatial agent for Earth Observation. Users describe a geospatial question in natural language, and GoPilot finds relevant data, selects and runs the appropriate tools and AI models, and returns maps, raster and vector results.',
   },
+
   {
-    q: 'What data and AI models does GoPilot use?',
-    a: 'GoPilot reaches more than 10,000 datasets and hundreds of AI models through one interface, including Sentinel-2 imagery, high-resolution optical imagery, DEM elevation, ERA5 climate data, and foundation-model embeddings such as Clay and AlphaEarth. It runs segmentation, object-detection, and change-detection models on top of that data.',
+    q: 'What does GoPilot do?',
+    a: 'GoPilot turns natural-language questions into geospatial analysis workflows. It can discover Earth-observation data, perform geospatial operations, run AI models such as segmentation and object detection, analyse change over time, and return the results as maps and downloadable geospatial layers.',
   },
+
   {
-    q: 'How much does GoPilot cost?',
-    a: 'GoPilot has four plans: Free at €0 per month with 500 tokens, Pro at €149 per month with 5,000 tokens, Business at €499 per month with 25,000 tokens, and Enterprise with custom pricing plus on-premise or cloud deployment. Tokens are shared across GoPilot, GoBox, and RASID’s MCP and API services.',
+    q: 'How does GoPilot work?',
+    a: 'GoPilot first interprets a user request and plans the required workflow. It then retrieves relevant Earth-observation data, selects and runs appropriate geospatial tools and AI models, and returns the resulting layers, measurements and analysis.',
   },
+
+  {
+    q: 'Does GoPilot require GIS expertise?',
+    a: 'GoPilot is designed to let users interact with geospatial data through natural language instead of manually performing the underlying GIS workflow. GIS professionals can also use GoPilot through existing tools such as QGIS and ArcGIS Pro.',
+  },
+
+  {
+    q: 'What data does GoPilot use?',
+    a: 'GoPilot provides access to more than 10,000 datasets, including Sentinel-2 imagery, high-resolution optical imagery, digital elevation models, ERA5 climate reanalysis and foundation-model embeddings such as Clay and AlphaEarth. The available data depends on the analysis requested.',
+  },
+
+  {
+    q: 'How many datasets are available in GoPilot?',
+    a: 'GoPilot provides access to more than 10,000 datasets through a single natural-language interface. These include satellite imagery, elevation data, climate data and other Earth-observation and geospatial datasets.',
+  },
+
+  {
+    q: 'What AI models does GoPilot use?',
+    a: 'GoPilot can orchestrate hundreds of AI models and geospatial tools. Depending on the task, these include models and workflows for segmentation, object detection, change detection and other forms of Earth-observation analysis.',
+  },
+
+  {
+    q: 'What types of geospatial analysis can GoPilot perform?',
+    a: 'GoPilot can perform tasks including image segmentation, object detection, change detection, feature extraction, spatial analysis and Earth-observation data processing. The available workflows depend on the datasets and models relevant to the user’s request.',
+  },
+
+  {
+    q: 'Can GoPilot analyse satellite imagery?',
+    a: 'Yes. GoPilot can discover and analyse satellite imagery and other Earth-observation data, select appropriate analytical models and return the results as geospatial layers and measurements.',
+  },
+
+  {
+    q: 'Can GoPilot analyse Sentinel-2 imagery?',
+    a: 'Yes. Sentinel-2 is one of the Earth-observation data sources available to GoPilot. It can be used for applications including environmental monitoring, land-cover analysis, change detection and other geospatial workflows.',
+  },
+
   {
     q: 'Can I use GoPilot inside QGIS or ArcGIS Pro?',
-    a: 'Yes. RASID ships plugins that bring GoPilot into QGIS and ArcGIS Pro, so GIS professionals can run RASID’s models and workflows directly inside the tools they already use.',
+    a: 'Yes. RASID provides plugins for QGIS and ArcGIS Pro, allowing GIS professionals to use GoPilot and RASID’s geospatial models and workflows within the tools they already use.',
   },
+
   {
-    q: 'Does GoPilot offer an API or MCP access?',
-    a: 'Yes, on the Enterprise plan. Every GoPilot capability is exposed over the Model Context Protocol (MCP) as three GoServers: GoServer Fetch for data, GoServer Geo for analysis, and GoServer AI for model inference. Enterprise customers call these directly from their own agents and code; on every plan, GoPilot orchestrates them for you.',
+    q: 'Does GoPilot provide an API?',
+    a: 'Yes. RASID provides programmatic access to GoPilot capabilities through its MCP and API services, with direct access available according to the applicable plan. This allows organisations to integrate RASID’s geospatial capabilities into their own software and workflows.',
   },
+
   {
-    q: 'What can GoPilot do for agriculture and environmental monitoring?',
-    a: 'For agriculture, GoPilot maps crops at national scale, delineates field boundaries, and detects trees and crop disease. For the environment, it screens satellite imagery for methane plumes, estimating leak rate and locating the source, and tracks deforestation, land-cover change, and water and coastline change.',
+    q: 'Does GoPilot support MCP?',
+    a: 'Yes. GoPilot capabilities are exposed through the Model Context Protocol (MCP) using three GoServers: GoServer Fetch for data access, GoServer Geo for geospatial operations, and GoServer AI for model inference.',
   },
+
   {
-    q: 'What can GoPilot do for defense and urban planning?',
-    a: 'For defense, GoPilot answers questions about tensions and strike sites and verifies them with before-and-after change detection. For urban planning, it counts buildings and roads, maps land use, and detects and counts solar installations from high-resolution imagery.',
+    q: 'What are RASID GoServers?',
+    a: 'GoServers are RASID’s MCP-based services for geospatial data and AI workflows. GoServer Fetch handles data access, GoServer Geo provides geospatial operations, and GoServer AI provides model inference.',
   },
+
   {
-    q: 'Who is RASID and where is it based?',
-    a: 'RASID is a geospatial-AI company that builds GoPilot. It won the AWS Generative AI Challenge in 2026 and has offices in Paris, France and Beirut, Lebanon. You can reach the team at info@rasid.ai.',
+    q: 'Can developers integrate RASID into their own AI agents?',
+    a: 'Yes. RASID exposes geospatial data, operations and AI inference through MCP-based GoServers and API services. This allows compatible AI agents and software applications to use RASID’s geospatial capabilities programmatically.',
   },
+
   {
-    q: 'Is the imagery shown on this site real?',
-    a: 'The animated globe and some demo overlays on this marketing site are procedurally generated for illustration. RASID’s production analyses run on real Sentinel-2 and other Earth-observation imagery and return real raster and vector outputs to customers.',
+    q: 'How much does GoPilot cost?',
+    a: 'GoPilot has four plans: Free at €0 per month with 500 tokens, Pro at €149 per month with 5,000 tokens, Business at €499 per month with 25,000 tokens, and Enterprise with custom pricing. Enterprise also provides deployment options including cloud and on-premise environments.',
+  },
+
+  {
+    q: 'What are GoPilot tokens?',
+    a: 'GoPilot tokens represent usage capacity across RASID’s platform services. Tokens are shared across GoPilot, GoBox, and RASID’s MCP and API services, with the amount included depending on the subscription plan.',
+  },
+
+  {
+    q: 'What is GoBox?',
+    a: 'GoBox is RASID’s GIS-focused interface for working with geospatial data and AI capabilities. It is part of the RASID platform and shares usage capacity with GoPilot through the platform’s token system.',
+  },
+
+  {
+    q: 'What is the difference between GoPilot and RASID consultancy?',
+    a: 'GoPilot is RASID’s commercial geospatial AI product for repeatable Earth-observation and geospatial workflows. RASID also delivers bespoke consultancy and R&D projects involving custom AI models, geospatial datasets, data pipelines and software for organisations with specific requirements.',
+  },
+
+  {
+    q: 'What does RASID do besides GoPilot?',
+    a: 'RASID delivers bespoke geospatial consultancy and R&D projects in addition to GoPilot. Its work includes satellite image analysis, computer vision, environmental monitoring, agricultural intelligence, infrastructure mapping, transportation analysis and other Earth-observation applications.',
+  },
+
+  {
+    q: 'What industries does RASID work with?',
+    a: 'RASID applies Earth Observation and GeoAI across agriculture, environmental monitoring, energy, infrastructure, transportation and urban analysis. The company develops both reusable platform capabilities and custom solutions for specific industry requirements.',
+  },
+
+  {
+    q: 'What can GoPilot do for agriculture?',
+    a: 'GoPilot can support agricultural workflows including crop mapping, field delineation, tree detection and crop-condition analysis. These workflows use Earth-observation data and AI models to extract information at different geographic scales.',
+  },
+
+  {
+    q: 'What can GoPilot do for environmental monitoring?',
+    a: 'GoPilot can support environmental monitoring workflows including methane plume screening, deforestation monitoring, land-cover change analysis, and water and coastline change detection. Users can combine Earth-observation data with other geospatial datasets to investigate environmental conditions.',
+  },
+
+  {
+    q: 'Can GoPilot detect methane emissions?',
+    a: 'Yes. RASID has developed a methane-monitoring workflow combining GoPilot with a specialized methane detection model. The workflow uses satellite imagery to identify and investigate potential methane plumes and can be applied to oil and gas and other emission sources.',
+  },
+
+  {
+    q: 'What is MethaneMapper?',
+    a: 'MethaneMapper is RASID’s specialized methane detection model for satellite imagery. It works alongside GoPilot, which provides the agentic layer for discovering data, orchestrating the workflow and contextualising the resulting methane detections.',
+  },
+
+  {
+    q: 'How does GoPilot support methane monitoring?',
+    a: 'GoPilot can interpret a methane-monitoring request, identify suitable satellite observations, select and execute the methane detection workflow, and return a mapped result. The result can then be investigated alongside other geospatial information such as infrastructure, land cover and historical observations.',
+  },
+
+  {
+    q: 'What can GoPilot do for infrastructure?',
+    a: 'GoPilot can extract and analyse infrastructure features from Earth-observation imagery, including buildings, roads, solar installations and other assets. RASID also develops bespoke infrastructure-mapping workflows for specific projects.',
+  },
+
+  {
+    q: 'What can GoPilot do for transportation?',
+    a: 'GoPilot supports transportation workflows including road and infrastructure mapping, satellite-video analysis and automated road-safety assessment. RASID also develops bespoke geospatial solutions for transportation and infrastructure projects.',
+  },
+
+  {
+    q: 'Can GoPilot perform change detection?',
+    a: 'Yes. GoPilot can compare Earth-observation imagery and run change-detection workflows to identify changes between observations. Change detection can be applied to applications such as environmental monitoring, infrastructure analysis and site investigation.',
+  },
+
+  {
+    q: 'What outputs does GoPilot produce?',
+    a: 'GoPilot can return maps, quantitative results and downloadable raster and vector layers. Supported outputs include formats such as GeoTIFF and GeoJSON, allowing results to be used in standard GIS workflows.',
+  },
+
+  {
+    q: 'Can GoPilot export GeoJSON and GeoTIFF?',
+    a: 'Yes. GoPilot can produce interoperable geospatial outputs including GeoJSON and GeoTIFF. These formats can be used in standard GIS and geospatial analysis workflows.',
+  },
+
+  {
+    q: 'Is GoPilot available now?',
+    a: 'Yes. GoPilot is available at app.rasid.ai and runs in production on AWS. RASID continues to develop and expand the platform’s datasets, models, integrations and analytical workflows.',
+  },
+
+  {
+    q: 'Where does GoPilot run?',
+    a: 'GoPilot runs on cloud infrastructure powered by AWS. RASID uses AWS services for the platform’s AI, compute, storage and agent runtime infrastructure.',
+  },
+
+  {
+    q: 'Does RASID use real satellite imagery?',
+    a: 'Yes. RASID’s production analyses use real Earth-observation imagery and geospatial datasets, including Sentinel-2. The outputs generated by production workflows are real raster and vector analysis results.',
+  },
+
+  {
+    q: 'Is the imagery shown on the RASID website real?',
+    a: 'Some animated globe visuals and demo overlays on the RASID marketing site are procedurally generated for illustration. RASID’s production analyses use real Earth-observation imagery and return real geospatial outputs.',
+  },
+
+  {
+    q: 'Is GoPilot only for remote-sensing specialists?',
+    a: 'No. GoPilot is designed to make Earth-observation analysis accessible through natural language while also supporting professional GIS workflows. Specialists can use GoPilot through the web platform, QGIS, ArcGIS Pro, MCP and API integrations.',
+  },
+
+  {
+    q: 'Who is GoPilot for?',
+    a: 'GoPilot is designed for professionals and organisations that need to work with Earth-observation and geospatial data. Potential users include GIS teams, researchers, environmental organisations, engineering companies, infrastructure organisations, energy companies and public-sector institutions.',
+  },
+
+  {
+    q: 'Who is RASID?',
+    a: 'RASID is a geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. Its flagship product is GoPilot, alongside bespoke geospatial R&D and consulting projects.',
+  },
+
+  {
+    q: 'Where is RASID based?',
+    a: 'RASID is based in Paris, France and Beirut, Lebanon, and works internationally with organisations across different geospatial application areas.',
+  },
+
+  {
+    q: 'Has RASID received recognition for its technology?',
+    a: 'RASID won the AWS Generative AI Challenge in 2026. The recognition supported the development of GoPilot and its applications in agentic AI and Earth Observation.',
+  },
+
+  {
+    q: 'What technologies does RASID specialize in?',
+    a: 'RASID specializes in Earth Observation, remote sensing, GeoAI, computer vision, agentic AI, geospatial software engineering and cloud-based geospatial infrastructure. These capabilities are combined to build both reusable products and bespoke solutions.',
+  },
+
+  {
+    q: 'What is GeoAI?',
+    a: 'GeoAI is the application of artificial intelligence to geospatial data and location-based problems. It combines technologies such as machine learning, computer vision and geospatial analysis to extract information and insights from satellite imagery and other spatial datasets.',
+  },
+
+  {
+    q: 'How is GoPilot different from a general AI chatbot?',
+    a: 'GoPilot is specialized for geospatial analysis and connects AI reasoning directly to Earth-observation datasets, geospatial operations and AI models. Instead of only generating text, it can execute analytical workflows and return actual geospatial data products such as maps, raster layers and vector layers.',
+  },
+
+  {
+    q: 'How is GoPilot different from a traditional GIS workflow?',
+    a: 'Traditional GIS workflows often require users to find data, configure tools, write scripts or manually connect multiple processing steps. GoPilot uses an AI agent to interpret the objective, select relevant data and tools, execute the workflow and return the resulting geospatial outputs.',
+  },
+
+  {
+    q: 'Can GoPilot combine multiple datasets?',
+    a: 'Yes. GoPilot can orchestrate workflows involving multiple Earth-observation and geospatial datasets. This allows analyses to combine satellite imagery with information such as elevation, climate data, infrastructure and other spatial datasets when relevant to the task.',
+  },
+
+  {
+    q: 'Can GoPilot combine different AI models?',
+    a: 'Yes. GoPilot can select and orchestrate different AI models and geospatial operations within a single workflow. This allows a question to be addressed through multiple analytical steps rather than relying on a single model.',
+  },
+
+  {
+    q: 'Can RASID build custom geospatial AI solutions?',
+    a: 'Yes. RASID develops bespoke geospatial AI solutions for organisations with requirements that are not fully addressed by the standard GoPilot platform. These projects can include custom models, data pipelines, geospatial datasets, software and operational workflows.',
+  },
+
+  {
+    q: 'Can RASID develop a geospatial AI model for a specific use case?',
+    a: 'Yes. RASID develops and integrates computer-vision and geospatial AI models for specific applications. Custom model development can be delivered as part of a bespoke R&D or consultancy project and can also contribute capabilities to the GoPilot platform.',
+  },
+
+  {
+    q: 'What organisations can work with RASID?',
+    a: 'RASID works with organisations that need Earth-observation data, geospatial AI or custom geospatial software. This includes companies, engineering and consulting firms, research organisations, international organisations and public-sector institutions.',
+  },
+
+  {
+    q: 'Does RASID work internationally?',
+    a: 'Yes. RASID is based in Paris and Beirut and delivers geospatial technology and consulting work internationally. Its Earth-observation workflows can be applied across geographic regions wherever suitable data is available.',
   },
 ] as const;
 
