@@ -1187,11 +1187,6 @@ export const CASE_STUDIES = [
         h: 'Deployment and collaboration',
         p: 'The platform has been demonstrated and tested with institutional and professional users, including national mapping organisations. RASID is continuing to expand the platform through commercial users, institutional engagements and new geospatial workflows.',
       },
-
-      {
-        h: 'Client perspective',
-        p: 'A verified customer or partner quotation will be added here when an attributable statement about GoPilot’s impact or usability is available.',
-      },
     ],
   },
 
