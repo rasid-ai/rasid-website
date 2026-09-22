@@ -13,9 +13,13 @@ import Reveal from '@/components/common/Reveal';
  * The page is wrapped in ScrollProvider (see app/products/page) so GoPilot's
  * pinned scroll choreography works exactly as it does on the home page.
  */
+// GoPilot's studio is interactive/animation-heavy → client-only. GoServers and
+// Plugins are essentially static content (capability lists, plugin cards), so
+// they're server-rendered (no ssr:false) — their headings + prose then land in
+// the crawlable HTML for SEO/GEO, while still code-split.
 const GoPilotStudio = dynamic(() => import('@/components/gopilot/GoPilotStudio'), { ssr: false });
-const GoServers = dynamic(() => import('@/components/product/GoServers'), { ssr: false });
-const Plugins = dynamic(() => import('@/components/product/Plugins'), { ssr: false });
+const GoServers = dynamic(() => import('@/components/product/GoServers'));
+const Plugins = dynamic(() => import('@/components/product/Plugins'));
 
 export default function ProductsPage() {
   return (

@@ -17,7 +17,10 @@ export default function RasidMark({ className }: { className?: string }) {
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src="/logo/navbar-mark.png"
-      alt=""
+      // Real alt for crawlers/SEO (it's the brand logo); aria-hidden keeps
+      // screen readers from announcing "RASID" twice (the wordmark text beside
+      // it is the accessible name).
+      alt="RASID"
       aria-hidden
       draggable={false}
       width={676}

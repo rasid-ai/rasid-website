@@ -44,11 +44,22 @@ export const NAV = {
         { label: 'Defense', href: '/services#defense', note: 'Tensions & strike verification' },
         { label: 'Environmental', href: '/services#environmental', note: 'Methane & emissions monitoring' },
         { label: 'Transportation', href: '/services#transportation', note: 'Mobility & road safety' },
+        { label: 'AI Consultancy', href: '/services#ai-consultancy', note: 'Custom AI, OCR & advisory' },
       ],
     },
     { label: 'Pricing', href: '/#pricing' },
-    { label: 'Team', href: '/#team' },
-    { label: 'Contact Us', href: '/#contact' },
+    {
+      // No href: 'Company' is a dropdown trigger, not a page. Children mix full
+      // routes (About, Case Studies) with home-page sections (Team, Contact) —
+      // the navbar handler resolves both from any route.
+      label: 'Company',
+      children: [
+        { label: 'About', href: '/about', note: 'Who we are' },
+        { label: 'Team', href: '/#team', note: 'The people behind RASID' },
+        { label: 'Case Studies', href: '/case-studies', note: 'Selected projects' },
+        { label: 'Contact', href: '/#contact', note: 'Get in touch' },
+      ],
+    },
   ],
   cta: { label: 'Launch GoPilot', href: GOPILOT_APP_URL },
 } as const;
@@ -327,8 +338,9 @@ export const PRICING_SECTION = {
 } as const;
 
 /* ── GoServers / MCP (§23) ───────────────────────────────────────────────────
- * Three MCP servers GoPilot orchestrates — and that you can call directly. The
- * capability lists are the real surface; edit them here as servers gain tools. */
+ * Three MCP servers GoPilot orchestrates on every plan — and that Enterprise
+ * customers can also call directly. The capability lists are the real surface;
+ * edit them here as servers gain tools. */
 export const GOSERVERS_SECTION = {
   eyebrow: 'GoServers · MCP',
   headline: 'Build with RASID.',
@@ -384,7 +396,7 @@ export const GOSERVERS_SECTION = {
     },
   ],
   flow: ['Your application', 'GoServers / MCP', 'RASID capabilities'],
-  note: 'Consume the same capabilities through API usage in your own apps, pipelines and agents.',
+  note: 'Enterprise customers consume the same capabilities through direct MCP / API access in their own apps, pipelines and agents.',
 } as const;
 
 /* ── QGIS + ArcGIS Pro (§24) ─────────────────────────────────────────────────
@@ -707,6 +719,20 @@ export const SERVICES_PAGE = {
       ],
       image: '/services/transportation.webp',
     },
+    {
+      id: 'ai-consultancy',
+      name: 'AI Consultancy',
+      summary: 'Beyond geospatial, RASID advises on and builds custom AI solutions from strategy to production, including OCR and document intelligence.',
+      examples: [
+        'AI strategy & advisory',
+        'OCR & document intelligence',
+        'Custom model development',
+        'Computer-vision solutions',
+        'LLM & agent integration',
+        'ML deployment & MLOps',
+      ],
+      image: '/services/ai-consultancy.webp',
+    },
   ] as {
     id: string;
     name: string;
@@ -749,6 +775,7 @@ export const FOOTER = {
         // "What we do" drops the reader into the narrative that starts under the
         // hero — the GoPilot act, where the product tells its own story.
         { label: 'What we do', href: '/#gopilot' },
+        { label: 'Case studies', href: '/case-studies' },
         { label: 'Team', href: '/#team' },
         { label: 'Pricing', href: '/#pricing' },
         { label: 'Contact Us', href: '/#contact' },
@@ -761,3 +788,173 @@ export const FOOTER = {
   legal: '© 2026 RASID. All rights reserved.',
   note: 'Imagery shown is procedurally generated for demonstration.',
 } as const;
+
+/* ── About + FAQ ─────────────────────────────────────────────────────────────
+ * Server-rendered, crawlable content (rendered by components/content/AboutContent
+ * as real <h2>/<h3>/<p>, NOT behind ssr:false/LazySection) so search engines and
+ * LLMs get substantive, quotable, entity-consistent text and FAQPage structured
+ * data. Direct-answer-first, self-contained sentences (GEO best practice). Keep
+ * "RASID" (org) and "GoPilot" (product) spelled consistently everywhere. */
+export const ABOUT_CONTENT = {
+  eyebrow: 'About RASID',
+  headline: 'Seeing Earth, smarter.',
+  intro:
+    'RASID is a geospatial-AI company that builds GoPilot, an AI agent for Earth observation. Ask GoPilot a question about the planet in plain language, and it finds the right satellite data, selects the right AI models, runs the analysis, and returns raster and vector answers, with no GIS expertise required. RASID turns billions of satellite pixels into decision-ready intelligence through a single natural-language interface.',
+  blocks: [
+    {
+      h: 'What GoPilot is',
+      p: 'GoPilot is an AI geospatial agent. It connects a large language model to a toolbox of Earth-observation data sources and computer-vision models, then plans and runs the workflow needed to answer a question. Instead of manually searching imagery catalogues, writing GIS scripts, and stitching model outputs together, you describe the outcome you want and GoPilot produces it.',
+    },
+    {
+      h: 'How GoPilot works',
+      p: 'GoPilot answers a question in four steps. First it interprets the request and plans a workflow. Second it fetches the right imagery and Earth-observation data. Third it selects and runs the appropriate AI models such as segmentation, detection, or change analysis. Fourth it returns the result as downloadable raster and vector layers, alongside the numbers that matter. Every step is shown, so the analysis is auditable rather than a black box.',
+    },
+    {
+      h: 'One interface over 10,000+ datasets',
+      p: 'GoPilot reaches more than 10,000 datasets and hundreds of AI models through one interface. Data sources include Sentinel-2 optical imagery, high-resolution optical imagery, DEM elevation, ERA5 climate reanalysis, and foundation-model embeddings such as Clay and AlphaEarth. Because the whole catalogue sits behind natural language, a first-time user and a remote-sensing specialist ask in exactly the same way.',
+    },
+    {
+      h: 'GoServers and plugins',
+      p: 'Everything GoPilot can do is exposed over the Model Context Protocol (MCP) as three GoServers: GoServer Fetch for data, GoServer Geo for geospatial operations, and GoServer AI for model inference. GoPilot orchestrates these on every plan; Enterprise customers can also call them directly from their own agents and code. RASID also ships plugins that bring GoPilot into QGIS and ArcGIS Pro, so existing GIS teams keep their tools and gain an AI copilot.',
+    },
+    {
+      h: 'Where RASID works',
+      p: 'RASID delivers projects across five sectors. In agriculture it maps national crops, delineates fields, and detects trees and disease. In urban analysis it counts buildings and roads and detects solar installations. In environmental monitoring it screens for methane plumes and tracks deforestation and water change. In defense it verifies strike sites with before-and-after change detection. In transportation it maps vehicle speed from satellite video and automates road-safety assessment.',
+    },
+    {
+      h: 'Recognition and offices',
+      p: 'RASID won the AWS Generative AI Challenge in 2026. The company is based in Paris, France and Beirut, Lebanon, and works with partners including AWS, the World Bank, OGC, and DAIS. You can reach the team at info@rasid.ai.',
+    },
+  ],
+} as const;
+
+/* FAQ — visible on the page AND emitted as FAQPage JSON-LD. Each answer is a
+ * complete, self-contained statement (≤3 sentences) an LLM can lift verbatim. */
+export const FAQ = [
+  {
+    q: 'What is GoPilot?',
+    a: 'GoPilot is RASID’s AI geospatial agent. You ask a question about Earth in plain language, and GoPilot finds the right satellite data, selects the right AI models, runs the analysis, and returns raster and vector results, without needing GIS expertise.',
+  },
+  {
+    q: 'What data and AI models does GoPilot use?',
+    a: 'GoPilot reaches more than 10,000 datasets and hundreds of AI models through one interface, including Sentinel-2 imagery, high-resolution optical imagery, DEM elevation, ERA5 climate data, and foundation-model embeddings such as Clay and AlphaEarth. It runs segmentation, object-detection, and change-detection models on top of that data.',
+  },
+  {
+    q: 'How much does GoPilot cost?',
+    a: 'GoPilot has four plans: Free at €0 per month with 500 tokens, Pro at €149 per month with 5,000 tokens, Business at €499 per month with 25,000 tokens, and Enterprise with custom pricing plus on-premise or cloud deployment. Tokens are shared across GoPilot, GoBox, and RASID’s MCP and API services.',
+  },
+  {
+    q: 'Can I use GoPilot inside QGIS or ArcGIS Pro?',
+    a: 'Yes. RASID ships plugins that bring GoPilot into QGIS and ArcGIS Pro, so GIS professionals can run RASID’s models and workflows directly inside the tools they already use.',
+  },
+  {
+    q: 'Does GoPilot offer an API or MCP access?',
+    a: 'Yes, on the Enterprise plan. Every GoPilot capability is exposed over the Model Context Protocol (MCP) as three GoServers: GoServer Fetch for data, GoServer Geo for analysis, and GoServer AI for model inference. Enterprise customers call these directly from their own agents and code; on every plan, GoPilot orchestrates them for you.',
+  },
+  {
+    q: 'What can GoPilot do for agriculture and environmental monitoring?',
+    a: 'For agriculture, GoPilot maps crops at national scale, delineates field boundaries, and detects trees and crop disease. For the environment, it screens satellite imagery for methane plumes, estimating leak rate and locating the source, and tracks deforestation, land-cover change, and water and coastline change.',
+  },
+  {
+    q: 'What can GoPilot do for defense and urban planning?',
+    a: 'For defense, GoPilot answers questions about tensions and strike sites and verifies them with before-and-after change detection. For urban planning, it counts buildings and roads, maps land use, and detects and counts solar installations from high-resolution imagery.',
+  },
+  {
+    q: 'Who is RASID and where is it based?',
+    a: 'RASID is a geospatial-AI company that builds GoPilot. It won the AWS Generative AI Challenge in 2026 and has offices in Paris, France and Beirut, Lebanon. You can reach the team at info@rasid.ai.',
+  },
+  {
+    q: 'Is the imagery shown on this site real?',
+    a: 'The animated globe and some demo overlays on this marketing site are procedurally generated for illustration. RASID’s production analyses run on real Sentinel-2 and other Earth-observation imagery and return real raster and vector outputs to customers.',
+  },
+] as const;
+
+/* ── Case studies / articles ─────────────────────────────────────────────────
+ * Real, published case studies sourced from the RASID capability portfolio.
+ * Each has a `context` line (programme / client / year), a one-line `summary`,
+ * and `sections` (Problem / Approach / Result) rendered as the article body.
+ * `authorInitials` matches a TEAM_SECTION member so the Article links to that
+ * person's Person schema. status:'published' -> indexed + in the sitemap.
+ * Rendered by app/case-studies/[slug]; listed on app/case-studies. */
+export const CASE_STUDIES_PAGE = {
+  eyebrow: 'Case studies',
+  headline: 'Selected work.',
+  body: 'A decade of funded, delivered projects: the problem, the approach, and the result. From landfill methane detection to an award-winning AI geospatial agent.',
+} as const;
+
+export const CASE_STUDIES = [
+  {
+    slug: 'gopilot-ai-geospatial-agent',
+    title: 'GoPilot: RASID’s AI geospatial agent',
+    sector: 'Platform',
+    date: '2026-08-01',
+    authorInitials: 'HN',
+    status: 'published',
+    summary:
+      'A conversational AI agent that puts RASID’s remote-sensing stack in front of analysts through plain-language requests.',
+    context: 'AWS Bedrock · Flagship platform · 2026',
+    sections: [
+      { h: 'The problem', p: 'Geospatial analysis workflows require specialist GIS skills and manual scripting for every new task, which keeps Earth observation out of reach for most teams.' },
+      { h: 'The approach', p: 'GoPilot is built on AWS Bedrock and the Strands agent framework, with Claude as the LLM backbone and SAM3 and DINOv3 vision pipelines for detection and segmentation. It reaches analysts through a QGIS plugin and an ArcGIS Pro add-in, so teams work in the tools they already use.' },
+      { h: 'The result', p: 'GoPilot won the AWS Geospatial Gen AI Challenge in August 2026, and has been piloted with national mapping agencies including CIGN in Côte d’Ivoire and OSGOF in Nigeria.' },
+    ],
+  },
+  {
+    slug: 'methanemapper-landfill-detection',
+    title: 'MethaneMapper: detecting landfill methane plumes from space',
+    sector: 'Environmental',
+    date: '2025-11-01',
+    authorInitials: 'HN',
+    status: 'published',
+    summary:
+      'A satellite system that detects and quantifies methane plumes from landfill sites using multi- and hyperspectral imagery.',
+    context: 'EBRD Climate Change Innovation Programme · 2025 · €27,000',
+    sections: [
+      { h: 'The problem', p: 'Landfill methane is a major but under-monitored contributor to greenhouse-gas emissions, and there has been no consistent way to detect plumes at scale.' },
+      { h: 'The approach', p: 'RASID applied multi-modality AI to multispectral and hyperspectral satellite imagery to detect and quantify methane plumes, fine-tuning the models against ground-truth measurements.' },
+      { h: 'The result', p: 'The project delivered a working plume-detection pipeline under an EBRD Climate Change Innovation Programme grant of €27,000, from May to November 2025. RASID has since extended methane monitoring commercially, including a two-phase project for a Brazilian firm, and is building a synthetic methane-plume dataset for satellite MRV under a follow-on EBRD grant.' },
+    ],
+  },
+  {
+    slug: 'bananasight-tr4-lebanon',
+    title: 'BananaSight: early warning for Fusarium Wilt (TR4)',
+    sector: 'Agriculture',
+    date: '2025-09-01',
+    authorInitials: 'AG',
+    status: 'published',
+    summary:
+      'Real-time monitoring for banana plantations that flags early stress and TR4 disease from Sentinel-2 imagery, before symptoms are visible.',
+    context: 'EBRD Lebanon Innovation Programme · 2025 · €30,000',
+    sections: [
+      { h: 'The problem', p: 'Fusarium Wilt Tropical Race 4 (TR4) can devastate a banana plantation before any visible symptoms appear, and growers have had no early-warning tool to act in time.' },
+      { h: 'The approach', p: 'BananaSight analyses Sentinel-2 multispectral imagery to detect stress and disease signatures ahead of a visible outbreak, alerting farmers to at-risk areas.' },
+      { h: 'The result', p: 'Delivered under an EBRD Lebanon Innovation Programme grant of €30,000, from March to September 2025, BananaSight is the first commercially-ready multispectral solution of its kind.' },
+    ],
+  },
+  {
+    slug: 'c-ard-analysis-ready-data',
+    title: 'C-ARD: raw satellite imagery into corrected Analysis-Ready Data',
+    sector: 'Imagery quality',
+    date: '2026-01-01',
+    authorInitials: 'HW',
+    status: 'published',
+    summary:
+      'An AI pipeline that automatically corrects geometric and radiometric anomalies in high-resolution imagery, turning raw data into Analysis-Ready Data.',
+    context: 'Private satellite-imagery provider · 2026',
+    sections: [
+      { h: 'The problem', p: 'Imagery providers battle geometric distortion, inconsistent radiometry, and atmospheric interference from cloud, haze and shadow, which drives high rejection rates. Manual correction is slow, costly, and does not scale.' },
+      { h: 'The approach', p: 'C-ARD combines deep-learning co-registration and orthorectification, radiometric enhancement, and automatic cloud, haze and shadow detection and removal, with a human-in-the-loop GUI. It deploys in the cloud, on-premise, or on-orbit (EC-ARD).' },
+      { h: 'The result', p: 'The client-ready pipeline processes roughly 200 GB in about 2 hours, turning more captures into sellable imagery while cutting QA cost and accelerating delivery for a private imagery provider.' },
+    ],
+  },
+] as {
+  slug: string;
+  title: string;
+  sector: string;
+  date: string;
+  authorInitials: string;
+  status: 'draft' | 'published';
+  summary: string;
+  context: string;
+  sections: { h: string; p: string }[];
+}[];
