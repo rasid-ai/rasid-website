@@ -722,12 +722,13 @@ export const SERVICES_PAGE = {
     {
       id: 'ai-consultancy',
       name: 'AI Consultancy',
-      summary: 'Beyond geospatial, RASID advises on and builds custom AI solutions from strategy to production, including OCR and document intelligence.',
+      summary: 'Beyond geospatial, RASID helps organisations turn AI ideas into production systems, from strategy and model development to deployment and integration.',
       examples: [
         'AI strategy & advisory',
+        'Custom AI model development',
+        'Computer-vision solutions',
         'OCR & document intelligence',
         'Custom model development',
-        'Computer-vision solutions',
         'LLM & agent integration',
         'ML deployment & MLOps',
       ],
