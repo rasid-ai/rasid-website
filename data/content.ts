@@ -1140,32 +1140,57 @@ export const CASE_STUDIES = [
     authorInitials: 'HN',
     status: 'published',
     summary:
-      'A geospatial AI agent that turns natural-language questions into executable Earth-observation workflows, connecting satellite data, geospatial tools and AI models in one interface.',
-    context: 'AI · Earth Observation · SaaS',
+      'An AI geospatial agent that turns natural-language questions into executable Earth-observation workflows, connecting satellite data, geospatial tools and AI models in one interface.',
+    context: 'AI · Earth Observation · Platform',
     sections: [
       {
         h: 'The problem',
         p: 'Earth-observation data is increasingly abundant, but turning it into an answer still requires specialist knowledge. Analysts must find suitable imagery, prepare the data, select the right models, write or configure GIS workflows, and combine outputs from different tools. This makes many satellite-based analyses slow, fragmented and difficult to scale.',
       },
+
       {
         h: 'The approach',
-        p: 'GoPilot is RASID’s AI geospatial agent. Built on AWS Bedrock and the Strands agent framework, it connects a language model to Earth-observation datasets, geospatial operations and AI models. A user describes the desired analysis in natural language; GoPilot interprets the request, plans the workflow, retrieves relevant data, selects appropriate tools and models, executes the analysis and returns the resulting maps, raster and vector layers and measurements.',
+        p: 'GoPilot is RASID’s AI geospatial agent. It connects a large language model to Earth-observation datasets, geospatial operations and specialised AI models. A user describes the desired analysis in natural language; GoPilot interprets the request, plans the workflow, retrieves relevant data, selects appropriate tools and models, executes the analysis and returns maps, raster and vector layers, measurements and other results.',
       },
+
       {
-        h: 'The agentic architecture',
-        p: 'GoPilot separates AI reasoning from specialised geospatial computation. Its agent orchestrates tools exposed through RASID’s MCP-based GoServers: GoServer Fetch for data access, GoServer Geo for geospatial operations and GoServer AI for model inference. This allows the same agentic layer to combine satellite imagery, geospatial processing and specialised computer-vision models rather than relying on a single AI model.',
+        h: 'The AI architecture',
+        p: 'GoPilot is built on AWS Bedrock and the Strands agent framework, with Claude providing the language-model reasoning layer. The agent does not replace specialised geospatial models; it orchestrates them. Vision workflows include models such as SAM3 and DINOv3 for segmentation and detection, while RASID’s MCP-based GoServers provide structured access to data retrieval, geospatial operations and AI inference.',
       },
+
+      {
+        h: 'How the workflow works',
+        p: 'A typical GoPilot analysis follows four stages. First, the agent interprets the user’s question and determines the required data and operations. Second, it discovers and retrieves the relevant Earth-observation data. Third, it selects and executes the appropriate geospatial operations and AI models. Fourth, it returns the resulting maps, raster and vector layers and quantitative outputs for inspection or download.',
+      },
+
       {
         h: 'The geospatial stack',
-        p: 'GoPilot provides access to more than 10,000 datasets and hundreds of AI models through a single interface. Its workflows can use sources including Sentinel-2 imagery, high-resolution optical imagery, digital elevation data, ERA5 climate data and foundation-model embeddings such as Clay and AlphaEarth. RASID also provides QGIS and ArcGIS Pro integrations, allowing professional GIS teams to use the platform within existing workflows.',
+        p: 'GoPilot provides access to more than 10,000 datasets and hundreds of AI models through one interface. Available data includes Sentinel-2 optical imagery, high-resolution optical imagery, digital elevation models, ERA5 climate reanalysis and foundation-model embeddings such as Clay and AlphaEarth. The platform can combine multiple datasets and models within a single analytical workflow.',
       },
+
       {
         h: 'From prototype to production',
-        p: 'GoPilot has progressed from an AWS Geospatial Challenge prototype into a production platform running on AWS. It is available at app.rasid.ai, with separate production and beta environments, continuous deployment and monitoring. The platform is being expanded through both commercial subscriptions and bespoke geospatial projects.',
+        p: 'GoPilot evolved from RASID’s work on agentic Earth-observation analysis into a production platform running on AWS. It is available at app.rasid.ai, with separate production and beta environments, continuous deployment and monitoring. The platform is commercialised through subscriptions and is also used as the technology foundation for bespoke geospatial projects.',
       },
+
+      {
+        h: 'Real-world applications',
+        p: 'GoPilot has been applied to environmental monitoring, agriculture, infrastructure and transportation workflows. Its methane-monitoring capability demonstrates how the general-purpose agent can orchestrate a specialised scientific model, while other workflows use computer vision, spatial analysis and change detection for different Earth-observation applications.',
+      },
+
       {
         h: 'The result',
-        p: 'GoPilot won the AWS Generative AI Challenge in 2026 and has been tested with potential users and institutional partners, including national mapping organisations. The platform now provides a general-purpose agentic layer for Earth-observation analysis, while specialised workflows such as methane detection demonstrate how the same architecture can be applied to specific high-value use cases.',
+        p: 'GoPilot won the AWS Geospatial GenAI Challenge in 2026 and has progressed from prototype development to a production platform. The system reduces the number of manual steps required to move from a geospatial question to an analytical result, with workflows that can be executed in minutes rather than requiring analysts to assemble each workflow manually.',
+      },
+
+      {
+        h: 'Deployment and collaboration',
+        p: 'The platform has been demonstrated and tested with institutional and professional users, including national mapping organisations. RASID is continuing to expand the platform through commercial users, institutional engagements and new geospatial workflows.',
+      },
+
+      {
+        h: 'Client perspective',
+        p: 'A verified customer or partner quotation will be added here when an attributable statement about GoPilot’s impact or usability is available.',
       },
     ],
   },
@@ -1178,37 +1203,69 @@ export const CASE_STUDIES = [
     authorInitials: 'HN',
     status: 'published',
     summary:
-      'A physics-informed methane detection system that combines satellite imagery, synthetic plume generation and AI to identify potential methane emission sources from space.',
-    context: ' Climate Change . Methane · GHG',
+      'A physics-informed methane detection system that combines Sentinel-2 imagery, synthetic plume generation and deep learning to identify potential methane emission sources from space.',
+    context: 'Methane · Satellite Monitoring · AI',
     sections: [
       {
         h: 'The problem',
-        p: 'Methane is a powerful greenhouse gas, but detecting emission sources over large areas remains difficult. Satellite data is increasingly available, yet turning imagery into reliable methane detections requires specialised atmospheric, remote-sensing and machine-learning workflows.',
+        p: 'Methane is a powerful greenhouse gas, but identifying individual emission sources over large areas remains technically difficult. Satellite imagery is increasingly available, yet turning an observation into a credible methane detection requires appropriate scene selection, atmospheric information, temporal comparison and specialised machine-learning models.',
       },
+
       {
         h: 'The approach',
-        p: 'RASID developed MethaneMapper, a specialised methane detection model that works with satellite imagery to identify potential methane plumes. The system combines computer vision with Earth-observation analysis and is designed to work with real observations as well as physics-informed synthetic training data.',
+        p: 'RASID developed MethaneMapper, a specialised deep-learning model for methane plume detection from satellite imagery. The workflow uses Sentinel-2 Level-1C imagery as a primary data source and combines spectral information with temporal reference observations to distinguish potential methane plumes from persistent surface features.',
       },
+
+      {
+        h: 'The methane detection model',
+        p: 'MethaneMapper uses a U-Net-based segmentation architecture to identify spatial patterns associated with methane plumes in Sentinel-2 imagery. The model is trained using both physics-informed synthetic data and confirmed real-world observations, allowing the system to learn from a much larger set of controlled plume examples than is available from confirmed satellite detections alone.',
+      },
+
       {
         h: 'Physics-informed synthetic data',
-        p: 'Because confirmed methane plume observations are scarce, RASID developed a synthetic-data pipeline that generates realistic methane plumes and inserts them into real Sentinel-2 scenes. The approach combines radiative-transfer modelling with a Gaussian puff plume simulator and atmospheric information to generate more than 100,000 synthetic plume samples for model development and testing.',
+        p: 'Confirmed methane plume observations are scarce, so RASID developed a synthetic-data pipeline to generate realistic methane plumes and insert them into real Sentinel-2 scenes. The pipeline combines radiative-transfer modelling with a Gaussian puff plume simulator and atmospheric information, including wind data, to produce more than 100,000 synthetic methane plume samples for model development and testing.',
       },
+
       {
-        h: 'Real-world validation',
-        p: 'The models were evaluated against independently confirmed methane plume observations, including the UNEP Eye on Methane dataset. The current detector recovers 80% of confirmed plume events in the validation set. Each detection is also evaluated against reference observations to reduce the risk of fixed surface features being interpreted as methane plumes.',
+        h: 'Detection workflow',
+        p: 'The workflow begins by identifying suitable Sentinel-2 observations for the area of interest. The system then retrieves the imagery, applies the methane detection model and compares the target observation with reference dates. Potential plume signatures are mapped and located, while contextual information can be used to investigate whether the detected signal is associated with infrastructure or another potential emission source.',
       },
+
       {
-        h: 'From methane detection to investigation',
-        p: 'MethaneMapper became a core specialised model within GoPilot. GoPilot provides the agentic layer around the detector: it can interpret a methane-monitoring request, identify suitable satellite observations, retrieve the imagery, select and execute the detection workflow, and return a mapped plume. The result can then be contextualised using other geospatial information such as infrastructure, land cover and historical observations.',
+        h: 'Detection and confirmation',
+        p: 'Each potential detection is evaluated against reference observations so that fixed surface features are less likely to be interpreted as methane plumes. The resulting detections can then be compared with independently confirmed methane observations for validation. This separates the automated detection stage from external confirmation and reduces the risk of presenting every model output as a confirmed emission.',
       },
+
       {
-        h: 'Operational workflow',
-        p: 'The methane workflow runs on real Sentinel-2 imagery and can be repeated wherever suitable observations are available rather than being tied to a prepared monitoring site. A full investigation, from scene selection to a mapped plume, can be completed in minutes, turning a workflow that traditionally requires specialist intervention into a repeatable analysis process.',
+        h: 'Validation',
+        p: 'The detector was benchmarked against the UNEP Eye on Methane dataset of independently confirmed methane plume events. The current detector recovers 80% of confirmed plume events in the validation set. These results are being prepared for scientific publication.',
       },
+
+      {
+        h: 'From MethaneMapper to GoPilot',
+        p: 'MethaneMapper provides the specialised methane detection capability, while GoPilot provides the agentic orchestration layer. A user can submit a methane-monitoring request in natural language; GoPilot identifies suitable observations, retrieves the imagery, selects and runs the methane workflow, and returns a mapped potential plume. The result can then be contextualised using infrastructure, land cover and historical observations.',
+      },
+
+      {
+        h: 'Operational performance',
+        p: 'The end-to-end workflow, from scene selection to a mapped potential plume, can be completed in minutes. This replaces a multi-step specialist workflow involving imagery discovery, data retrieval, model execution and interpretation with a repeatable agentic workflow that can be initiated through a natural-language request.',
+      },
+
+      {
+        h: 'Geographic validation',
+        p: 'The methane workflow has been tested against confirmed emission events from locations in different geographic and environmental conditions. This provides a basis for assessing whether the detection approach can generalise beyond a single prepared monitoring site or environmental setting.',
+      },
+
+      {
+        h: 'From detection to mitigation',
+        p: 'The next stage is to connect satellite-based detection with operational action. RASID is developing pilots with environmental authorities and oil and gas operators to identify potential emission sources, support field verification and track changes after intervention. Additional sensors and detection models will extend coverage toward continuous regional monitoring and automated alerts.',
+      },
+
       {
         h: 'The result',
-        p: 'The initial methane work was developed in collaboration with a Brazilian client and has since evolved into a broader methane-monitoring capability within GoPilot. RASID is extending the system with additional sensors, detection models, contextual analysis and pilots with environmental authorities and oil and gas operators, with the longer-term objective of continuous regional monitoring and automated alerts.',
+        p: 'MethaneMapper has evolved from a specialised methane detection model into a component of GoPilot’s broader Earth-observation agent. The combination of physics-informed synthetic training data, real satellite observations, independent validation and agentic orchestration provides a foundation for scalable methane investigation across regions where suitable satellite observations are available.',
       },
+
     ],
   },
 
