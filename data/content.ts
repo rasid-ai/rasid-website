@@ -933,12 +933,12 @@ export const FAQ = [
 
   {
     q: 'Does GoPilot support MCP?',
-    a: 'Yes. GoPilot capabilities are exposed through the Model Context Protocol (MCP) using three GoServers: GoServer Fetch for data access, GoServer Geo for geospatial operations, and GoServer AI for model inference.',
+    a: 'Yes. GoPilot capabilities are exposed through the Model Context Protocol (MCP) using four GoServers: GoServer-Fetch for data access, GoServer-Geo for geospatial operations, GoServer-Analyze and GoServer-AI for model inference.',
   },
 
   {
     q: 'What are RASID GoServers?',
-    a: 'GoServers are RASID’s MCP-based services for geospatial data and AI workflows. GoServer Fetch handles data access, GoServer Geo provides geospatial operations, and GoServer AI provides model inference.',
+    a: 'GoServers are RASID’s MCP-based services for geospatial data and AI workflows. GoServer-Fetch handles data access, GoServer-Geo provides geospatial operations, GoServer-Analyze handles complex time-series data analysis and GoServer-AI provides model inference.',
   },
 
   {
@@ -1057,11 +1057,6 @@ export const FAQ = [
   },
 
   {
-    q: 'Who is RASID?',
-    a: 'RASID is a geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. Its flagship product is GoPilot, alongside bespoke geospatial R&D and consulting projects.',
-  },
-
-  {
     q: 'Where is RASID based?',
     a: 'RASID is based in Paris, France and Beirut, Lebanon, and works internationally with organisations across different geospatial application areas.',
   },
@@ -1144,60 +1139,135 @@ export const CASE_STUDIES = [
     authorInitials: 'HN',
     status: 'published',
     summary:
-      'A conversational AI agent that puts RASID’s remote-sensing stack in front of analysts through plain-language requests.',
-    context: 'AWS Bedrock · Flagship platform · 2026',
+      'A geospatial AI agent that turns natural-language questions into executable Earth-observation workflows, connecting satellite data, geospatial tools and AI models in one interface.',
+    context: 'AI · Earth Observation · SaaS',
     sections: [
-      { h: 'The problem', p: 'Geospatial analysis workflows require specialist GIS skills and manual scripting for every new task, which keeps Earth observation out of reach for most teams.' },
-      { h: 'The approach', p: 'GoPilot is built on AWS Bedrock and the Strands agent framework, with Claude as the LLM backbone and SAM3 and DINOv3 vision pipelines for detection and segmentation. It reaches analysts through a QGIS plugin and an ArcGIS Pro add-in, so teams work in the tools they already use.' },
-      { h: 'The result', p: 'GoPilot won the AWS Geospatial Gen AI Challenge in August 2026, and has been piloted with national mapping agencies including CIGN in Côte d’Ivoire and OSGOF in Nigeria.' },
+      {
+        h: 'The problem',
+        p: 'Earth-observation data is increasingly abundant, but turning it into an answer still requires specialist knowledge. Analysts must find suitable imagery, prepare the data, select the right models, write or configure GIS workflows, and combine outputs from different tools. This makes many satellite-based analyses slow, fragmented and difficult to scale.',
+      },
+      {
+        h: 'The approach',
+        p: 'GoPilot is RASID’s AI geospatial agent. Built on AWS Bedrock and the Strands agent framework, it connects a language model to Earth-observation datasets, geospatial operations and AI models. A user describes the desired analysis in natural language; GoPilot interprets the request, plans the workflow, retrieves relevant data, selects appropriate tools and models, executes the analysis and returns the resulting maps, raster and vector layers and measurements.',
+      },
+      {
+        h: 'The agentic architecture',
+        p: 'GoPilot separates AI reasoning from specialised geospatial computation. Its agent orchestrates tools exposed through RASID’s MCP-based GoServers: GoServer Fetch for data access, GoServer Geo for geospatial operations and GoServer AI for model inference. This allows the same agentic layer to combine satellite imagery, geospatial processing and specialised computer-vision models rather than relying on a single AI model.',
+      },
+      {
+        h: 'The geospatial stack',
+        p: 'GoPilot provides access to more than 10,000 datasets and hundreds of AI models through a single interface. Its workflows can use sources including Sentinel-2 imagery, high-resolution optical imagery, digital elevation data, ERA5 climate data and foundation-model embeddings such as Clay and AlphaEarth. RASID also provides QGIS and ArcGIS Pro integrations, allowing professional GIS teams to use the platform within existing workflows.',
+      },
+      {
+        h: 'From prototype to production',
+        p: 'GoPilot has progressed from an AWS Geospatial Challenge prototype into a production platform running on AWS. It is available at app.rasid.ai, with separate production and beta environments, continuous deployment and monitoring. The platform is being expanded through both commercial subscriptions and bespoke geospatial projects.',
+      },
+      {
+        h: 'The result',
+        p: 'GoPilot won the AWS Generative AI Challenge in 2026 and has been tested with potential users and institutional partners, including national mapping organisations. The platform now provides a general-purpose agentic layer for Earth-observation analysis, while specialised workflows such as methane detection demonstrate how the same architecture can be applied to specific high-value use cases.',
+      },
     ],
   },
+
   {
     slug: 'methanemapper-landfill-detection',
-    title: 'MethaneMapper: detecting landfill methane plumes from space',
+    title: 'MethaneMapper: Monitoring Methane Plumes from Space',
     sector: 'Environmental',
     date: '2025-11-01',
     authorInitials: 'HN',
     status: 'published',
     summary:
-      'A satellite system that detects and quantifies methane plumes from landfill sites using multi- and hyperspectral imagery.',
-    context: 'EBRD Climate Change Innovation Programme · 2025 · €27,000',
+      'A physics-informed methane detection system that combines satellite imagery, synthetic plume generation and AI to identify potential methane emission sources from space.',
+    context: ' Climate Change . Methane · GHG',
     sections: [
-      { h: 'The problem', p: 'Landfill methane is a major but under-monitored contributor to greenhouse-gas emissions, and there has been no consistent way to detect plumes at scale.' },
-      { h: 'The approach', p: 'RASID applied multi-modality AI to multispectral and hyperspectral satellite imagery to detect and quantify methane plumes, fine-tuning the models against ground-truth measurements.' },
-      { h: 'The result', p: 'The project delivered a working plume-detection pipeline under an EBRD Climate Change Innovation Programme grant of €27,000, from May to November 2025. RASID has since extended methane monitoring commercially, including a two-phase project for a Brazilian firm, and is building a synthetic methane-plume dataset for satellite MRV under a follow-on EBRD grant.' },
+      {
+        h: 'The problem',
+        p: 'Methane is a powerful greenhouse gas, but detecting emission sources over large areas remains difficult. Satellite data is increasingly available, yet turning imagery into reliable methane detections requires specialised atmospheric, remote-sensing and machine-learning workflows.',
+      },
+      {
+        h: 'The approach',
+        p: 'RASID developed MethaneMapper, a specialised methane detection model that works with satellite imagery to identify potential methane plumes. The system combines computer vision with Earth-observation analysis and is designed to work with real observations as well as physics-informed synthetic training data.',
+      },
+      {
+        h: 'Physics-informed synthetic data',
+        p: 'Because confirmed methane plume observations are scarce, RASID developed a synthetic-data pipeline that generates realistic methane plumes and inserts them into real Sentinel-2 scenes. The approach combines radiative-transfer modelling with a Gaussian puff plume simulator and atmospheric information to generate more than 100,000 synthetic plume samples for model development and testing.',
+      },
+      {
+        h: 'Real-world validation',
+        p: 'The models were evaluated against independently confirmed methane plume observations, including the UNEP Eye on Methane dataset. The current detector recovers 80% of confirmed plume events in the validation set. Each detection is also evaluated against reference observations to reduce the risk of fixed surface features being interpreted as methane plumes.',
+      },
+      {
+        h: 'From methane detection to investigation',
+        p: 'MethaneMapper became a core specialised model within GoPilot. GoPilot provides the agentic layer around the detector: it can interpret a methane-monitoring request, identify suitable satellite observations, retrieve the imagery, select and execute the detection workflow, and return a mapped plume. The result can then be contextualised using other geospatial information such as infrastructure, land cover and historical observations.',
+      },
+      {
+        h: 'Operational workflow',
+        p: 'The methane workflow runs on real Sentinel-2 imagery and can be repeated wherever suitable observations are available rather than being tied to a prepared monitoring site. A full investigation, from scene selection to a mapped plume, can be completed in minutes, turning a workflow that traditionally requires specialist intervention into a repeatable analysis process.',
+      },
+      {
+        h: 'The result',
+        p: 'The initial methane work was developed in collaboration with a Brazilian client and has since evolved into a broader methane-monitoring capability within GoPilot. RASID is extending the system with additional sensors, detection models, contextual analysis and pilots with environmental authorities and oil and gas operators, with the longer-term objective of continuous regional monitoring and automated alerts.',
+      },
     ],
   },
-  {
+
+    {
     slug: 'bananasight-tr4-lebanon',
-    title: 'BananaSight: early warning for Fusarium Wilt (TR4)',
+    title: 'BananaSight: Early Warning for Fusarium Wilt',
     sector: 'Agriculture',
     date: '2025-09-01',
     authorInitials: 'AG',
     status: 'published',
     summary:
       'Real-time monitoring for banana plantations that flags early stress and TR4 disease from Sentinel-2 imagery, before symptoms are visible.',
-    context: 'EBRD Lebanon Innovation Programme · 2025 · €30,000',
+    context: 'Agriculture · TR4 · Panama Disease',
     sections: [
-      { h: 'The problem', p: 'Fusarium Wilt Tropical Race 4 (TR4) can devastate a banana plantation before any visible symptoms appear, and growers have had no early-warning tool to act in time.' },
-      { h: 'The approach', p: 'BananaSight analyses Sentinel-2 multispectral imagery to detect stress and disease signatures ahead of a visible outbreak, alerting farmers to at-risk areas.' },
-      { h: 'The result', p: 'Delivered under an EBRD Lebanon Innovation Programme grant of €30,000, from March to September 2025, BananaSight is the first commercially-ready multispectral solution of its kind.' },
+      {
+        h: 'The problem',
+        p: 'Fusarium Wilt Tropical Race 4 (TR4) can devastate a banana plantation before any visible symptoms appear, leaving growers with limited time to respond. There is a need for scalable early-warning methods that can monitor plantations without relying entirely on field inspection.',
+      },
+      {
+        h: 'The approach',
+        p: 'BananaSight analyses Sentinel-2 multispectral imagery to detect patterns of vegetation stress associated with potential disease. The system monitors plantation areas over time and identifies locations showing abnormal changes, allowing farmers and agricultural teams to focus field inspections where they are most needed.',
+      },
+      {
+        h: 'The approach to early warning',
+        p: 'Rather than relying only on visible symptoms, BananaSight uses satellite observations to identify changes in plant condition across the plantation. This enables repeated monitoring over large areas and provides an additional layer of information for agricultural decision-making.',
+      },
+      {
+        h: 'The result',
+        p: 'BananaSight established a satellite-based monitoring workflow for banana plantations and demonstrated how Sentinel-2 imagery can support earlier identification of areas requiring investigation.',
+      },
     ],
   },
+
   {
     slug: 'c-ard-analysis-ready-data',
-    title: 'C-ARD: raw satellite imagery into corrected Analysis-Ready Data',
+    title: 'C-ARD: Raw to Corrected Analysis-Ready Data',
     sector: 'Imagery quality',
     date: '2026-01-01',
     authorInitials: 'HW',
     status: 'published',
     summary:
       'An AI pipeline that automatically corrects geometric and radiometric anomalies in high-resolution imagery, turning raw data into Analysis-Ready Data.',
-    context: 'Private satellite-imagery provider · 2026',
+    context: 'Analysis-Ready Data . Orthorectification . Radiometric Anomalies',
     sections: [
-      { h: 'The problem', p: 'Imagery providers battle geometric distortion, inconsistent radiometry, and atmospheric interference from cloud, haze and shadow, which drives high rejection rates. Manual correction is slow, costly, and does not scale.' },
-      { h: 'The approach', p: 'C-ARD combines deep-learning co-registration and orthorectification, radiometric enhancement, and automatic cloud, haze and shadow detection and removal, with a human-in-the-loop GUI. It deploys in the cloud, on-premise, or on-orbit (EC-ARD).' },
-      { h: 'The result', p: 'The client-ready pipeline processes roughly 200 GB in about 2 hours, turning more captures into sellable imagery while cutting QA cost and accelerating delivery for a private imagery provider.' },
+      {
+        h: 'The problem',
+        p: 'Satellite-imagery providers deal with geometric distortion, inconsistent radiometry, and atmospheric interference from cloud, haze and shadow. These issues can increase rejection rates and make imagery preparation slow and costly when corrections are performed manually.',
+      },
+      {
+        h: 'The approach',
+        p: 'C-ARD combines deep-learning co-registration and orthorectification with radiometric enhancement and automated cloud, haze and shadow detection and removal. A human-in-the-loop interface allows operators to review and control the processing, while the pipeline can be deployed in cloud, on-premise or on-orbit environments through EC-ARD.',
+      },
+      {
+        h: 'The processing pipeline',
+        p: 'The system brings multiple image-correction and quality-control steps into a single workflow. By automating repetitive preprocessing tasks while retaining human review where required, C-ARD helps imagery providers produce more consistent Analysis-Ready Data at scale.',
+      },
+      {
+        h: 'The result',
+        p: 'The client-ready pipeline processes roughly 200 GB of imagery in about two hours. The system helps turn more captures into usable and sellable imagery while reducing quality-assurance effort and accelerating delivery for the satellite-imagery provider.',
+      },
     ],
   },
 ] as {
