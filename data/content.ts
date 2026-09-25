@@ -57,6 +57,7 @@ export const NAV = {
         { label: 'About', href: '/about', note: 'Who we are' },
         { label: 'Team', href: '/#team', note: 'The people behind RASID' },
         { label: 'Case Studies', href: '/case-studies', note: 'Selected projects' },
+        { label: 'Publications', href: '/publications', note: 'Peer-reviewed research' },
         { label: 'Contact', href: '/#contact', note: 'Get in touch' },
       ],
     },
@@ -338,59 +339,81 @@ export const PRICING_SECTION = {
 } as const;
 
 /* ── GoServers / MCP (§23) ───────────────────────────────────────────────────
- * Three MCP servers GoPilot orchestrates on every plan — and that Enterprise
- * customers can also call directly. The capability lists are the real surface;
- * edit them here as servers gain tools. */
+ * The four MCP servers GoPilot orchestrates — and that Enterprise customers can
+ * also call directly. Capability lists mirror the real registered tool surface
+ * (fetch / geo / analyze / ai); edit here as servers gain tools. */
 export const GOSERVERS_SECTION = {
   eyebrow: 'GoServers · MCP',
   headline: 'Build with RASID.',
-  body: 'GoPilot\'s geospatial capabilities are exposed over MCP through four GoServers. Fetch data, run geospatial operations, and run AI models. Orchestrated by GoPilot, or called directly from your own code.',
+  body: 'GoPilot\'s geospatial capabilities are exposed over MCP through four GoServers. Fetch data, run vector operations, analyse rasters and time series, and run AI models. Orchestrated by GoPilot, or called directly from your own code.',
   center: 'GoPilot-MCPs',
   servers: [
     {
       name: 'GoServer-Fetch',
       tag: 'Data',
-      desc: 'Discover and retrieve 10, 000+ dataet including imagery, embeddings and vector data.',
+      desc: 'Discover and retrieve from 10,000+ datasets: imagery, embeddings, climate and vector data.',
       caps: [
-        'Sentinel-2 L2A / L1C',
-        'Mapbox tiles · all zoom levels',
+        'Sentinel-2 L1C / L2A',
+        'Landsat 4–9 Collection 2',
+        'Mapbox & Google tiles',
+        'Copernicus DEM · 30 m',
         'ERA5 climate reanalysis',
-        'DEM layer',
-        'Clay embeddings',
+        'ESA CCI climate variables',
         'AlphaEarth embeddings',
-        'ESA WorldCover LULC',
-        'Source Cooperative datasets',
+        'Esri annual LULC · 10 m',
+        'Microsoft building footprints',
+        'ArcGIS Living Atlas · Source Cooperative',
         '… and more',
       ],
     },
     {
       name: 'GoServer-Geo',
-      tag: 'Geospatial',
-      desc: 'Geospatial operations on GeoJSON and shapefiles.',
+      tag: 'Vector',
+      desc: 'Vector operations on GeoJSON, GeoParquet and shapefiles.',
       caps: [
-        'Buffer & offset',
+        'Buffer · true-meter, auto-UTM',
         'Intersect · union · difference',
         'Dissolve & merge',
-        'Reproject (CRS transform)',
-        'Area, length & perimeter',
-        'Centroid & bounding box',
-        'Clip & mask',
-        'Zonal statistics',
         'Spatial join',
-        'Simplify & smooth',
+        'Crop & filter by attribute',
+        'Geodesic area columns',
+        'Centroids & bounding boxes',
+        'GeoJSON · GeoParquet · CSV',
+        'Vector to instance mask',
+        '… and more',
+      ],
+    },
+    {
+      name: 'GoServer-Analyze',
+      tag: 'Raster',
+      desc: 'Raster processing, spectral indices, change detection and time-series analysis.',
+      caps: [
+        'Spectral indices · NDVI, NDWI, NBR',
+        'Methane index · SBMP, MBSP, MBMP',
+        'Band math & raster algebra',
+        'Thresholding & reclassification',
+        'Multi-date change detection',
+        'Phenology · cycles, peaks, growth',
+        'Clip to bbox & band selection',
+        'Stack & collapse bands',
+        'Rescale, cast & PNG preview',
+        '… and more',
       ],
     },
     {
       name: 'GoServer-AI',
       tag: 'Inference',
-      desc: 'Run geospatial AI models on imagery.',
+      desc: 'Run RASID\'s geospatial AI models on imagery.',
       caps: [
+        'Scene parsing · open vocabulary',
         'Field delineation',
         'Solar panel segmentation',
-        'Scene parsing',
-        'Methane detection',
+        'Tree crown & palm detection',
+        'Cloud & shadow detection',
+        'Methane plume detection',
+        'Banana TR4 disease detection',
+        'Wheat crop classification',
         'DINOv3 embeddings + PCA',
-        'Change detection',
         '… and more',
       ],
     },
@@ -509,7 +532,7 @@ export const PROOF_SECTION = {
 export const PRODUCTS_PAGE = {
   eyebrow: 'Products',
   headline: 'One engine. Three ways to use it.',
-  body: 'GoPilot is the agent, GoServers is the API, and our plugins live inside the GIS tools you already use — all powered by the same RASID models and imagery.',
+  body: 'GoPilot is the agent, GoServers is the API, and our plugins live inside the GIS tools you already use, all powered by the same RASID models and imagery.',
 } as const;
 
 /* ── Team — scaffolded with placeholders. Swap `members` for the real people
@@ -777,6 +800,7 @@ export const FOOTER = {
         // hero — the GoPilot act, where the product tells its own story.
         { label: 'What we do', href: '/#gopilot' },
         { label: 'Case studies', href: '/case-studies' },
+        { label: 'Publications', href: '/publications' },
         { label: 'Team', href: '/#team' },
         { label: 'Pricing', href: '/#pricing' },
         { label: 'Contact Us', href: '/#contact' },
@@ -792,7 +816,7 @@ export const FOOTER = {
 
 /* ── About + FAQ ─────────────────────────────────────────────────────────────
  * Server-rendered, crawlable content (rendered by components/content/AboutContent
- * as real <h2>/<h3>/<p>, NOT behind ssr:false/LazySection) so search engines and
+ * as real <h2>/<h3>/<p>, NOT behind ssr:false or a mount gate) so search engines and
  * LLMs get substantive, quotable, entity-consistent text and FAQPage structured
  * data. Direct-answer-first, self-contained sentences (GEO best practice).
  * Keep "RASID" (org) and "GoPilot" (product) spelled consistently everywhere.
@@ -826,7 +850,7 @@ export const ABOUT_CONTENT = {
 
     {
       h: 'GoServers API/MCP',
-      p: 'GoPilot capabilities are exposed through the Model Context Protocol (MCP) as four GoServers: GoServer-Fetch for data, GoServer-Geo for geospatial operations, GoServer-Analyse and GoServer-AI for model inference. GoPilot orchestrates these services to retrieve data, perform geospatial processing and run AI models.',
+      p: 'GoPilot capabilities are exposed through the Model Context Protocol (MCP) as four GoServers: GoServer-Fetch for data, GoServer-Geo for geospatial operations, GoServer-Analyze for raster and time-series analysis, and GoServer-AI for model inference. GoPilot orchestrates these services to retrieve data, perform geospatial processing and run AI models.',
     },
 
     {
@@ -934,7 +958,7 @@ export const FAQ = [
 
   {
     q: 'Does GoPilot support MCP?',
-    a: 'Yes. GoPilot capabilities are exposed through the Model Context Protocol (MCP) using four GoServers: GoServer-Fetch for data access, GoServer-Geo for geospatial operations, GoServer-Analyze and GoServer-AI for model inference.',
+    a: 'Yes. GoPilot capabilities are exposed through the Model Context Protocol (MCP) using four GoServers: GoServer-Fetch for data access, GoServer-Geo for geospatial operations, GoServer-Analyze for raster and time-series analysis, and GoServer-AI for model inference.',
   },
 
   {
@@ -1137,11 +1161,46 @@ export const CASE_STUDIES = [
     title: 'GoPilot: RASID’s AI geospatial agent',
     sector: 'Platform',
     date: '2026-08-01',
-    authorInitials: 'HN',
+    authorInitials: 'AG',
     status: 'published',
     summary:
       'An AI geospatial agent that turns natural-language questions into executable Earth-observation workflows, connecting satellite data, geospatial tools and AI models in one interface.',
     context: 'AI · Earth Observation · Platform',
+    seoDescription:
+      'GoPilot is RASID\'s AI geospatial agent: it turns plain-language questions into executable Earth-observation workflows and returns real map layers.',
+    hero: {
+      src: '/case-studies/gopilot-ai-geospatial-agent/gopilot-dinov3-naf-embeddings.webp',
+      alt:
+        'The GoPilot web app running a DINOv3 embedding workflow: the agent’s reply lists three-band PCA GeoTIFF deliverables with download links on the left, and a PCA-coloured embedding layer is drawn over a satellite basemap of central Moscow on the right.',
+      caption:
+        'GoPilot turning learned image features into data you can open. Here it runs DINOv3 embeddings, upsamples them with NAF from 19.1 m to 2.39 m cells, and returns three-band PCA GeoTIFFs that render straight onto the basemap. PCA colours are only comparable within a single run, since the basis is fit per run.',
+    },
+    /* Methane imagery is deliberately excluded here: MethaneMapper has its own
+       case study, so this page illustrates GoPilot itself (the agent and the
+       platform) rather than repeating a sibling study's subject. */
+    images: [
+      {
+        src: '/case-studies/gopilot-ai-geospatial-agent/aws-geospatial-genai-challenge-report.webp',
+        alt:
+          'Two-page case study spread on GoPilot from the AWS GenAI for Geospatial Challenge EMEA end-of-challenge report, with challenge, approach and results columns.',
+        caption:
+          'GoPilot in the AWS GenAI for Geospatial Challenge (EMEA edition) end-of-challenge report, recording natural-language Earth-observation workflows built on Amazon Bedrock, AgentCore Runtime, Strands Agents and Claude.',
+      },
+      {
+        src: '/case-studies/gopilot-ai-geospatial-agent/gopilot-capability-spectrum.webp',
+        alt:
+          'Horizontal bar chart ranking GoPilot capability groups by number of tools, from Model/Segment at the top down to several single-tool groups, with bar segments shaded by the plan tier that unlocks them.',
+        caption:
+          'How GoPilot’s tools distribute across its capability groups. Model/Segment carries the most, with Catalog/Search and RasterProduct/Fetch next, and the shading shows which plan tier unlocks each tool.',
+      },
+      {
+        src: '/case-studies/gopilot-ai-geospatial-agent/gopilot-qgis-plugin-solutions.webp',
+        alt:
+          'QGIS desktop with the RASID GoPilot plugin dialog open over a satellite basemap of Dubai, showing a Solutions catalogue of cards including BananaSight, Cloud Detection, Field Delineation, Mapbox Fetcher, Planet Imagery and Scene Parsing.',
+        caption:
+          'The same agent inside QGIS. The plugin’s Solutions catalogue lists ready-made analyses, each launched with a Create Project button without leaving the desktop GIS.',
+      },
+    ],
     sections: [
       {
         h: 'The problem',
@@ -1200,6 +1259,31 @@ export const CASE_STUDIES = [
     summary:
       'A physics-informed methane detection system that combines Sentinel-2 imagery, synthetic plume generation and deep learning to identify potential methane emission sources from space.',
     context: 'Methane · Satellite Monitoring · AI',
+    seoDescription:
+      'How RASID detects methane plumes from Sentinel-2 imagery with a physics-informed model trained on synthetic plumes, validated against real events.',
+    hero: {
+      src: '/case-studies/methanemapper-landfill-detection/landfill-detection-saudi-arabia.webp',
+      alt:
+        'Satellite basemap of Saudi Arabia with the national boundary outlined in red and green markers showing automatically detected landfill sites',
+      caption:
+        'Output of the Landfill Automated Detection tool: 260 landfill locations identified from optical satellite imagery across Saudi Arabia.',
+    },
+    images: [
+      {
+        src: '/case-studies/methanemapper-landfill-detection/methanemapper-train-test-deploy.webp',
+        alt:
+          'Pipeline diagram showing MethaneMapper trained on a 100,000-sample synthetic dataset, tested on a synthetic and a real held-out set and deployed to a hosted endpoint, above three panels comparing the multi-band multi-pass input, the ground-truth plume likelihood and the predicted methane fractional change',
+        caption:
+          'Train, test, deploy: synthetic plumes for training, a synthetic and a real held-out set for testing, a hosted endpoint for serving. The lower panels compare the multi-band multi-pass input, the ground-truth plume likelihood and the model’s predicted methane fractional change.',
+      },
+      {
+        src: '/case-studies/methanemapper-landfill-detection/landfill-persistent-emission-detection.webp',
+        alt:
+          'Diagram of a landfill active-emission detection workflow, stacking four months of hyperspectral and multispectral methane plume maps into an accumulated emission hotspot map',
+        caption:
+          'Landfill active-emission workflow: monthly multispectral and hyperspectral plume maps are accumulated over a landfill footprint, so repeated plumes become a persistent-emission indicator rather than a single-overpass signal.',
+      },
+    ],
     sections: [
       {
         h: 'The problem',
@@ -1266,30 +1350,86 @@ export const CASE_STUDIES = [
 
     {
     slug: 'bananasight-tr4-lebanon',
-    title: 'BananaSight: Early Warning for Fusarium Wilt',
+    title: 'BananaSight: Satellite Early Warning for Fusarium Wilt TR4',
     sector: 'Agriculture',
     date: '2025-09-01',
-    authorInitials: 'AG',
+    authorInitials: 'HW',
     status: 'published',
     summary:
-      'Real-time monitoring for banana plantations that flags early stress and TR4 disease from Sentinel-2 imagery, before symptoms are visible.',
-    context: 'Agriculture · TR4 · Panama Disease',
+      'A Sentinel-2 monitoring system that learns the banana growth cycle across 713 annotated Lebanese fields and flags stressed plants, including Fusarium wilt TR4, so growers can target inspection before damage becomes irreversible.',
+    context: 'EBRD Innovation Programme in Lebanon · Agriculture · TR4 · 2025',
+    seoDescription:
+      'A Sentinel-2 early-warning system for Fusarium wilt TR4 across 713 annotated Lebanese banana fields, flagging crop stress before damage is irreversible.',
+    hero: {
+      src: '/case-studies/bananasight-tr4-lebanon/annotated-banana-fields-damour.webp',
+      alt:
+        'Satellite view of the Lebanese coast at Damour with hundreds of individually coloured polygons outlining annotated banana plantation parcels',
+      caption:
+        'Part of the 713 banana fields digitised and field-verified across Lebanon’s coastal belt; this view covers the Damour study area.',
+    },
+    images: [
+      {
+        src: '/case-studies/bananasight-tr4-lebanon/study-area-map-lebanon-banana-belt.webp',
+        alt:
+          'Regional map of the eastern Mediterranean coast showing the three Lebanese banana study areas Damour, Aadloun and Sahel El Qlaile marked along the shoreline',
+        caption:
+          'The three areas of interest on Lebanon’s frost-free coastal plain: Damour (Chouf), Aadloun (Saida) and Sahel El Qlaile (Sour).',
+      },
+      {
+        src: '/case-studies/bananasight-tr4-lebanon/ndvi-field-map-aadloun-banana-plantations.webp',
+        alt:
+          'Pixel-level NDVI map over banana fields at Aadloun, Lebanon, with field boundaries in black and graduated green dots showing vegetation vigour per Sentinel-2 pixel',
+        caption:
+          'Pixel-level NDVI over the Aadloun banana fields in late July 2023, showing how widely canopy vigour varies within and between neighbouring plots.',
+      },
+      {
+        src: '/case-studies/bananasight-tr4-lebanon/bananasight-web-interface-aoi-selection.webp',
+        alt:
+          'BananaSight web interface showing the form for creating a new monitoring process, with sowing and harvest dates, beside a satellite map of a Lebanese coastal banana-growing area',
+        caption:
+          'The BananaSight interface: an operator creates a monitoring process for a field, setting the growing window before the model runs over the season.',
+      },
+    ],
     sections: [
       {
         h: 'The problem',
-        p: 'Fusarium Wilt Tropical Race 4 (TR4) can devastate a banana plantation before any visible symptoms appear, leaving growers with limited time to respond. There is a need for scalable early-warning methods that can monitor plantations without relying entirely on field inspection.',
+        p:
+          'Fusarium wilt Tropical Race 4 (TR4) is a soil-borne fungal pathogen with no chemical treatment and no cure. It attacks Cavendish bananas, the genetically uniform variety behind almost all internationally traded fruit, and it persists in soil for decades, so an infected field cannot simply be replanted. Because plantations are propagated vegetatively, every plant in a block shares the same susceptibility, and once TR4 arrives it can spread rapidly within a field. Prevention, containment and early detection are the only viable defences, and conventional field monitoring is labour-intensive, irregular, and tends to find infections only at an advanced stage, when containment is no longer practical.',
+      },
+      {
+        h: 'The programme and the study area',
+        p:
+          'BananaSight was delivered under the EBRD Innovation Programme in Lebanon, for an agri-technology beneficiary working with Lebanese banana growers. Banana growing in Lebanon is restricted to frost-free coastal zones, so three representative areas of interest were selected along the coastal plain: Damour in Chouf, Aadloun south of Sidon, and Sahel El Qlaile near Sour. Together they span the core of the country\'s banana belt and a wide range of field size and management intensity, from Damour\'s fragmented plots averaging 0.23 hectares to Aadloun and Sahel El Qlaile, where fields average 0.77 and 0.87 hectares.',
+      },
+      {
+        h: 'Building the dataset',
+        p:
+          'As far as the team could establish, no public dataset addressed TR4 symptom detection, so one had to be built. Field boundaries were digitised in QGIS from high-resolution basemaps and Street View, cross-checked against historical imagery to confirm consistent banana cultivation across several seasons, then validated by on-site survey and consultation with local farmers, producing 713 annotated banana fields covering 413 hectares. An automated pipeline assembled a four-year weekly Sentinel-2 time series over each area (2020 to 2024), using Level-1C products, retaining all 13 spectral bands and cloud masks, and selecting the least cloud-affected scene for each week. The result is a four-year weekly record for each of 42,000 georeferenced pixels (more than eight million pixel-week observations), with fourteen vegetation, soil and water-related indices computed on top of the raw bands, including NDVI, SAVI, NDWI, NDMI and BSI.',
+      },
+      {
+        h: 'Learning the banana growth cycle',
+        p:
+          'Detecting disease in bananas is harder than it first appears, because a healthy plantation\'s signal already rises and falls sharply through the year. In Lebanon the vegetative growth phase runs from April to September: NDVI climbs from around week 16 and declines between weeks 35 and 40 as mother plants are harvested and cut, while the bare soil index traces approximately the inverse. Since TR4 also depresses NDVI, an infected plant during the natural autumn decline looks much like a healthy one. The system therefore concentrates on the growth window, where a falling vegetation signal contradicts the expected seasonal rise and is far more likely to be genuine stress.',
       },
       {
         h: 'The approach',
-        p: 'BananaSight analyses Sentinel-2 multispectral imagery to detect patterns of vegetation stress associated with potential disease. The system monitors plantation areas over time and identifies locations showing abnormal changes, allowing farmers and agricultural teams to focus field inspections where they are most needed.',
+        p:
+          'BananaSight forecasts what a healthy pixel should look like and flags the pixels that do not follow. A deep-learning time-series model is trained on the four-year archive to project the expected trajectory of each spectral index, and the observed satellite signal is compared against that expectation week by week. Deviations are interpreted per index (suppressed vegetation indices, bare-soil values rising towards positive, canopy moisture lower than expected) and combined into a pixel-level anomaly score, with separate vegetation, soil and water scores so an alert can be attributed to canopy condition, soil exposure or water content. Because the method is unsupervised it does not depend on a large library of labelled TR4 cases, and it flags any stress worth a grower\'s attention rather than TR4 alone.',
       },
       {
-        h: 'The approach to early warning',
-        p: 'Rather than relying only on visible symptoms, BananaSight uses satellite observations to identify changes in plant condition across the plantation. This enables repeated monitoring over large areas and provides an additional layer of information for agricultural decision-making.',
+        h: 'Validation',
+        p:
+          'The test set was assembled from three sources: two fields where the beneficiary had recorded TR4 in 2020; a farmer-guided survey near El Qlaile in which five infected and five healthy plants were confirmed on the ground; and further TR4 sites reported in the literature in China, Peru and Mozambique. On held-out data the forecasting model explained more than 88 per cent of the variance in the observed signal. Mapped anomaly scores were highest inside the parcel surveyed as diseased, while the surveyed healthy parcels stayed largely clear. At a second site, where the only available information was that TR4 was present somewhere in the field, the model localised the anomaly to the middle and upper-right sections, areas that visual inspection confirmed as reduced or wilted canopy.',
+      },
+      {
+        h: 'From pipeline to product',
+        p:
+          'BananaSight was delivered as a web tool rather than a research script. A user creates a project, draws or uploads the field boundary as a polygon, selects the week to monitor and runs the model; the output is an anomaly heat map over the plot. The monitored week has to fall inside the April-to-September growth window, and because the tool reaches back through the Sentinel-2 archive to 2015, the same workflow can be pointed at past seasons to review how a field behaved before and after a known outbreak.',
       },
       {
         h: 'The result',
-        p: 'BananaSight established a satellite-based monitoring workflow for banana plantations and demonstrated how Sentinel-2 imagery can support earlier identification of areas requiring investigation.',
+        p:
+          'The project produced an analysis-ready, multi-temporal Sentinel-2 dataset for banana monitoring, a validated stress-detection method, and a working interface the beneficiary can run on its own fields. The practical value for a grower is triage: instead of walking hundreds of hectares on a fixed schedule, inspection effort goes to the pixels diverging from the expected healthy cycle. The framework was built to be transferable to other banana-producing regions and, in principle, to other crops monitored with multispectral imagery. Detection lead time has not yet been measured against ground-confirmed infection dates; quantifying it is one aim of the planned next steps, which also include a full growing season of on-field validation, feeding that field feedback back into the model, and testing outside Lebanon.',
       },
     ],
   },
@@ -1299,27 +1439,76 @@ export const CASE_STUDIES = [
     title: 'C-ARD: Raw to Corrected Analysis-Ready Data',
     sector: 'Imagery quality',
     date: '2026-01-01',
-    authorInitials: 'HW',
+    authorInitials: 'HN',
     status: 'published',
     summary:
-      'An AI pipeline that automatically corrects geometric and radiometric anomalies in high-resolution imagery, turning raw data into Analysis-Ready Data.',
-    context: 'Analysis-Ready Data . Orthorectification . Radiometric Anomalies',
+      'An AI pipeline that automatically corrects geometric distortion, radiometric inconsistency and cloud, haze and shadow in high-resolution satellite and aerial imagery, processing around 200 GB in about two hours.',
+    context: 'Analysis-Ready Data · Orthorectification · Cloud Removal',
+    seoDescription:
+      'An AI pipeline that corrects geometric and radiometric defects in satellite imagery, turning raw captures into analysis-ready data at 200 GB in two hours.',
+    hero: {
+      src: '/case-studies/c-ard-analysis-ready-data/human-in-the-loop-review-workflow.webp',
+      alt:
+        'Workflow diagram of the C-ARD human-in-the-loop review interface: load GeoTIFF, anomaly detection, review detected anomalies by accepting, deleting, editing or drawing them, anomaly correction, review proposed corrections, then save the corrected GeoTIFF',
+      caption:
+        'The human-in-the-loop review workflow. Operators accept, delete, edit or draw anomaly detections, then approve or reject each proposed correction before the corrected GeoTIFF is saved.',
+    },
+    images: [
+      {
+        src: '/case-studies/c-ard-analysis-ready-data/cloud-removal-before-after.webp',
+        alt:
+          'Comparison of a cloud-affected mountainous forested satellite scene and a clear product of the same area after C-ARD cloud handling',
+        caption:
+          'Cloud handling: a cloud-affected capture alongside a clear product. C-ARD removes cloud by replacing it with a valid observation where one exists, and by generative reconstruction where none does.',
+      },
+      {
+        src: '/case-studies/c-ard-analysis-ready-data/terrain-distortion-before-after.webp',
+        alt:
+          'Four-panel comparison of terrain-distortion correction: a highway with a lateral ripple straightened, and a steep hillside with smeared surface texture reconstructed',
+        caption:
+          'Terrain-distortion correction, shown as illustrative crops: a wavy-road artefact along a highway corridor (left pair) and smeared texture on steep terrain (right pair).',
+      },
+    ],
     sections: [
       {
         h: 'The problem',
-        p: 'Satellite-imagery providers deal with geometric distortion, inconsistent radiometry, and atmospheric interference from cloud, haze and shadow. These issues can increase rejection rates and make imagery preparation slow and costly when corrections are performed manually.',
+        p:
+          'Satellite-imagery providers lose usable captures to three recurring defects. Geometric distortion brings terrain distortion, sensor-angle artefacts and spatial misalignment between imagery layers. Radiometry is inconsistent, producing colour imbalance, brightness variation and inconsistent spectral response across image tiles. Cloud cover, haze, shadow and atmospheric distortion obscure ground features outright. Together these lead to high rejection rates from end-users in defence, agriculture, urban planning and environmental monitoring, and manual correction is time-consuming, costly and not scalable.',
       },
       {
         h: 'The approach',
-        p: 'C-ARD combines deep-learning co-registration and orthorectification with radiometric enhancement and automated cloud, haze and shadow detection and removal. A human-in-the-loop interface allows operators to review and control the processing, while the pipeline can be deployed in cloud, on-premise or on-orbit environments through EC-ARD.',
+        p:
+          'C-ARD (Corrected Analysis Ready Data) is an AI-powered system for automatic geometric and radiometric anomaly correction in high-resolution satellite and aerial imagery. It works in two directions: it transforms raw data into Analysis-Ready Data (ARD), and it refines existing ARD products to eliminate residual errors. Three deep-learning capabilities sit at its core: image matching and co-registration; cloud, shadow and haze detection and removal; and radiometric colour enhancement. RASID built it for satellite and aerial imagery providers, to be dropped into the pipelines they already run.',
       },
       {
-        h: 'The processing pipeline',
-        p: 'The system brings multiple image-correction and quality-control steps into a single workflow. By automating repetitive preprocessing tasks while retaining human review where required, C-ARD helps imagery providers produce more consistent Analysis-Ready Data at scale.',
+        h: 'Inside the pipeline',
+        p:
+          'The satellite and aerial image-quality pipeline automates detection, correction and patching in three stages: anomaly detection, anomaly correction, and co-registration and patching. Detection flags the tiles within a scene that carry artefacts, so correction and review are targeted at those areas rather than the whole capture. Correction then applies the appropriate model to each flagged region. The corrected patches are co-registered and stitched back in so they align with the surrounding imagery. The pipeline works on individual scenes and on bulk imagery alike.',
       },
       {
-        h: 'The result',
-        p: 'The client-ready pipeline processes roughly 200 GB of imagery in about two hours. The system helps turn more captures into usable and sellable imagery while reducing quality-assurance effort and accelerating delivery for the satellite-imagery provider.',
+        h: 'Correcting geometry',
+        p:
+          'Geometric correction uses AI-enhanced orthorectification and co-registration to remove terrain-induced distortion. Two artefact classes recur in high-resolution captures: wavy roads, where a linear feature such as a highway develops a lateral ripple, and smearing, where steep terrain drags surface texture into streaks. C-ARD detects and corrects both automatically, straightening linear infrastructure and restoring texture on slopes.',
+      },
+      {
+        h: 'Clearing cloud, haze and shadow',
+        p:
+          'Atmospheric correction splits into detection and removal. Cloud detection supports both high- and low-resolution imagery, with models adapted for RGB, RGB-NIR and multispectral inputs (so the same capability can be applied across a mixed sensor fleet rather than only to scenes with a full band set), and the detection output distinguishes thick cloud, thin cloud and shadow. Removal then offers two routes: removal by replacement, which substitutes the obscured area with valid observation, and removal using generative AI, which reconstructs ground detail where no clean replacement is available. Haze is handled by the same detection-and-removal capability.',
+      },
+      {
+        h: 'Radiometry and the raw-to-ARD path',
+        p:
+          'Radiometric enhancement covers colour correction and normalisation, so that brightness, hue and spectral response stay consistent across image tiles. The same route covers the raw-to-ARD transformation: as the processing chain shows, panchromatic and four-band multispectral imagery are each calibrated to top-of-atmosphere (TOA) values, then fused into a single pansharpened product. What arrives as separate uncalibrated bands leaves as one consistent, analysis-ready image.',
+      },
+      {
+        h: 'Human in the loop',
+        p:
+          'C-ARD is not a black box. An interactive GUI places an operator between detection and delivery. The analyst loads a GeoTIFF, reviews the detected anomalies (accepting true detections, deleting wrong ones, editing incomplete detections and drawing anomalies the model missed), then reviews the corrections the system proposes, accepting the good ones and rejecting the bad before saving the corrected GeoTIFF. Automation removes the repetitive work; the decisions stay with the operator.',
+      },
+      {
+        h: 'Deployment and results',
+        p:
+          'C-ARD is built for scalable deployment: as a cloud service, on-premises alongside existing imagery pipelines, or in orbit as EC-ARD, an edge-compatible version. The pipeline detects and corrects anomalies in near real time, processing around 200 GB of imagery in about two hours. The value it is designed to deliver for imagery providers is fourfold: turn more captures into sellable imagery, reduce manual correction and QA time, deliver analysis-ready data faster, and provide consistent high-quality imagery.',
       },
     ],
   },
@@ -1333,4 +1522,110 @@ export const CASE_STUDIES = [
   summary: string;
   context: string;
   sections: { h: string; p: string }[];
+  /** <=160 char meta description; `summary` is editorial and runs longer. */
+  seoDescription?: string;
+  /** Lead image: shown on the article and as the card thumbnail on the index. */
+  hero?: { src: string; alt: string; caption?: string };
+  /** Supporting figures, spread through the article body in order. */
+  images?: { src: string; alt: string; caption: string }[];
+}[];
+
+/* ── Publications ─────────────────────────────────────────────────
+ * Peer-reviewed research co-authored by RASID team members. `venue` and `doi`
+ * record where each paper was formally published (verified against the
+ * publisher's registered metadata), while `url`/`pdfUrl` point at the open-access
+ * arXiv version so every link is free to read and permanent.
+ * Rendered by app/publications/page.tsx, which also emits ScholarlyArticle
+ * JSON-LD linking each RASID author to their Person node. */
+export const PUBLICATIONS_PAGE = {
+  eyebrow: 'Publications',
+  headline: 'Peer-reviewed research.',
+  body:
+    'RASID’s work is grounded in published research. Team members co-author peer-reviewed papers on Earth observation, remote sensing, geospatial AI and quantum SAR processing with international collaborators. Further results, including the MethaneMapper validation work, are in preparation.',
+} as const;
+
+export const PUBLICATIONS = [
+  {
+    title: 'A Decade of Wheat Mapping for Lebanon',
+    authors: [
+      'Hasan Wehbi',
+      'Hasan Nasrallah',
+      'Mohamad Hasan Zahweh',
+      'Zeinab Takach',
+      'Veera Ganesh Yalla',
+      'Ali J. Ghandour',
+    ],
+    venue: '2025 IEEE International Conference on Next-Gen Technologies of Artificial Intelligence and Geoscience Remote Sensing (EarthSense)',
+    year: '2025',
+    url: 'https://arxiv.org/abs/2504.11366',
+    doi: '10.1109/EarthSense66084.2025.11297250',
+    pdfUrl: 'https://arxiv.org/pdf/2504.11366',
+    type: 'conference-paper',
+    summary:
+      'Combines a Temporal Spatial Vision Transformer with parameter-efficient fine-tuning and a field-boundary delineation step to map Lebanon\'s wheat fields from satellite imagery, addressing the common failure where many small parcels get merged into one field. The result is a decade of field-level wheat maps that can be counted and compared year over year, not just a pixel mask.',
+    abstract:
+      'Wheat accounts for approximatly 20% of the world’s caloric intake making it a vital component of global food secuirty. Given this significance, mapping wheat fields plays a crucial role in enabling various stakeholders including policymakers, researchers, and agricultural organizations to make informed decisions regarding food security, supply chain management, and resource allocation. In this paper, we tackle the problem of accurately mapping wheat fields out of satellite images by enhancing our previous work on winter wheat segmentation by creating an improved pipeline for processing data as well as presenting a decade-long analysis of wheat mapping in Lebanon. We integrate a Temporal Spatial Vision Transformer (TSViT) with Parameter-Efficient Fine Tuning (PEFT) and a novel post-processing pipeline based on the FOW delineation framework. Our enhanced pipeline addresses key challenges encountered in the previous approach such as clustering of small agricultural parcels in a single large field and sparse training labels. By merging wheat segmentation with precise field boundary extraction, our method produces geometrically coherent and semantically rich maps enabling us to perfom in-depth analysis such as calculating the total number of fields and tracking fields areas year over year. Extensive evaluations demonstrate improved boundary delineation and field-level precision, establishing the framework’s potential in operational agricultural monitoring and historical trend analysis. This work lays the foundation for a range of critical studies and future advancements. Building on the accurate mapping of wheat fields, our approach provides a crucial step toward more sophisticated agricultural analyses. Future work can extend this methodology to improve yield estimation, crop monitoring and broader analysis of agricultural trends.',
+  },
+  {
+    title: 'Efficient Adaptation for Remote Sensing Visual Grounding',
+    authors: [
+      'Hasan Moughnieh',
+      'Mohamad Chalhoub',
+      'Hasan Nasrallah',
+      'Cristiano Nattero',
+      'Paolo Campanella',
+      'Giovanni Nico',
+      'Ali J. Ghandour',
+    ],
+    venue: 'IGARSS 2025 - 2025 IEEE International Geoscience and Remote Sensing Symposium',
+    year: '2025',
+    url: 'https://arxiv.org/abs/2503.23083',
+    doi: '10.1109/IGARSS55030.2025.11243354',
+    pdfUrl: 'https://arxiv.org/pdf/2503.23083',
+    type: 'conference-paper',
+    summary:
+      'Shows that large vision-language foundation models can be taught to find objects in satellite and aerial imagery from a plain-text description by tuning only a small fraction of their weights (LoRA, BitFit, adapters) instead of retraining the whole model. Accuracy matches or surpasses the state of the art while significantly reducing compute cost, which is what makes text-driven search over imagery affordable in production.',
+    abstract:
+      'Foundation models have revolutionized artificial intelligence (AI), offering remarkable capabilities across multi-modal domains. Their ability to precisely locate objects in complex aerial and satellite images, using rich contextual information and detailed object descriptions, is essential for remote sensing (RS). These models can associate textual descriptions with object positions through the Visual Grounding (VG) task, but due to domain-specific challenges, their direct application to RS produces sub-optimal results. To address this, we applied Parameter Efficient Fine Tuning (PEFT) techniques to adapt these models for RS-specific VG tasks. Specifically, we evaluated LoRA placement across different modules in Grounding DINO and used BitFit and adapters to fine-tune the OFA foundation model pre-trained on general-purpose VG datasets. This approach achieved performance comparable to or surpassing current State Of The Art (SOTA) models while significantly reducing computational costs. This study highlights the potential of PEFT techniques to advance efficient and precise multi-modal analysis in RS, offering a practical and cost-effective alternative to full model training.',
+  },
+  {
+    /* Peer-reviewed journal article. Published in Earth Observation and Geomatics
+       Engineering 10(1) (University of Tehran); metadata taken from the publisher's
+       own citation_* meta tags. NOTE: the DOI below is publisher-declared but not
+       yet deposited — doi.org currently 404s and Crossref has no record — so it is
+       shown as plain text, never as a link. Remove it if it stays unresolvable. */
+    title: 'Quantum Meets SAR: A Novel Range-Doppler Algorithm for Next-Gen Earth Observation',
+    authors: [
+      'Khalil Al Salahat',
+      'Mohamad El Moussawi',
+      'Ali J. Ghandour',
+    ],
+    venue: 'Earth Observation and Geomatics Engineering',
+    volume: '10',
+    issue: '1',
+    pages: '83–92',
+    year: '2026',
+    url: 'https://arxiv.org/abs/2504.01832',
+    doi: '10.22059/eoge.2026.414020.1222',
+    pdfUrl: 'https://arxiv.org/pdf/2504.01832',
+    type: 'journal-article',
+    summary:
+      'Proposes a Quantum Range-Doppler Algorithm that replaces the Fast Fourier Transform with the Quantum Fourier Transform to speed up the processing of raw synthetic-aperture radar signals into imagery. It also introduces a quantum implementation of Range Cell Migration Correction, the step that realigns returned echoes so a target’s energy lands in a single range bin.',
+    abstract:
+      'Synthetic Aperture Radar (SAR) plays a vital role in remote sensing due to its ability to capture high-resolution images regardless of weather conditions or daylight. However, to transform the raw SAR signals into interpretable imagery, advanced data processing techniques are essential. A widely used technique for this purpose is the Range Doppler Algorithm (RDA), which takes advantage of Fast Fourier Transform (FFT) to convert signals into the frequency domain for further processing. However, the computational cost of this approach becomes significant when dealing with large datasets. This paper presents a Quantum Range Doppler Algorithm (QRDA) that utilizes the Quantum Fourier Transform (QFT) to accelerate processing compared to the classical FFT. Furthermore, it introduces a quantum implementation of the Range Cell Migration Correction (RCMC) in the Fourier domain, a critical step in the RDA pipeline that realigns the received echoes so that the energy from a target is concentrated in a single range bin across all azimuth positions. The performance of the quantum RCMC is evaluated and compared against its classical counterpart, demonstrating the potential of quantum computing in advanced SAR imaging.',
+  },
+] as {
+  title: string;
+  authors: string[];
+  venue: string;
+  volume?: string;
+  issue?: string;
+  pages?: string;
+  year: string;
+  url: string;
+  doi?: string;
+  pdfUrl?: string;
+  type: string;
+  summary: string;
+  abstract?: string;
 }[];

@@ -34,7 +34,8 @@ export default function GoPilotStudio() {
   const [step, setStep] = useState(0);
   const active: UseCase = S.cases.find((c) => c.id === activeId) ?? S.cases[0];
 
-  // The section is mounted early (LazySection, ~0.9 screens ahead), so we hold
+  // The studio is a client-only dynamic import, so it can mount before the
+  // reader reaches it. We hold
   // the sequence until it's actually on screen — otherwise the first case plays
   // out before the reader ever sees it. Fires once, on first entry.
   const rootRef = useRef<HTMLElement>(null);
@@ -82,8 +83,11 @@ export default function GoPilotStudio() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeId, inView]);
 
+  // No id on the <section> below: this studio is client-only, so the #gopilot
+  // anchor lives on the server-rendered wrapper in StoryStack / ProductsPage.
+  // Two elements sharing one id would be invalid HTML once this hydrates.
   return (
-    <section ref={rootRef} id="gopilot" className="relative w-full overflow-hidden bg-void py-24 md:py-32" aria-label="GoPilot">
+    <section ref={rootRef} className="relative w-full overflow-hidden bg-void py-24 md:py-32" aria-label="GoPilot">
 <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10">
         <Reveal className="mx-auto mb-12 max-w-[52ch] text-center md:mb-16">
           <div className="mb-5 flex items-center justify-center gap-3">

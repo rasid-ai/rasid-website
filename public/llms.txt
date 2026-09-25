@@ -11,9 +11,12 @@ intelligence through one natural-language interface over 10,000+ datasets and
 hundreds of AI models. Everything GoPilot does is also exposed over the Model
 Context Protocol (MCP) as GoServers, and inside QGIS and ArcGIS Pro via plugins.
 
+## About
+- [About RASID and GoPilot](https://rasid.ai/about): What RASID does, how GoPilot works step by step, the data and models it uses, and a FAQ covering pricing, MCP access, plugins and sectors. The most complete single page on the site.
+
 ## Products
 - [GoPilot](https://rasid.ai/products#gopilot): AI geospatial agent for plain-language questions to raster/vector answers.
-- [GoServers (MCP / API)](https://rasid.ai/products#mcps): Three MCP servers: GoServer Fetch (data), GoServer Geo (analysis), GoServer AI (model inference). Orchestrated by GoPilot on every plan; direct MCP / API access is available on the Enterprise plan.
+- [GoServers (MCP / API)](https://rasid.ai/products#mcps): Four MCP servers: GoServer-Fetch (data retrieval), GoServer-Geo (vector operations), GoServer-Analyze (raster and time-series analysis), GoServer-AI (model inference). Orchestrated by GoPilot on every plan; direct MCP / API access is available on the Enterprise plan.
 - [Plugins](https://rasid.ai/products#plugins): GoPilot inside QGIS and ArcGIS Pro.
 
 ## Services
@@ -22,15 +25,29 @@ Context Protocol (MCP) as GoServers, and inside QGIS and ArcGIS Pro via plugins.
 - [Defense](https://rasid.ai/services#defense): Q&A on tensions and strike sites with before/after change-detection verification.
 - [Environmental](https://rasid.ai/services#environmental): Methane monitoring, deforestation, water/coastline change.
 - [Transportation](https://rasid.ai/services#transportation): Vehicle-speed mapping from satellite video, iRAP road-safety automation, network extraction.
+- [AI Consultancy](https://rasid.ai/services#ai-consultancy): Custom AI beyond geospatial, including OCR and document intelligence, computer vision, LLM and agent integration, and MLOps.
+
+## Case studies
+- [GoPilot: RASID's AI geospatial agent](https://rasid.ai/case-studies/gopilot-ai-geospatial-agent): The agent itself, built on AWS Bedrock with Claude and SAM3/DINOv3 vision pipelines, delivered through the web app, QGIS and ArcGIS Pro. Winner of the AWS GenAI for Geospatial Challenge (EMEA), 2026.
+- [MethaneMapper: monitoring methane plumes from space](https://rasid.ai/case-studies/methanemapper-landfill-detection): Physics-informed methane detection from Sentinel-2 imagery, combining synthetic plume generation with deep learning to identify potential methane emission sources from space.
+- [BananaSight: early warning for Fusarium wilt TR4](https://rasid.ai/case-studies/bananasight-tr4-lebanon): Sentinel-2 time-series monitoring across 713 annotated Lebanese banana fields, flagging crop stress before damage is irreversible. Funded by the EBRD Innovation Programme in Lebanon.
+- [C-ARD: raw to corrected analysis-ready data](https://rasid.ai/case-studies/c-ard-analysis-ready-data): An AI pipeline correcting geometric and radiometric defects plus cloud, haze and shadow in high-resolution imagery, processing around 200 GB in about two hours.
+
+## Publications
+- [Quantum Meets SAR: A Novel Range-Doppler Algorithm for Next-Gen Earth Observation](https://arxiv.org/abs/2504.01832): Earth Observation and Geomatics Engineering 10(1), 83-92, 2026. Quantum Fourier Transform applied to SAR range-Doppler processing.
+- [A Decade of Wheat Mapping for Lebanon](https://arxiv.org/abs/2504.11366): IEEE EarthSense 2025. DOI 10.1109/EarthSense66084.2025.11297250. Transformer time-series model plus field delineation for national wheat mapping.
+- [Efficient Adaptation for Remote Sensing Visual Grounding](https://arxiv.org/abs/2503.23083): IEEE IGARSS 2025. DOI 10.1109/IGARSS55030.2025.11243354. Parameter-efficient fine-tuning (LoRA, BitFit, adapters) for text-driven object location in satellite imagery.
+- [All publications](https://rasid.ai/publications)
 
 ## Pricing
 - [Pricing](https://rasid.ai/#pricing): Free (€0/mo, 500 tokens); Pro (€149/mo, 5,000 tokens); Business (€499/mo, 25,000 tokens); Enterprise (custom, on-prem/cloud + MCP connector). Tokens are shared across GoPilot, GoBox, and MCP/API services.
 
 ## Company
-- [Team](https://rasid.ai/#team): Geospatial scientists, ML engineers and GIS specialists.
-- [Contact](https://rasid.ai/#contact): info@rasid.ai. Offices in Paris, France and Beirut, Lebanon.
+- [Team](https://rasid.ai/#team): Geospatial scientists, ML engineers and GIS specialists. Led by Dr. Ali J. Ghandour (R&D) and Reda Haidar (commercial).
+- [Case studies](https://rasid.ai/case-studies): Delivered projects with problem, approach and result.
+- [Publications](https://rasid.ai/publications): Peer-reviewed research co-authored by the team.
+- [Contact](https://rasid.ai/#contact): info@rasid.ai. Offices at 47 rue Vivienne, 75002 Paris, France and Badaro Building 4961, Badaro Street, Beirut 1100, Lebanon.
 
 ## Optional
 - [LinkedIn](https://www.linkedin.com/company/rasid-ai/)
 - [YouTube](https://www.youtube.com/@RASIDAI)
-- [GoPilot deck (PDF)](https://rasid.ai/decks/GoPilot_Deck2026.pdf)

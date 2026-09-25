@@ -4,9 +4,9 @@ import { GOSERVERS_SECTION as S } from '@/data/content';
 import Reveal from '@/components/common/Reveal';
 
 /**
- * §23 — GoServers / MCP. GoPilot branches into three MCP servers (Fetch · Geo ·
- * AI), each a card listing its real capabilities. Light DOM/SVG only (§34): the
- * connector is a single non-scaling-stroke path, the cards are plain flexbox.
+ * §23 — GoServers / MCP. GoPilot branches into four MCP servers (Fetch · Geo ·
+ * Analyze · AI), each a card listing its real capabilities. Light DOM/SVG only
+ * (§34): the connector is a single non-scaling-stroke path, cards are flexbox.
  */
 export default function GoServers() {
   return (
@@ -22,7 +22,7 @@ export default function GoServers() {
           <p className="mx-auto mt-6 max-w-[54ch] text-[0.98rem] leading-relaxed text-mist">{S.body}</p>
         </Reveal>
 
-        {/* GoPilot → three GoServers */}
+        {/* GoPilot → four GoServers */}
         <Reveal delay={120} className="mt-16">
           <div className="flex justify-center">
             <div className="inline-flex items-center gap-2 border border-signal/40 bg-signal/[0.05] px-5 py-2.5">
@@ -31,11 +31,12 @@ export default function GoServers() {
             </div>
           </div>
 
-          {/* three-way connector — non-scaling-stroke keeps 1px lines under the
-              non-uniform stretch of preserveAspectRatio="none" */}
-          <svg viewBox="0 0 100 44" preserveAspectRatio="none" className="h-11 w-full" aria-hidden>
+          {/* four-way connector — non-scaling-stroke keeps 1px lines under the
+              non-uniform stretch of preserveAspectRatio="none". Only drawn at lg,
+              where the servers actually sit in one 4-column row. */}
+          <svg viewBox="0 0 100 44" preserveAspectRatio="none" className="hidden h-11 w-full lg:block" aria-hidden>
             <path
-              d="M50 0 V22 M16.66 22 H83.34 M16.66 22 V44 M50 22 V44 M83.34 22 V44"
+              d="M50 0 V22 M12.5 22 H87.5 M12.5 22 V44 M37.5 22 V44 M62.5 22 V44 M87.5 22 V44"
               fill="none"
               stroke="rgb(var(--c-signal) / 0.32)"
               strokeWidth={1}
@@ -43,7 +44,7 @@ export default function GoServers() {
             />
           </svg>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4 lg:gap-5">
             {S.servers.map((srv) => (
               <div key={srv.name} className="brackets relative flex flex-col border border-white/[0.1] bg-white/[0.015] p-5 md:p-6">
                 <div className="flex items-center justify-between gap-2">

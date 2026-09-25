@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/products`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/services`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/publications`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     // The case-studies index + individual studies only enter the sitemap once at
     // least one study is published.
     ...(publishedStudies.length

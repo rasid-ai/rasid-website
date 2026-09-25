@@ -1,23 +1,25 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { SERVICES_PAGE as S } from '@/data/content';
+import { useImageFallback } from '@/lib/hooks/useImageFallback';
 import Reveal from '@/components/common/Reveal';
 
 /** Service card image that falls back to a labelled placeholder if the file is
  *  missing (e.g. a newly-added service before its webp is dropped in). */
 function ShowcaseImage({ src, label }: { src: string; label: string }) {
-  const [ok, setOk] = useState(true);
+  const { ref, failed, onError } = useImageFallback();
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink">
-      {ok ? (
+      {!failed ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
+          ref={ref}
           src={src}
           alt={`${label} project`}
+          loading="lazy"
           decoding="async"
-          onError={() => setOk(false)}
+          onError={onError}
           className="h-full w-full object-cover transition-transform duration-700 ease-cinema group-hover:scale-[1.04]"
         />
       ) : (

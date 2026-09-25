@@ -109,12 +109,14 @@ export default function ContactSection() {
  * Calendly booking embed.
  *
  * The scheduler is a heavy third-party SPA we can't speed up, so we minimise the
- * time the reader stares at a blank frame:
- *  - `preconnect` to Calendly the moment this section mounts. It's a lazily-
- *    mounted section (~0.9 screens before it enters view), so the DNS lookup +
- *    TLS handshake happen well ahead of the iframe request — no cold connection.
- *  - the iframe loads eagerly on mount (not `loading="lazy"`), for the same
- *    head-start reason, so Calendly is usually booted by the time it's on screen.
+ * time the reader stares at a blank frame without paying for it on first paint:
+ *  - `preconnect` to Calendly as soon as this section mounts, so the DNS lookup
+ *    and TLS handshake are already done before the iframe is fetched.
+ *  - `loading="lazy"` on the iframe. This section is now server-rendered (see
+ *    StoryStack), so an eager iframe would start a third-party navigation to
+ *    calendly.com on every home-page load, before the reader has scrolled
+ *    anywhere near it. Lazy defers the fetch until it approaches the viewport,
+ *    while the preconnect above keeps it fast when it does load.
  *  - a skeleton shows until `onLoad`, and the frame fades in, so any residual
  *    wait reads as intentional rather than broken.
  */
@@ -145,6 +147,7 @@ function BookingEmbed({ url }: { url: string }) {
       <iframe
         src={url}
         title="Book a call with RASID"
+        loading="lazy"
         className={[
           'h-full w-full transition-opacity duration-500',
           loaded ? 'opacity-100' : 'opacity-0',

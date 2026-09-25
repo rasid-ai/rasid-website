@@ -3,7 +3,7 @@ import { ABOUT_CONTENT as A, FAQ, PRICING_SECTION } from '@/data/content';
 /**
  * AboutContent — the server-rendered SEO/GEO content layer.
  *
- * This is a plain SERVER component (no 'use client', not behind LazySection or
+ * This is a plain SERVER component (no 'use client', not behind a mount gate or
  * ssr:false), so its text, heading hierarchy (h2/h3), and structured data land
  * in the initial HTML that search crawlers and LLMs read. Everything else below
  * the hero is client-only/scroll-gated and therefore invisible to non-JS

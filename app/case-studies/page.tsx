@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/final/Footer';
@@ -8,14 +9,14 @@ import { CASE_STUDIES, CASE_STUDIES_PAGE as S } from '@/data/content';
 // keep the index out of search (noindex) and out of the sitemap.
 const hasPublished = CASE_STUDIES.some((c) => c.status === 'published');
 
-export const metadata: Metadata = {
-  title: 'Case Studies',
+export const metadata: Metadata = pageMetadata({
+  title: 'RASID Case Studies: Delivered Geospatial AI Projects',
   description:
-    'RASID case studies: real geospatial-AI projects, the approach, the data and models used, and the results.',
-  alternates: { canonical: '/case-studies' },
-  openGraph: { url: '/case-studies', title: 'RASID Case Studies' },
-  robots: hasPublished ? { index: true, follow: true } : { index: false, follow: true },
-};
+    'Real RASID projects with the problem, the approach and the result: methane detection, banana disease early warning, analysis-ready imagery and GoPilot.',
+  path: '/case-studies',
+  // Indexable as soon as anything is published; placeholder-only stays hidden.
+  index: hasPublished,
+});
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -70,8 +71,26 @@ export default function CaseStudies() {
               <Link
                 key={c.slug}
                 href={`/case-studies/${c.slug}`}
-                className="brackets group relative flex flex-col border border-white/[0.09] bg-white/[0.012] p-6 transition-colors duration-500 hover:border-signal/40 md:p-7"
+                className="brackets group relative flex flex-col border border-white/[0.09] bg-white/[0.012] transition-colors duration-500 hover:border-signal/40"
               >
+                {c.hero && (
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={c.hero.src}
+                      alt={c.hero.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-cinema group-hover:scale-[1.03]"
+                    />
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0"
+                      style={{ background: 'linear-gradient(to top, rgb(var(--c-void) / 0.45), transparent 60%)' }}
+                    />
+                  </div>
+                )}
+                <div className="flex flex-1 flex-col p-6 md:p-7">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-signal/80">
                     {c.sector}
@@ -90,6 +109,7 @@ export default function CaseStudies() {
                   Read
                   <span aria-hidden className="transition-transform duration-500 ease-cinema group-hover:translate-x-1">→</span>
                 </span>
+                </div>
               </Link>
             ))}
           </div>

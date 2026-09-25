@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { TEAM_SECTION as S } from '@/data/content';
 import { trackSocialClick } from '@/lib/analytics';
+import { useImageFallback } from '@/lib/hooks/useImageFallback';
 import Reveal from '@/components/common/Reveal';
 
 /**
@@ -68,8 +68,8 @@ function Member({
   linkedin?: string;
   email?: string;
 }) {
-  const [photoFailed, setPhotoFailed] = useState(false);
-  const showPhoto = photo && !photoFailed;
+  const { ref, failed, onError } = useImageFallback();
+  const showPhoto = photo && !failed;
   const li = linkedin || COMPANY_LINKEDIN;
   const mail = email || COMPANY_EMAIL;
 
@@ -80,9 +80,12 @@ function Member({
         {showPhoto ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
+            ref={ref}
             src={photo}
             alt={name}
-            onError={() => setPhotoFailed(true)}
+            loading="lazy"
+            decoding="async"
+            onError={onError}
             className="h-full w-full object-cover object-top grayscale-[0.12] transition-all duration-700 ease-cinema group-hover:scale-[1.04] group-hover:opacity-25"
           />
         ) : (

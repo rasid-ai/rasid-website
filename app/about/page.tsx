@@ -1,20 +1,15 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/final/Footer';
 import AboutContent from '@/components/content/AboutContent';
 
-export const metadata: Metadata = {
-  title: 'About', // → "About · RASID"
+export const metadata: Metadata = pageMetadata({
+  title: 'About RASID: GoPilot and Applied Earth Observation',
   description:
-    'About RASID and GoPilot, the AI geospatial agent. What it is, how it works, the data and models it uses, and answers to common questions.',
-  alternates: { canonical: '/about' },
-  openGraph: {
-    url: '/about',
-    title: 'About RASID: the AI geospatial agent GoPilot',
-    description:
-      'What GoPilot is, how it works, the data and AI models it uses, pricing, and FAQs.',
-  },
-};
+    'What RASID does and how GoPilot works: the data and AI models behind it, the sectors it serves, pricing, and answers to common questions.',
+  path: '/about',
+});
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/final/Footer';
+import { pageMetadata } from '@/lib/seo';
 import { CASE_STUDIES, TEAM_SECTION } from '@/data/content';
 
 export function generateStaticParams() {
@@ -21,15 +22,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const c = getStudy(slug);
   if (!c) return {};
-  return {
-    title: c.title,
-    description: c.summary,
-    alternates: { canonical: `/case-studies/${c.slug}` },
-    openGraph: { type: 'article', url: `/case-studies/${c.slug}`, title: c.title, description: c.summary },
+  // Keep every article title inside the ~50-60 char window search engines show:
+  // pad short titles, brand-suffix medium ones, leave long ones alone.
+  const n = c.title.length;
+  const title =
+    n < 40 ? `${c.title} | RASID Case Study` : n <= 52 ? `${c.title} | RASID` : c.title;
+  return pageMetadata({
+    title,
+    description: c.seoDescription ?? c.summary,
+    path: `/case-studies/${c.slug}`,
+    type: 'article',
+    // Each article shares with its own cover rather than the generic site card.
+    // No width/height: the covers are all 1600px wide but vary in height, and a
+    // wrong og:image:height is worse than none (crawlers trust the declared size).
+    image: c.hero ? { url: c.hero.src, alt: c.hero.alt } : undefined,
     // Drafts render (so they can be previewed) but stay out of search until real
     // content lands and status flips to 'published'.
-    robots: c.status === 'published' ? { index: true, follow: true } : { index: false, follow: true },
-  };
+    index: c.status === 'published',
+  });
 }
 
 export default async function CaseStudy({ params }: { params: Promise<{ slug: string }> }) {
@@ -39,11 +49,28 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
   const author = getAuthor(c.authorInitials);
   const base = 'https://rasid.ai';
 
+  /* Figures are spread through the body rather than dumped in a gallery: image k
+     is rendered after an evenly-spaced section, so the article reads as prose
+     with illustrations. Keyed by section index. */
+  const gallery = c.images ?? [];
+  const figures = new Map<number, (typeof gallery)[number]>();
+  if (gallery.length) {
+    const spacing = Math.max(1, Math.floor(c.sections.length / (gallery.length + 1)));
+    gallery.forEach((img, k) => {
+      // Walk forward to the next free slot so more images than sections can never
+      // silently overwrite (and drop) an earlier figure.
+      let idx = Math.min(c.sections.length - 1, (k + 1) * spacing - 1);
+      while (idx < c.sections.length && figures.has(idx)) idx += 1;
+      if (idx < c.sections.length) figures.set(idx, img);
+    });
+  }
+
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: c.title,
     description: c.summary,
+    ...(c.hero ? { image: [`${base}${c.hero.src}`] } : {}),
     datePublished: c.date,
     dateModified: c.date,
     articleSection: c.sector,
@@ -116,15 +143,55 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
             </div>
           )}
 
+          {/* hero */}
+          {c.hero && (
+            <figure className="mt-10">
+              <div className="overflow-hidden border border-white/[0.09] bg-ink">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={c.hero.src}
+                  alt={c.hero.alt}
+                  decoding="async"
+                  className="block h-auto w-full"
+                />
+              </div>
+              {c.hero.caption && (
+                <figcaption className="mt-2.5 text-[0.82rem] leading-snug text-graphite">
+                  {c.hero.caption}
+                </figcaption>
+              )}
+            </figure>
+          )}
+
           <div className="hairline my-12" />
 
           <div className="space-y-10">
-            {c.sections.map((sec) => (
-              <section key={sec.h}>
-                <h2 className="text-[1.3rem] font-medium tracking-tight text-chalk">{sec.h}</h2>
-                <p className="mt-3 text-[1rem] leading-relaxed text-mist">{sec.p}</p>
-              </section>
-            ))}
+            {c.sections.map((sec, i) => {
+              const fig = figures.get(i);
+              return (
+                <section key={sec.h}>
+                  <h2 className="text-[1.3rem] font-medium tracking-tight text-chalk">{sec.h}</h2>
+                  <p className="mt-3 text-[1rem] leading-relaxed text-mist">{sec.p}</p>
+                  {fig && (
+                    <figure className="mt-7">
+                      <div className="overflow-hidden border border-white/[0.09] bg-ink">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={fig.src}
+                          alt={fig.alt}
+                          loading="lazy"
+                          decoding="async"
+                          className="block h-auto w-full"
+                        />
+                      </div>
+                      <figcaption className="mt-2.5 text-[0.82rem] leading-snug text-graphite">
+                        {fig.caption}
+                      </figcaption>
+                    </figure>
+                  )}
+                </section>
+              );
+            })}
           </div>
 
           {/* author byline */}

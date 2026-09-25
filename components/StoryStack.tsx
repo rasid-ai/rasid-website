@@ -3,69 +3,59 @@
 import dynamic from 'next/dynamic';
 
 /**
- * StoryStack — everything after the hero, code-split.
+ * StoryStack — everything after the hero.
  *
- * New (curated) narrative — one featured product, one featured service, then
- * the commercial close:
- *
- *   GoPilot            the FEATURED product — the question, the agent, the answer
- *   Products bridge    a slim link to the full /products page (GoServers, Plugins)
- *   Environmental      the featured service — methane monitoring
+ *   GoPilot            the FEATURED product (interactive studio)
+ *   Services showcase  the curated sectors, links to /services
  *   Pricing
  *   Team
  *   Testimonial · Partners
  *   Contact Us
  *
- * GoServers and Plugins moved to the /products page; Products in the nav routes
- * there. Retired: DataSection (folded into the hero), MCP/Models/UseCases, GoBox,
- * How-It-Works, the Decision editorial, and the FinalEarth closer — the landing
- * now ends on Contact. Each act is a lazily-mounted chunk.
+ * RENDERING NOTE (SEO/GEO): only GoPilot's studio stays client-only. Everything
+ * else is server-rendered so its text lands in the initial HTML.
+ *
+ * Why: AI crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot) do not execute
+ * JavaScript, and they are exactly the agents this site wants to be cited by.
+ * These sections were previously `ssr:false` AND wrapped in a lazy mount gate that
+ * renders null until an IntersectionObserver fires, so the pricing table, the
+ * team, the testimonials, the partner wall and the contact details were
+ * invisible to them (and to any non-JS reader). The visual result is unchanged:
+ * the sections still animate in via Reveal, which only touches opacity and
+ * transform on DOM that is now already present.
+ *
+ * Each section owns its own anchor id (#pricing, #team, #proof, #partners,
+ * #contact, #service), so dropping the lazy wrapper keeps every nav and
+ * footer link working.
  */
-import LazySection from './common/LazySection';
 
+// Interactive + animation-heavy: the only section that stays client-only.
 const GoPilotStudio = dynamic(() => import('./gopilot/GoPilotStudio'), { ssr: false });
-const ServicesShowcase = dynamic(() => import('./services/ServicesShowcase'), { ssr: false });
-const Pricing = dynamic(() => import('./product/Pricing'), { ssr: false });
-const TeamSection = dynamic(() => import('./team/TeamSection'), { ssr: false });
-const Proof = dynamic(() => import('./product/Proof'), { ssr: false });
-const Partners = dynamic(() => import('./product/Partners'), { ssr: false });
-const ContactSection = dynamic(() => import('./contact/ContactSection'), { ssr: false });
-// Footer is rendered by app/page.tsx directly (server-rendered, not ssr:false) so
-// its nav links + contact land in the crawlable HTML — see AboutContent note.
+
+// Code-split but server-rendered (no `ssr: false`), so the copy is crawlable.
+const ServicesShowcase = dynamic(() => import('./services/ServicesShowcase'));
+const Pricing = dynamic(() => import('./product/Pricing'));
+const TeamSection = dynamic(() => import('./team/TeamSection'));
+const Proof = dynamic(() => import('./product/Proof'));
+const Partners = dynamic(() => import('./product/Partners'));
+const ContactSection = dynamic(() => import('./contact/ContactSection'));
 
 export default function StoryStack() {
   return (
     <>
-      {/* Featured product — GoPilot use-case studio (interactive) */}
-      <LazySection id="gopilot" minHeight="100svh">
+      {/* Featured product — GoPilot use-case studio (interactive, client-only).
+          The wrapper carries #gopilot so the anchor resolves server-side even
+          though the studio itself mounts on the client. */}
+      <div id="gopilot" style={{ minHeight: '100svh' }}>
         <GoPilotStudio />
-      </LazySection>
+      </div>
 
-      {/* Services showcase — the full range, links to /services */}
-      <LazySection id="service" minHeight="60svh">
-        <ServicesShowcase />
-      </LazySection>
-
-      <LazySection id="pricing" minHeight="60svh">
-        <Pricing />
-      </LazySection>
-
-      <LazySection id="team" minHeight="60svh">
-        <TeamSection />
-      </LazySection>
-
-      {/* Testimonial + Partners sit between Team and Contact */}
-      <LazySection id="proof" minHeight="60svh">
-        <Proof />
-      </LazySection>
-
-      <LazySection id="partners" minHeight="40svh">
-        <Partners />
-      </LazySection>
-
-      <LazySection id="contact" minHeight="60svh">
-        <ContactSection />
-      </LazySection>
+      <ServicesShowcase />
+      <Pricing />
+      <TeamSection />
+      <Proof />
+      <Partners />
+      <ContactSection />
     </>
   );
 }
