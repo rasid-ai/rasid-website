@@ -474,6 +474,9 @@ export const PARTNERS_SECTION = {
     { name: 'TEAMS International', slug: 'teams', logo: '/partners/teams.png' },
     { name: 'METAPLANET', slug: 'metaplanet', logo: '/partners/metaplanet.png' },
     { name: 'CGI', slug: 'cgi', logo: '/partners/cgi.png' },
+    { name: 'AOAD', slug: 'cgi', logo: '/partners/aoad.jpg' },
+    { name: 'Fred Eng', slug: 'cgi', logo: '/partners/fred.png' },
+    { name: 'UNDP RBAS', slug: 'cgi', logo: '/partners/undp-rbas.png' },
   ] as { name: string; slug: string; logo?: string }[],
 } as const;
 
