@@ -3,6 +3,8 @@
 
 # next.js build output
 /.next
+# alternate distDirs used for isolated verification builds
+/.next-*
 /out
 
 # production
@@ -42,9 +44,6 @@ Thumbs.db
 
 # local tooling
 .claude/
-
-# large source data — NOT shipped; huge GeoTIFFs exceed GitHub's 100MB limit
-/raw_data
 
 # build metadata
 *.tsbuildinfo

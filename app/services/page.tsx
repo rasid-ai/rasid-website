@@ -1,21 +1,16 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/final/Footer';
 import ServicesPage from '@/components/services/ServicesPage';
 import { SERVICES_PAGE } from '@/data/content';
 
-export const metadata: Metadata = {
-  title: 'Services', // → "Services · RASID"
+export const metadata: Metadata = pageMetadata({
+  title: 'RASID Services: Applied Geospatial AI, Sector by Sector',
   description:
-    'RASID Earth-intelligence services by sector: environmental (methane & emissions), urban, agriculture, defense, and transportation, powered by GoPilot.',
-  alternates: { canonical: '/services' },
-  openGraph: {
-    url: '/services',
-    title: 'RASID Services: Applied GeoAI by sector',
-    description:
-      'Earth-intelligence projects across environmental, urban, agriculture, defense, and transportation, powered by GoPilot.',
-  },
-};
+    'Earth-intelligence projects across environmental, urban, agriculture, defense, transportation and AI consultancy, all powered by GoPilot.',
+  path: '/services',
+});
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',

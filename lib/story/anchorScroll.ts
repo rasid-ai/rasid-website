@@ -1,17 +1,12 @@
 import type Lenis from 'lenis';
 
-/** Fired to make every LazySection mount immediately (see LazySection). */
-export const MOUNT_ALL_EVENT = 'rasid:mountall';
-
 /**
  * Anchor scroll that lands accurately without fighting the user.
  *
- * Sections mount lazily and the hero is pinned, so a target's position can shift
- * for a moment after a click (the reserved placeholder height differs from the
- * real content). To land accurately we:
- *   1. fire MOUNT_ALL_EVENT so every LazySection mounts now and heights settle;
- *   2. aim a FEW times over ~0.8s, re-resolving the target each time so the last
- *      aim lands on the settled position.
+ * The hero is pinned and images load in, so a target's position can shift for a
+ * moment after a click. To land accurately we aim a FEW times over ~0.8s,
+ * re-resolving the target each time so the last aim lands on the settled
+ * position.
  *
  * The scroll is an INSTANT jump, corrected a couple of times as heights settle.
  * Smooth scrolling is deliberately avoided here: lenis' animated scrollTo
@@ -34,7 +29,6 @@ export function convergeScroll(
   immediate = false,
 ): void {
   if (typeof window === 'undefined') return;
-  window.dispatchEvent(new Event(MOUNT_ALL_EVENT));
 
   const timers: number[] = [];
   let aborted = false;

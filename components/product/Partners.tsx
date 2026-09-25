@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { PARTNERS_SECTION as S } from '@/data/content';
+import { useImageFallback } from '@/lib/hooks/useImageFallback';
 import Reveal from '@/components/common/Reveal';
 
 /**
@@ -13,7 +13,7 @@ import Reveal from '@/components/common/Reveal';
  * public/partners/ is all it takes to switch from text to a real logo.
  */
 function PartnerMark({ name, logo }: { name: string; logo?: string }) {
-  const [failed, setFailed] = useState(false);
+  const { ref, failed, onError } = useImageFallback();
   if (logo && !failed) {
     // Fixed box per logo so mixed aspect ratios (horizontal wordmarks *and*
     // stacked icon-over-text lockups like AWS / World Bank) each get equal room
@@ -22,9 +22,12 @@ function PartnerMark({ name, logo }: { name: string; logo?: string }) {
       <div className="flex h-14 w-32 items-center justify-center sm:h-16 sm:w-40">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          ref={ref}
           src={logo}
           alt={name}
-          onError={() => setFailed(true)}
+          loading="lazy"
+          decoding="async"
+          onError={onError}
           className="partner-logo max-h-full max-w-full object-contain opacity-70 transition-opacity duration-300 hover:opacity-100"
         />
       </div>

@@ -225,7 +225,7 @@ function SceneContents({
            the page survives. But a silent fallback here looks identical to a
            correctly-rendered ocean-facing globe, which hides the single most
            damaging failure the scene has; say so out loud. */
-        console.error('[EarthScene] land texture unavailable — globe will render without continents:', err);
+        console.error('[EarthScene] land texture unavailable, globe will render without continents:', err);
       });
     return () => {
       live = false;

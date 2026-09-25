@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { PLUGINS_SECTION as S } from '@/data/content';
+import { useImageFallback } from '@/lib/hooks/useImageFallback';
 import { trackPluginDownload } from '@/lib/analytics';
 import Reveal from '@/components/common/Reveal';
 
@@ -27,7 +27,7 @@ function PluginMedia({
   caption: string;
   play?: boolean;
 }) {
-  const [failed, setFailed] = useState(false);
+  const { ref, failed, onError } = useImageFallback();
   const showImg = img && !failed;
 
   return (
@@ -45,9 +45,12 @@ function PluginMedia({
         ) : showImg ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
+            ref={ref}
             src={img}
             alt={caption}
-            onError={() => setFailed(true)}
+            loading="lazy"
+            decoding="async"
+            onError={onError}
             className="absolute inset-0 h-full w-full object-cover"
           />
         ) : (

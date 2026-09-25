@@ -1,22 +1,17 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/final/Footer';
 import ScrollProvider from '@/lib/story/ScrollProvider';
 import ProductsPage from '@/components/products/ProductsPage';
 import { GOSERVERS_SECTION } from '@/data/content';
 
-export const metadata: Metadata = {
-  title: 'Products', // → "Products · RASID" via the root title template
+export const metadata: Metadata = pageMetadata({
+  title: 'RASID Products: GoPilot, GoServers and QGIS Plugins',
   description:
-    'The RASID product suite: GoPilot, the geospatial AI agent; GoServers, every capability over MCP; and plugins for QGIS and ArcGIS Pro.',
-  alternates: { canonical: '/products' },
-  openGraph: {
-    url: '/products',
-    title: 'RASID Products: GoPilot, GoServers & Plugins',
-    description:
-      'GoPilot (AI geospatial agent), GoServers (capabilities over MCP), and plugins for QGIS and ArcGIS Pro.',
-  },
-};
+    'The RASID product suite: GoPilot, the AI geospatial agent; GoServers, every capability over MCP; and plugins for QGIS and ArcGIS Pro.',
+  path: '/products',
+});
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -27,7 +22,7 @@ const breadcrumbJsonLd = {
   ],
 };
 
-// The three GoServers (MCP servers) as developer SoftwareApplications, so answer
+// The four GoServers (MCP servers) as developer SoftwareApplications, so answer
 // engines can enumerate RASID's API surface. Provider links back to the org.
 const goServersJsonLd = {
   '@context': 'https://schema.org',

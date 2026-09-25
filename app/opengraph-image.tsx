@@ -10,7 +10,7 @@ import { join } from 'node:path';
  *
  * Rendered by Satori (flexbox + a CSS subset only) at build time and cached.
  */
-export const alt = 'RASID — GoPilot, the AI geospatial agent for Earth observation';
+export const alt = 'RASID: GoPilot, the AI geospatial agent for Earth observation';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -41,7 +41,7 @@ export default async function Image() {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ fontSize: 82, fontWeight: 700, lineHeight: 1.05 }}>Seeing Earth, Smarter.</div>
           <div style={{ fontSize: 32, color: '#7FB8A6', marginTop: 28, maxWidth: 980, lineHeight: 1.3 }}>
-            GoPilot — the AI geospatial agent. Ask in plain language; get the data, the models, and the answer.
+            GoPilot, the AI geospatial agent. Ask in plain language; get the data, the models, and the answer.
           </div>
         </div>
 

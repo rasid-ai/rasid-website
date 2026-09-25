@@ -12,11 +12,13 @@ import Footer from '@/components/final/Footer';
  *   …         (product · services · pricing · team · proof · partners · contact)
  *
  * Act I is server-rendered as the shell (its copy is real HTML, so the page has
- * meaningful content and LCP text without waiting on WebGL). The StoryStack acts
- * below the fold are code-split and mounted as they approach the viewport.
+ * meaningful content and LCP text without waiting on WebGL). Everything in the
+ * StoryStack is code-split but server-rendered too — only the GoPilot studio is
+ * client-only, because it needs the DOM. That matters for SEO and for AI
+ * crawlers, which do not execute JavaScript: the copy has to be in the HTML.
  *
- * Footer is rendered here directly (server-rendered, not inside the ssr:false
- * StoryStack) so its nav links + contact land in the crawlable HTML. The
+ * Footer is rendered here directly so its nav links + contact land in the
+ * crawlable HTML even if the stack below it changes. The
  * substantive About/FAQ + product/service content lives on the dedicated
  * /about, /products and /services pages (kept off the home page to keep the
  * cinematic landing short) — all discoverable via the sitemap.

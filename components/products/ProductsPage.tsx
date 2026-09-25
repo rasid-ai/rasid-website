@@ -39,8 +39,12 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* GoPilot — interactive use-case studio (carries its own #gopilot id) */}
-      <GoPilotStudio />
+      {/* GoPilot — interactive use-case studio. The studio is client-only, so the
+          wrapper carries #gopilot to keep the anchor resolvable server-side
+          (nav, footer and llms.txt all point at /products#gopilot). */}
+      <div id="gopilot">
+        <GoPilotStudio />
+      </div>
 
       {/* GoServers and Plugins carry their own ids (#mcps, #plugins) */}
       <GoServers />

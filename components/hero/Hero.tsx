@@ -119,7 +119,7 @@ export default function Hero() {
       id="top"
       ref={sectionRef}
       className="relative h-[100svh] w-full overflow-hidden bg-void"
-      aria-label="RASID — Seeing Earth smarter"
+      aria-label="RASID: Seeing Earth smarter"
     >
       {/* ---------- WebGL / fallback ---------- */}
       <div
