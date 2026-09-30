@@ -44,9 +44,21 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   // Favicon / app icons live in public/logo/ (the green R). Declared here since
   // we don't use the app/icon.png file convention.
+  //
+  // Sizes are multiples of 48px because that's what Google's favicon guidelines
+  // require; the old single 512x512 declaration did not qualify, which is why no
+  // icon showed up in search results. public/favicon.ico is the root-path
+  // fallback that Google and browsers probe without parsing this markup.
+  // Regenerate the whole set with: node .verify/gen-favicons.mjs
   icons: {
-    icon: '/logo/favicon.png',
-    apple: '/logo/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo/favicon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/logo/favicon-96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/logo/favicon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: { url: '/logo/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
   },
   keywords: [
     'geospatial AI',
