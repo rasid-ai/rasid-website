@@ -17,7 +17,10 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
             disable_session_recording: true,
             loaded: (posthog) => {
                 // Tag every event with the environment to filter out local events
-                posthog.register({ environment: process.env.NODE_ENV })
+                posthog.register({ 
+                    app: 'landing',
+                    environment: process.env.NODE_ENV 
+                })
 
                 // Show debug logs in browser console when local
                 if (process.env.NODE_ENV === 'development') {
