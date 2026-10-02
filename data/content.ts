@@ -66,7 +66,8 @@ export const NAV = {
 } as const;
 
 export const HERO = {
-  eyebrow: 'ASK THE EARTH',
+  eyebrow: 'PARIS, FRANCE · BEIRUT, LEBANON',
+  //eyebrow: 'ASK THE EARTH',
   title: ['DEEP-TECH GEOSPATIAL &', 'AI CONSULTANCY'],
   tagline: 'We combine AI, geospatial, data and software engineering to turn complex data into actionable intelligence and build production-ready solutions for real-world challenges.',
   // title: ['MEET GOPILOT,', 'YOUR #1 GeoAGENT.'],
