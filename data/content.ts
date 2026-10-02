@@ -67,12 +67,14 @@ export const NAV = {
 
 export const HERO = {
   eyebrow: 'ASK THE EARTH',
-  title: ['MEET GOPILOT,', 'YOUR #1 GeoAI AGENT.'],
-  tagline: 'Ask in plain language. GoPilot finds the data, selects the right models, runs the analysis, and gives you the answer.',
-  body: 'One platform. 10,000+ datasets. Hundreds of AI models. One natural-language interface.',
+  title: ['DEEP-TECH GEOSPATIAL &', 'AI CONSULTANCY'],
+  tagline: 'We combine AI, geospatial, data and software engineering to turn complex data into actionable intelligence and build production-ready solutions for real-world challenges.',
+  // title: ['MEET GOPILOT,', 'YOUR #1 GeoAGENT.'],
+  //tagline: 'Ask in plain language. GoPilot finds the data, selects the right models, runs the analysis, and gives you the answer.',
+  body: 'GoPilot. One platform. 10,000+ datasets. Hundreds of AI models. One natural-language interface.',
   // Value-forward acquisition CTA (§12) — this targets new users, so it names the
   // free tokens rather than "sign in". Points at the SaaS app via GOPILOT_APP_URL.
-  primary: { label: 'Sign up free. Get 500 tokens', href: GOPILOT_APP_URL },
+  primary: { label: 'Sign-up free. Get 500 tokens', href: GOPILOT_APP_URL },
   //secondary: { label: 'Explore RASID', href: '#gopilot' },
   scrollHint: 'Scroll to descend',
 } as const;
