@@ -68,8 +68,8 @@ export const NAV = {
 export const HERO = {
   eyebrow: 'PARIS, FRANCE · BEIRUT, LEBANON',
   //eyebrow: 'ASK THE EARTH',
-  title: ['Deep-Tech', 'AI & Geospatial', 'Consultancy'],
-  tagline: 'RASID combines AI, geospatial, data and software engineering to turn complex data into actionable intelligence.',
+  title: ['AI & Geospatial', 'Consultancy'],
+  tagline: 'RASID combines innovation-led deep-tech AI, geospatial, data and software engineering to turn complex data into actionable intelligence.',
   // title: ['MEET GOPILOT,', 'YOUR #1 GeoAGENT.'],
   //tagline: 'Ask in plain language. GoPilot finds the data, selects the right models, runs the analysis, and gives you the answer.',
   body: 'GoPilot. One platform. 10,000+ datasets. Hundreds of AI models. One natural-language interface.',
