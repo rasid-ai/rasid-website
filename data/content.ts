@@ -565,7 +565,7 @@ export const TEAM_SECTION = {
     },
     {
       name: 'Reda Haidar',
-      role: 'Commercial Director',
+      role: 'Commercial & Strategy Director',
       initials: 'RH',
       photo: '/team/member-2.webp',
       expertise: 'Growth & Partnerships',
@@ -575,7 +575,7 @@ export const TEAM_SECTION = {
     },
     {
       name: 'Hasan Nasrallah',
-      role: 'Lead AI Engineer',
+      role: 'AI Solutions Architect',
       initials: 'HN',
       photo: '/team/member-3.webp',
       expertise: 'Deep Learning · EO',
@@ -595,7 +595,7 @@ export const TEAM_SECTION = {
     },
     {
       name: 'Mohamad Moussawi',
-      role: 'Lead Full Stack Engineer',
+      role: 'Platform Engineer',
       initials: 'MM',
       photo: '/team/member-5.webp',
       expertise: 'Platform · Product',
@@ -608,7 +608,7 @@ export const TEAM_SECTION = {
       role: 'Sales & Marketing Engineer',
       initials: 'AH',
       photo: '/team/member-6.webp',
-      expertise: 'Sales & Marketing',
+      expertise: 'BD & Pre-Sales',
       bio: 'Connects RASID’s capabilities to the people and sectors that need them.',
       linkedin: 'https://www.linkedin.com/in/amira-el-halabi-6b3b77351/',
       email: 'amira@rasid.ai',
