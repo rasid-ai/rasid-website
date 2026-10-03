@@ -585,7 +585,7 @@ export const TEAM_SECTION = {
     },
     {
       name: 'Hasan Wehbi',
-      role: 'AI R&D Engineer',
+      role: 'AI System Engineer',
       initials: 'HW',
       photo: '/team/member-4.webp',
       expertise: 'Research · Models',
@@ -831,17 +831,20 @@ export const ABOUT_CONTENT = {
   eyebrow: 'About RASID',
   headline: 'Seeing Earth, smarter.',
   intro:
-    'RASID is a boutique geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. We combine satellite data, geospatial analysis, computer vision and AI to build practical solutions for real-world challenges. Our work spans product development through GoPilot and bespoke geospatial R&D and consulting projects.',
+    //'RASID is a boutique geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. We combine satellite data, geospatial analysis, computer vision and AI to build practical solutions for real-world challenges. Our work spans product development through GoPilot and bespoke geospatial R&D and consulting projects.',
+    'RASID is a deep-tech company turning complex data into decision-ready intelligence. We combine AI, data engineering, software development and geospatial technologies to build practical, production-ready solutions. Our work spans AI consultancy and bespoke R&D projects, alongside data digital transformation and our niche expertise in Earth Observation. We also offer GoPilot, our production-ready GeoAgent.',
 
   blocks: [
     {
       h: 'What RASID is',
-      p: 'RASID is a geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. We combine satellite data, geospatial analysis, computer vision, AI and software engineering to turn complex Earth-observation data into actionable intelligence. Our two main activities are developing GoPilot, our flagship AI geospatial product, and delivering bespoke geospatial R&D and consulting projects.',
+      //p: 'RASID is an innovation-led technology and consultancy company specializing in AI, data engineering, Earth Observation, remote sensing and GeoAI. We combine satellite data, geospatial analysis, computer vision, AI and software engineering to turn complex Earth-observation data into actionable intelligence. Our two main activities are developing GoPilot, our flagship AI geospatial product, and delivering bespoke geospatial R&D and consulting projects.',
+      p: 'RASID is an innovation-led technology and consultancy company turning complex data into decision-ready intelligence. We combine AI, data engineering, software development and geospatial technologies to build practical, production-ready solutions. Our work spans AI consultancy, bespoke R&D projects and data digital transformation, alongside our niche expertise in Earth Observation.',
     },
+
 
     {
       h: 'What GoPilot is',
-      p: 'GoPilot is RASID’s flagship AI geospatial agent. It connects language models to Earth-observation data, geospatial tools and AI models, allowing users to describe what they need in natural language. GoPilot finds relevant data, selects and runs the appropriate analytical workflow, and returns maps, raster and vector layers, measurements and other results.',
+      p: 'GoPilot is the #1 GeoAgent by RASID. It connects language models to Earth-observation data, geospatial tools and AI models, allowing users to describe what they need in natural language. GoPilot finds relevant data, selects and runs the appropriate analytical workflow, and returns maps, raster and vector layers, measurements and other results.',
     },
 
     {
@@ -899,12 +902,12 @@ export const ABOUT_CONTENT = {
 export const FAQ = [
   {
     q: 'What is RASID?',
-    a: 'RASID is a geospatial technology and consultancy company specializing in Earth Observation, remote sensing and GeoAI. RASID develops GoPilot, its flagship AI geospatial product, and delivers bespoke geospatial R&D and consulting projects.',
+    a: 'RASID is an innovation-led technology and consultancy company turning complex data into decision-ready intelligence. We combine AI, data engineering, software development and geospatial technologies to build practical, production-ready solutions. Our work spans AI consultancy, bespoke R&D projects and data digital transformation, alongside our niche expertise in Earth Observation.',
   },
 
   {
     q: 'What is GoPilot?',
-    a: 'GoPilot is RASID’s AI geospatial agent for Earth Observation. Users describe a geospatial question in natural language, and GoPilot finds relevant data, selects and runs the appropriate tools and AI models, and returns maps, raster and vector results.',
+    a: 'GoPilot is #1 GeoAgent by RASID. Users describe a geospatial question in natural language, and GoPilot finds relevant data, selects and runs the appropriate tools and AI models, and returns maps, raster and vector results.',
   },
 
   {
