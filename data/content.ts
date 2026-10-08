@@ -8,14 +8,15 @@
 /**
  * External destinations — the single source of truth for every product CTA.
  *
- * ▸ GOPILOT_APP_URL — the RASID SaaS application ("Launch GoPilot" / "Sign up").
- *   REPLACE the placeholder below with the real app URL when it exists; every
- *   CTA on the page (navbar, hero, final) follows automatically. It currently
- *   falls back to the in-page GoPilot demo (#gopilot) so nothing 404s — this is
- *   deliberately NOT a fabricated real-looking URL.
+ * ▸ GOPILOT_APP_URL — the GoPilot SaaS application ("Launch GoPilot" / "Sign up").
+ *   Every CTA on the site (navbar, hero, pricing, final, footer) reads this one
+ *   constant, so relocating the app is a one-line change here. Note the app has
+ *   its own domain, app.gopilot.earth: it is NOT a rasid.ai subdomain. The old
+ *   app.rasid.ai/try-gopilot still 301s here, but link to the live host directly
+ *   rather than relying on that redirect.
  * ▸ CONTACT_HREF — "Talk to RASID" (bespoke projects / contact).
  */
-export const GOPILOT_APP_URL = 'https://app.rasid.ai/try-gopilot'; // TODO(rasid): set to https://app.rasid… when live
+export const GOPILOT_APP_URL = 'https://app.gopilot.earth/try-gopilot';
 export const CONTACT_HREF = '#contact';
 
 export const NAV = {
@@ -1062,7 +1063,7 @@ export const FAQ = [
 
   {
     q: 'Is GoPilot available now?',
-    a: 'Yes. GoPilot is available at app.rasid.ai and runs in production on AWS. RASID continues to develop and expand the platform’s datasets, models, integrations and analytical workflows.',
+    a: 'Yes. GoPilot is available at app.gopilot.earth and runs in production on AWS. RASID continues to develop and expand the platform’s datasets, models, integrations and analytical workflows.',
   },
 
   {
@@ -1166,44 +1167,57 @@ export const CASE_STUDIES_PAGE = {
 
 export const CASE_STUDIES = [
   {
-    slug: 'gopilot-ai-geospatial-agent',
-    title: 'GoPilot: RASID’s AI geospatial agent',
+    /* Replaces the earlier GoPilot-only case study: GoPilot is now presented as
+       the centre of GoSuite rather than the whole product. The old slug
+       (gopilot-ai-geospatial-agent) was indexed, so next.config.mjs redirects it
+       here permanently; the asset folder moved with the slug. */
+    slug: 'gosuite-agentic-geospatial-platform',
+    title: 'GoSuite: One Agent, Every Tool',
     sector: 'Platform',
-    date: '2026-08-01',
+    date: '2026-10-08',
     authorInitials: 'AG',
     status: 'published',
     summary:
-      'An AI geospatial agent that turns natural-language questions into executable Earth-observation workflows, connecting satellite data, geospatial tools and AI models in one interface.',
-    context: 'AI · Earth Observation · Platform',
+      'RASID’s end-to-end agentic platform: GoPilot plans the work, GoServers supply the tools, GoBase supplies the knowledge and GoDoc parses the documents, with only the tools a task needs loaded into each request.',
+    context: 'Product Platform · Agentic Suite · AI',
     seoDescription:
-      'GoPilot is RASID\'s AI geospatial agent: it turns plain-language questions into executable Earth-observation workflows and returns real map layers.',
+      'GoSuite is RASID\'s agentic geospatial platform: GoPilot orchestrates GoServer tools, GoBase knowledge and GoDoc parsing, cutting agent token costs by 65 to 99%.',
     hero: {
-      src: '/case-studies/gopilot-ai-geospatial-agent/gopilot-dinov3-naf-embeddings.webp',
+      src: '/case-studies/gosuite-agentic-geospatial-platform/gosuite-platform-architecture.webp',
       alt:
-        'The GoPilot web app running a DINOv3 embedding workflow: the agent’s reply lists three-band PCA GeoTIFF deliverables with download links on the left, and a PCA-coloured embedding layer is drawn over a satellite basemap of central Moscow on the right.',
+        'Architecture diagram of GoSuite in four columns: Experience (MapUI chat and a tiling server), Platform (backend with GoClient, plus a usage and cost dashboard), Intelligence (GoPilot as agentic orchestrator running understand, plan, act, retrieve and answer), and Tools and Knowledge (a tool arsenal loading only what a task needs for 65 to 99% fewer tokens, GoServer, GoBase and GoDoc), all over shared Amazon S3 storage.',
       caption:
-        'GoPilot turning learned image features into data you can open. Here it runs DINOv3 embeddings, upsamples them with NAF from 19.1 m to 2.39 m cells, and returns three-band PCA GeoTIFFs that render straight onto the basemap. PCA colours are only comparable within a single run, since the basis is fit per run.',
+        'GoSuite end to end. GoPilot sits in the middle and runs the same five steps on every request: understand, plan, act through GoServer tools, retrieve from GoBase, answer with maps and cited results. Everything shares one storage layer on AWS.',
     },
     /* Methane imagery is deliberately excluded here: MethaneMapper has its own
-       case study, so this page illustrates GoPilot itself (the agent and the
-       platform) rather than repeating a sibling study's subject. */
+       case study, so this page illustrates the platform rather than repeating a
+       sibling study's subject. */
     images: [
       {
-        src: '/case-studies/gopilot-ai-geospatial-agent/aws-geospatial-genai-challenge-report.webp',
+        src: '/case-studies/gosuite-agentic-geospatial-platform/gopilot-dinov3-naf-embeddings.webp',
+        alt:
+          'The GoPilot web app running a DINOv3 embedding workflow: the agent’s reply lists three-band PCA GeoTIFF deliverables with download links on the left, and a PCA-coloured embedding layer is drawn over a satellite basemap of central Moscow on the right.',
+        caption:
+          'What an answer looks like in MapUI. Here GoPilot runs DINOv3 embeddings, upsamples them with NAF from 19.1 m to 2.39 m cells, and returns three-band PCA GeoTIFFs that render straight onto the basemap. PCA colours are only comparable within a single run, since the basis is fit per run.',
+      },
+      {
+        /* Ordered to land next to the tool-arsenal section: figure slots are
+           spaced evenly across the body by app/case-studies/[slug]/page.tsx. */
+        src: '/case-studies/gosuite-agentic-geospatial-platform/gopilot-capability-spectrum.webp',
+        alt:
+          'Horizontal bar chart ranking GoPilot capability groups by number of tools, from Model/Segment at the top down to several single-tool groups, with bar segments shaded by the plan tier that unlocks them.',
+        caption:
+          'How the tool arsenal distributes across capability groups. Model/Segment carries the most, with Catalog/Search and RasterProduct/Fetch next, and the shading shows which plan tier unlocks each tool.',
+      },
+      {
+        src: '/case-studies/gosuite-agentic-geospatial-platform/aws-geospatial-genai-challenge-report.webp',
         alt:
           'Two-page case study spread on GoPilot from the AWS GenAI for Geospatial Challenge EMEA end-of-challenge report, with challenge, approach and results columns.',
         caption:
           'GoPilot in the AWS GenAI for Geospatial Challenge (EMEA edition) end-of-challenge report, recording natural-language Earth-observation workflows built on Amazon Bedrock, AgentCore Runtime, Strands Agents and Claude.',
       },
       {
-        src: '/case-studies/gopilot-ai-geospatial-agent/gopilot-capability-spectrum.webp',
-        alt:
-          'Horizontal bar chart ranking GoPilot capability groups by number of tools, from Model/Segment at the top down to several single-tool groups, with bar segments shaded by the plan tier that unlocks them.',
-        caption:
-          'How GoPilot’s tools distribute across its capability groups. Model/Segment carries the most, with Catalog/Search and RasterProduct/Fetch next, and the shading shows which plan tier unlocks each tool.',
-      },
-      {
-        src: '/case-studies/gopilot-ai-geospatial-agent/gopilot-qgis-plugin-solutions.webp',
+        src: '/case-studies/gosuite-agentic-geospatial-platform/gopilot-qgis-plugin-solutions.webp',
         alt:
           'QGIS desktop with the RASID GoPilot plugin dialog open over a satellite basemap of Dubai, showing a Solutions catalogue of cards including BananaSight, Cloud Detection, Field Delineation, Mapbox Fetcher, Planet Imagery and Scene Parsing.',
         caption:
@@ -1213,47 +1227,122 @@ export const CASE_STUDIES = [
     sections: [
       {
         h: 'The problem',
-        p: 'Earth-observation data is increasingly abundant, but turning it into an answer still requires specialist knowledge. Analysts must find suitable imagery, prepare the data, select the right models, write or configure GIS workflows, and combine outputs from different tools. This makes many satellite-based analyses slow, fragmented and difficult to scale.',
+        p: 'Earth-observation data is abundant, but turning a question into an answer still takes several tools and data scattered across formats, folders and services. Handing that job to an LLM agent naively is expensive: loading every tool definition into every request burns tokens, slows the agent down and makes the choice of tool harder as the catalogue grows. The cost ends up scaling with the size of the toolbox rather than with the difficulty of the task.',
       },
 
       {
-        h: 'The approach',
-        p: 'GoPilot is RASID’s AI geospatial agent. It connects a large language model to Earth-observation datasets, geospatial operations and specialised AI models. A user describes the desired analysis in natural language; GoPilot interprets the request, plans the workflow, retrieves relevant data, selects appropriate tools and models, executes the analysis and returns maps, raster and vector layers, measurements and other results.',
+        h: 'The suite',
+        p: 'GoSuite is RASID’s end-to-end platform for agentic work. GoPilot sits at the centre as agent and orchestrator, and around it sit GoServer tools, GoBase knowledge and GoDoc document intelligence. Four layers make up the suite: an experience layer, with the MapUI chat interface and a tiling server that serves every layer as fast map tiles; a platform layer, with the backend, API, database, authentication and roles, plus the GoClient SDK and notebook client; an intelligence layer, which is GoPilot itself; and a tools-and-knowledge layer. All four read and write the same storage on AWS.',
       },
 
       {
-        h: 'The AI architecture',
-        p: 'GoPilot is built on AWS Bedrock and the Strands agent framework, with Claude providing the language-model reasoning layer. The agent does not replace specialised geospatial models; it orchestrates them. Vision workflows include models such as SAM3 and DINOv3 for segmentation and detection, while RASID’s MCP-based GoServers provide structured access to data retrieval, geospatial operations and AI inference.',
+        h: 'GoPilot, the orchestrator',
+        p: 'Every request runs the same five steps: understand the question, plan which tools are needed, act by calling GoServer tools, retrieve supporting knowledge from GoBase, then answer with maps and cited results. GoPilot is built on AWS Bedrock and the Strands agent framework, with Claude as the reasoning layer. It does not replace specialised geospatial models, it orchestrates them: vision workflows call models such as SAM3 and DINOv3, and the agent is responsible for sequencing the work rather than for the science inside each step.',
       },
 
       {
-        h: 'How the workflow works',
-        p: 'A typical GoPilot analysis follows four stages. First, the agent interprets the user’s question and determines the required data and operations. Second, it discovers and retrieves the relevant Earth-observation data. Third, it selects and executes the appropriate geospatial operations and AI models. Fourth, it returns the resulting maps, raster and vector layers and quantitative outputs for inspection or download.',
+        h: 'The tool arsenal',
+        p: 'The arsenal is what makes an agentic suite affordable to run. Instead of exposing the whole toolbox on every call, GoPilot plans the task first and loads only the tools that plan requires. In practice this cuts token costs by 65 to 99% against loading all tool definitions up front, which is why the team calls it the token killer. Fewer irrelevant tools in context also means fewer wrong turns, so the gain shows up in latency and reliability as well as in spend.',
       },
 
       {
-        h: 'The geospatial stack',
-        p: 'GoPilot provides access to more than 10,000 datasets and hundreds of AI models through one interface. Available data includes Sentinel-2 optical imagery, high-resolution optical imagery, digital elevation models, ERA5 climate reanalysis and foundation-model embeddings such as Clay and AlphaEarth. The platform can combine multiple datasets and models within a single analytical workflow.',
+        h: 'The tools: GoServers',
+        p: 'The tools themselves live in GoServers, RASID’s MCP tool servers: GoServer-Fetch for data retrieval, GoServer-Geo for vector operations, GoServer-Analyze for raster and time-series analysis, and GoServer-AI for model inference. Because they speak the Model Context Protocol, the same tools GoPilot orchestrates can be called directly from other agents or from a client’s own code. Between them they reach more than 10,000 datasets and hundreds of models, including Sentinel-2, high-resolution optical imagery, digital elevation models, ERA5 climate reanalysis and foundation-model embeddings such as Clay and AlphaEarth.',
       },
 
       {
-        h: 'From prototype to production',
-        p: 'GoPilot evolved from RASID’s work on agentic Earth-observation analysis into a production platform running on AWS. It is available at app.rasid.ai, with separate production and beta environments, continuous deployment and monitoring. The platform is commercialised through subscriptions and is also used as the technology foundation for bespoke geospatial projects.',
+        h: 'The knowledge: GoBase',
+        p: 'GoBase is the geospatial catalog GoPilot retrieves from. It indexes a whole data lake, raster, vector, documents, spreadsheets, images and video, into one queryable spine with a natural-language layer on top, and serves it back to the agent as retrieval-augmented generation, so an answer can cite the file, the page and the passage it came from. GoBase is a product in its own right and has its own case study; inside GoSuite it is the component that stops the agent guessing when the answer already exists in the client’s own data.',
       },
 
       {
-        h: 'Real-world applications',
-        p: 'GoPilot has been applied to environmental monitoring, agriculture, infrastructure and transportation workflows. Its methane-monitoring capability demonstrates how the general-purpose agent can orchestrate a specialised scientific model, while other workflows use computer vision, spatial analysis and change detection for different Earth-observation applications.',
+        h: 'Document intelligence: GoDoc',
+        p: 'GoDoc is the parsing front door. It chunks, embeds and reranks documents and maps, then ingests the result into GoBase, and GoPilot can also read documents through it directly. GoDoc runs offline, which matters for clients whose documents are not allowed to leave their own infrastructure.',
+      },
+
+      {
+        h: 'The experience layer',
+        p: 'What a user sees is a chat beside a live map. MapUI streams the agent’s reply on one side and draws the layers it produces on the other, so "extract the buildings here" ends as a buildings.shp on the map rather than as a description of how to make one. A tiling server publishes every layer as z/x/y tiles, raster or vector, so large outputs stay responsive. For users who would rather stay in their own tools, GoClient provides SDK and notebook access, and the same agent runs inside QGIS and ArcGIS Pro through RASID plugins.',
+      },
+
+      {
+        h: 'Storage, logging and cost',
+        p: 'One shared Amazon S3 layer holds everything the suite produces: layers, map tiles, documents, embeddings, logs and user sessions. Every component reads and writes the same store, so a result produced by one part of the suite is available to the rest without a copy step. The backend streams metrics and logs to a dashboard that tracks usage and token cost across the whole suite, which is what turns per-request spend into something a client can see rather than an end-of-month surprise.',
       },
 
       {
         h: 'The result',
-        p: 'GoPilot won the AWS Geospatial GenAI Challenge in 2026 and has progressed from prototype development to a production platform. The system reduces the number of manual steps required to move from a geospatial question to an analytical result, with workflows that can be executed in minutes rather than requiring analysts to assemble each workflow manually.',
+        p: 'A request such as "extract the buildings in this scene" comes back as a finished layer on the map, backed by cited sources, with the cost of the request visible in the dashboard. Loading only the tools a task needs cuts that cost by 65 to 99%. GoPilot won the AWS Geospatial GenAI Challenge in 2026, and the platform runs in production at app.gopilot.earth with separate production and beta environments, continuous deployment and monitoring. It is commercialised through subscriptions and is also the foundation RASID builds bespoke geospatial projects on.',
+      },
+    ],
+  },
+
+  {
+    /* GoBase is also a component of GoSuite; this study covers it as a product in
+       its own right, so the GoSuite page describes the role and links the reader
+       here in prose rather than repeating the internals. */
+    slug: 'gobase-geospatial-data-catalog',
+    title: 'GoBase: A Queryable Catalog for Data Lakes',
+    sector: 'Data infrastructure',
+    date: '2026-10-08',
+    authorInitials: 'AG',
+    status: 'published',
+    summary:
+      'A catalog and retrieval layer that indexes an entire data lake, raster, vector, documents, spreadsheets, images and video, into one queryable spine with a natural-language layer on top.',
+    context: 'Data Infrastructure · Geospatial Catalog & Retrieval',
+    seoDescription:
+      'GoBase indexes a whole data lake, raster, vector, documents and tabular data, into one content-addressed catalog answering plain-language questions with citations.',
+    hero: {
+      src: '/case-studies/gobase-geospatial-data-catalog/gobase-catalog-and-retrieval.webp',
+      alt:
+        'Diagram in three stages: an unorganised data lake of loose COG rasters, shapefiles, PDFs, spreadsheets, GeoJSON, field photos, drone video and scanned TIFFs feeds into GoBase, a catalog and retrieval layer built from a content-hash asset spine, per-modality detail tables for vector, raster, docs, tabular and unparsed files, a PostGIS, ltree and pgvector index and a natural-language query layer; the output answers "Which reports mention flood risk near the port?" with three cited results that pass to GoPilot.',
+      caption:
+        'A loose data lake on the left, one queryable catalog in the middle, cited answers on the right. GoBase keys every asset by content hash, describes it in a per-modality detail table, indexes it spatially, topically and semantically, then answers plain-language questions with the file, page and passage the answer came from.',
+    },
+    sections: [
+      {
+        h: 'The problem',
+        p: 'Most organisations that work with geospatial data have a lake rather than a catalog. Files are scattered across formats and folders, identified by filename rather than by content, so the same raster arrives three times under three names and nobody can tell which copy is current. There is no single index across modalities, which means a question that spans a raster, a report and a vector layer has no place to be asked. And there is no plain-language entry point: finding anything assumes you already know where it is and what it is called.',
       },
 
       {
-        h: 'Deployment and collaboration',
-        p: 'The platform has been demonstrated and tested with institutional and professional users, including national mapping organisations. RASID is continuing to expand the platform through commercial users, institutional engagements and new geospatial workflows.',
+        h: 'The approach',
+        p: 'GoBase is a catalog and retrieval layer that indexes the whole lake into one queryable spine: raster, vector, documents, spreadsheets, images and video. Ingestion is content-addressed and idempotent, so re-running it over the same lake does not duplicate anything. On top of the catalog sits a natural-language query layer, and underneath it a two-level retrieval scheme that first finds the right document or asset and then the passage inside it. It runs offline and on-premise, which is often the condition for pointing it at a client’s real data in the first place.',
+      },
+
+      {
+        h: 'The content-hash spine',
+        p: 'Every asset is keyed by the hash of its own bytes rather than by its path. Two copies of the same file under different names collapse to one entry, a changed file becomes a new version of a tracked asset rather than an unrelated row, and ingestion can be re-run safely because the identity of an asset never depends on where it happened to sit. This is the part that makes a lake countable: you can finally say how many distinct things are in it.',
+      },
+
+      {
+        h: 'A detail table per modality',
+        p: 'A single schema cannot describe a shapefile, a spreadsheet and a drone video equally well, so the spine carries a detail table per modality: vector, raster, docs and tabular, each recording what is actually interesting about that kind of file. There is also an explicit unparsed catch-all, so a file the parsers do not understand is still catalogued as an asset instead of vanishing. Coverage of the lake stays complete even where understanding of it is partial.',
+      },
+
+      {
+        h: 'Indexing: spatial, topical and semantic',
+        p: 'Three indexes run over the catalog in parallel. PostGIS holds each asset’s spatial extent, so proximity and intersection are first-class query terms. An ltree topic hierarchy holds where an asset sits thematically. And pgvector holds embeddings for semantic matching, so a question can land on relevant material that shares no keywords with it. A query can therefore be constrained by place, by subject and by meaning at once.',
+      },
+
+      {
+        h: 'Two-level retrieval',
+        p: 'Retrieval happens twice. The first pass ranks across the catalog at the level of a document card, deciding which assets are worth opening at all. The second pass runs chunk-level retrieval inside the shortlist to find the specific passage or region that answers the question. Splitting it this way keeps recall high across a large lake without paying to embed and rerank every chunk of every file for every question.',
+      },
+
+      {
+        h: 'Cited answers',
+        p: 'The output is a short, ranked set of results with their provenance attached. A question such as "which reports mention flood risk near the port?" comes back with the raster whose extent intersects the port, the document and the page inside it with the cited passage and its bounding box, and the vector layer two kilometres away, each labelled with why it matched. Answers point at the client’s own files, so a reader can check the source rather than trust the summary.',
+      },
+
+      {
+        h: 'The handoff to GoPilot',
+        p: 'GoBase is a product on its own, and it is also the knowledge side of GoSuite. GoPilot queries it as its retrieval-augmented generation layer, which is what lets the agent answer from a client’s own archive instead of guessing, and what lets it cite the archive when it does. The catalog supplies the evidence; the agent supplies the workflow.',
+      },
+
+      {
+        h: 'The result',
+        p: 'A heterogeneous lake becomes one searchable catalog with cited answers. Ingestion is idempotent, so the catalog can be kept current by re-running it rather than by curating it, and the retrieval layer can answer questions over data that was previously unreachable in practice: present on disk, but not findable by anyone who did not already know it was there.',
       },
     ],
   },
@@ -1286,11 +1375,11 @@ export const CASE_STUDIES = [
           'Train, test, deploy: synthetic plumes for training, a synthetic and a real held-out set for testing, a hosted endpoint for serving. The lower panels compare the multi-band multi-pass input, the ground-truth plume likelihood and the model’s predicted methane fractional change.',
       },
       {
-        src: '/case-studies/methanemapper-landfill-detection/landfill-persistent-emission-detection.webp',
+        src: '/case-studies/methanemapper-landfill-detection/utga-tabankourt-methane-retrieval.webp',
         alt:
-          'Diagram of a landfill active-emission detection workflow, stacking four months of hyperspectral and multispectral methane plume maps into an accumulated emission hotspot map',
+          'Site-level methane retrieval over the UTGA Tabankourt associated-gas treatment plant in Algeria: a Sentinel-2 view of the fenced facility on the left, and on the right a MethaneMapper retrieval map where a bright plume is outlined in red and annotated Q=3857.2 kg/hr with a colour bar for marginal retrieval in moles per square metre.',
         caption:
-          'Landfill active-emission workflow: monthly multispectral and hyperspectral plume maps are accumulated over a landfill footprint, so repeated plumes become a persistent-emission indicator rather than a single-overpass signal.',
+          'One site, one overpass. Over the UTGA Tabankourt associated-gas treatment plant in Algeria (28.64°N, 7.62°E), the Sentinel-2 acquisition of 3 January 2024 yields a plume with a retrieved flux of about 3,857 kg/h at a retrieval score of 100%. The quantification is the model’s estimate for that overpass, not an independently confirmed emission.',
       },
     ],
     sections: [
@@ -1392,11 +1481,11 @@ export const CASE_STUDIES = [
           'Pixel-level NDVI over the Aadloun banana fields in late July 2023, showing how widely canopy vigour varies within and between neighbouring plots.',
       },
       {
-        src: '/case-studies/bananasight-tr4-lebanon/bananasight-web-interface-aoi-selection.webp',
+        src: '/case-studies/bananasight-tr4-lebanon/gopilot-phenology-analysis.webp',
         alt:
-          'BananaSight web interface showing the form for creating a new monitoring process, with sowing and harvest dates, beside a satellite map of a Lebanese coastal banana-growing area',
+          'Three-step panel showing a phenology analysis run through GoPilot: the user draws a field and types "Run NDVI phenological analysis on this field, 36 months of Sentinel-2, then summarize the agronomic findings"; the agent fetches Sentinel-2, computes NDVI per scene, detects peaks, valleys and cycles and writes the summary; the result shows NDVI plots with stat tiles reading mean NDVI 0.457, cycle amplitude 0.701, two greenness events, a cyclical pattern, crop type corn and a stressed stress score.',
         caption:
-          'The BananaSight interface: an operator creates a monitoring process for a field, setting the growing window before the model runs over the season.',
+          'The same stress model, reached by asking. With BananaSight wired into GoPilot, an operator draws a field and asks in plain language for a phenological analysis; the agent pulls 36 months of Sentinel-2, computes NDVI per scene, detects the peaks and cycles and returns the plots with a written agronomic summary. The example run shown is a corn field, flagged as stressed.',
       },
     ],
     sections: [
@@ -1456,11 +1545,11 @@ export const CASE_STUDIES = [
     seoDescription:
       'An AI pipeline that corrects geometric and radiometric defects in satellite imagery, turning raw captures into analysis-ready data at 200 GB in two hours.',
     hero: {
-      src: '/case-studies/c-ard-analysis-ready-data/human-in-the-loop-review-workflow.webp',
+      src: '/case-studies/c-ard-analysis-ready-data/six-scene-correction-overview.webp',
       alt:
-        'Workflow diagram of the C-ARD human-in-the-loop review interface: load GeoTIFF, anomaly detection, review detected anomalies by accepting, deleting, editing or drawing them, anomaly correction, review proposed corrections, then save the corrected GeoTIFF',
+        'Overview card titled "6 Scenes. 1 Pipeline." showing six before-and-after satellite crops labelled geometric warp on a solar farm, co-registration, artefact removal, geometric warp on roads, cloud and shadow detection, and feature matching, with figures of around 200 GB processed end to end in about two hours',
       caption:
-        'The human-in-the-loop review workflow. Operators accept, delete, edit or draw anomaly detections, then approve or reject each proposed correction before the corrected GeoTIFF is saved.',
+        'Six scenes through one pipeline: raw capture on the left of each panel, corrected product on the right, covering geometric warp, co-registration, artefact removal, cloud and shadow detection, and feature matching.',
     },
     images: [
       {
@@ -1476,6 +1565,15 @@ export const CASE_STUDIES = [
           'Four-panel comparison of terrain-distortion correction: a highway with a lateral ripple straightened, and a steep hillside with smeared surface texture reconstructed',
         caption:
           'Terrain-distortion correction, shown as illustrative crops: a wavy-road artefact along a highway corridor (left pair) and smeared texture on steep terrain (right pair).',
+      },
+      {
+        /* Was the hero until the six-scene overview card replaced it; kept in the
+           body so the review workflow is still shown. */
+        src: '/case-studies/c-ard-analysis-ready-data/human-in-the-loop-review-workflow.webp',
+        alt:
+          'Workflow diagram of the C-ARD human-in-the-loop review interface: load GeoTIFF, anomaly detection, review detected anomalies by accepting, deleting, editing or drawing them, anomaly correction, review proposed corrections, then save the corrected GeoTIFF',
+        caption:
+          'The human-in-the-loop review workflow. Operators accept, delete, edit or draw anomaly detections, then approve or reject each proposed correction before the corrected GeoTIFF is saved.',
       },
     ],
     sections: [
@@ -1550,10 +1648,32 @@ export const PUBLICATIONS_PAGE = {
   eyebrow: 'Publications',
   headline: 'Peer-reviewed research.',
   body:
-    'RASID’s work is grounded in published research. Team members co-author peer-reviewed papers on Earth observation, remote sensing, geospatial AI and quantum SAR processing with international collaborators. Further results, including the MethaneMapper validation work, are in preparation.',
+    'RASID’s work is grounded in published research. Team members co-author peer-reviewed papers on Earth observation, remote sensing, geospatial AI and quantum SAR processing with international collaborators. Work that is accepted but not yet published is listed too, marked as upcoming.',
 } as const;
 
 export const PUBLICATIONS = [
+  {
+    /* Not published yet: accepted for presentation, so it is listed as a teaser.
+       `upcoming: true` is what drives that treatment on the page: no links, an
+       "upcoming" badge, and exclusion from the ScholarlyArticle JSON-LD, since
+       there is no canonical record to point at yet. When the proceedings or an
+       arXiv preprint land, drop the flag and add `url`/`doi`/`pdfUrl`. */
+    upcoming: true,
+    title: 'GoPilot-MethaneMapper: A Physics-Informed Platform for Sentinel-2 Methane Emission Quantification',
+    authors: [
+      'Ali J. Ghandour',
+      'Hasan Nasrallah',
+      'Cristiano Nattero',
+      'N. Ginatta',
+      'A. Pescino',
+    ],
+    venue: 'ESA Emissions Monitoring from Space and Ground Conference 2026',
+    eventNote: 'October 26-30, 2026 · Rome, Italy',
+    year: '2026',
+    type: 'conference-paper',
+    summary:
+      'A physics-informed platform for locating methane plumes in Sentinel-2 imagery and quantifying the emission behind them, delivered through GoPilot rather than as a standalone model. Due to be presented at ESA’s emissions monitoring conference in Rome; results and a readable copy follow after the conference.',
+  },
   {
     title: 'A Decade of Wheat Mapping for Lebanon',
     authors: [
@@ -1627,14 +1747,19 @@ export const PUBLICATIONS = [
   title: string;
   authors: string[];
   venue: string;
+  /** Dates and city, for upcoming venues where there is no volume/issue yet. */
+  eventNote?: string;
   volume?: string;
   issue?: string;
   pages?: string;
   year: string;
-  url: string;
+  /** Absent only while a paper is `upcoming` and has nothing to link to. */
+  url?: string;
   doi?: string;
   pdfUrl?: string;
   type: string;
+  /** Accepted but not yet published: rendered as a teaser, kept out of JSON-LD. */
+  upcoming?: boolean;
   summary: string;
   abstract?: string;
 }[];

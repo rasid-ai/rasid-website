@@ -4,7 +4,7 @@ import posthog from 'posthog-js';
  * Analytics for the "go to the SaaS app" conversion path.
  *
  * Every CTA on the marketing site that sends a visitor to the GoPilot app
- * (GOPILOT_APP_URL → app.rasid.ai) fires ONE event — `gopilot_app_clicked` —
+ * (GOPILOT_APP_URL → app.gopilot.earth) fires ONE event — `gopilot_app_clicked` —
  * with a `location` property saying where it was clicked. One event with a
  * breakdown property beats a separate event per placement: the signup funnel
  * stays a single step, and you can still split it by navbar / hero / pricing /
