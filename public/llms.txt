@@ -34,6 +34,7 @@ Context Protocol (MCP) as GoServers, and inside QGIS and ArcGIS Pro via plugins.
 - [C-ARD: raw to corrected analysis-ready data](https://rasid.ai/case-studies/c-ard-analysis-ready-data): An AI pipeline correcting geometric and radiometric defects plus cloud, haze and shadow in high-resolution imagery, processing around 200 GB in about two hours.
 
 ## Publications
+- GoPilot-MethaneMapper: A Physics-Informed Platform for Sentinel-2 Methane Emission Quantification: Upcoming, not yet published. ESA Emissions Monitoring from Space and Ground Conference 2026, Rome, Italy, October 26-30, 2026. Physics-informed detection and quantification of methane emissions from Sentinel-2, delivered through GoPilot.
 - [Quantum Meets SAR: A Novel Range-Doppler Algorithm for Next-Gen Earth Observation](https://arxiv.org/abs/2504.01832): Earth Observation and Geomatics Engineering 10(1), 83-92, 2026. Quantum Fourier Transform applied to SAR range-Doppler processing.
 - [A Decade of Wheat Mapping for Lebanon](https://arxiv.org/abs/2504.11366): IEEE EarthSense 2025. DOI 10.1109/EarthSense66084.2025.11297250. Transformer time-series model plus field delineation for national wheat mapping.
 - [Efficient Adaptation for Remote Sensing Visual Grounding](https://arxiv.org/abs/2503.23083): IEEE IGARSS 2025. DOI 10.1109/IGARSS55030.2025.11243354. Parameter-efficient fine-tuning (LoRA, BitFit, adapters) for text-driven object location in satellite imagery.

@@ -1550,10 +1550,32 @@ export const PUBLICATIONS_PAGE = {
   eyebrow: 'Publications',
   headline: 'Peer-reviewed research.',
   body:
-    'RASID’s work is grounded in published research. Team members co-author peer-reviewed papers on Earth observation, remote sensing, geospatial AI and quantum SAR processing with international collaborators. Further results, including the MethaneMapper validation work, are in preparation.',
+    'RASID’s work is grounded in published research. Team members co-author peer-reviewed papers on Earth observation, remote sensing, geospatial AI and quantum SAR processing with international collaborators. Work that is accepted but not yet published is listed too, marked as upcoming.',
 } as const;
 
 export const PUBLICATIONS = [
+  {
+    /* Not published yet: accepted for presentation, so it is listed as a teaser.
+       `upcoming: true` is what drives that treatment on the page: no links, an
+       "upcoming" badge, and exclusion from the ScholarlyArticle JSON-LD, since
+       there is no canonical record to point at yet. When the proceedings or an
+       arXiv preprint land, drop the flag and add `url`/`doi`/`pdfUrl`. */
+    upcoming: true,
+    title: 'GoPilot-MethaneMapper: A Physics-Informed Platform for Sentinel-2 Methane Emission Quantification',
+    authors: [
+      'Ali J. Ghandour',
+      'Hasan Nasrallah',
+      'Cristiano Nattero',
+      'N. Ginatta',
+      'A. Pescino',
+    ],
+    venue: 'ESA Emissions Monitoring from Space and Ground Conference 2026',
+    eventNote: 'October 26-30, 2026 · Rome, Italy',
+    year: '2026',
+    type: 'conference-paper',
+    summary:
+      'A physics-informed platform for locating methane plumes in Sentinel-2 imagery and quantifying the emission behind them, delivered through GoPilot rather than as a standalone model. Due to be presented at ESA’s emissions monitoring conference in Rome; results and a readable copy follow after the conference.',
+  },
   {
     title: 'A Decade of Wheat Mapping for Lebanon',
     authors: [
@@ -1627,14 +1649,19 @@ export const PUBLICATIONS = [
   title: string;
   authors: string[];
   venue: string;
+  /** Dates and city, for upcoming venues where there is no volume/issue yet. */
+  eventNote?: string;
   volume?: string;
   issue?: string;
   pages?: string;
   year: string;
-  url: string;
+  /** Absent only while a paper is `upcoming` and has nothing to link to. */
+  url?: string;
   doi?: string;
   pdfUrl?: string;
   type: string;
+  /** Accepted but not yet published: rendered as a teaser, kept out of JSON-LD. */
+  upcoming?: boolean;
   summary: string;
   abstract?: string;
 }[];
