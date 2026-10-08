@@ -28,7 +28,12 @@ const STEP_INTERVAL = 460;
 const DONE_TAIL = 420;
 const planDuration = (n: number) => STEP_START + Math.max(0, n - 1) * STEP_INTERVAL + DONE_TAIL;
 
-export default function GoPilotStudio() {
+/**
+ * `showProductsLink` — the "See All Products" link under the headline only makes
+ * sense where the studio is a teaser. On /products the reader is already there,
+ * so that page passes `false`.
+ */
+export default function GoPilotStudio({ showProductsLink = true }: { showProductsLink?: boolean }) {
   const [activeId, setActiveId] = useState<string>(S.cases[0].id);
   const [phase, setPhase] = useState<'thinking' | 'done'>('thinking');
   const [step, setStep] = useState(0);
@@ -97,13 +102,15 @@ export default function GoPilotStudio() {
           </div>
           <h2 className="display text-[clamp(2.2rem,5.4vw,4.4rem)] leading-[1.0] text-chalk">{S.headline}</h2>
           <p className="mx-auto mt-5 max-w-[52ch] text-[1rem] leading-relaxed text-mist">{S.body}</p>
-          <Link
-            href="/products"
-            className="group mt-6 inline-flex items-center gap-2 text-[13px] font-medium tracking-wide text-signal transition-colors duration-300 hover:text-signal-bright"
-          >
-            See All Products
-            <span aria-hidden className="transition-transform duration-500 ease-cinema group-hover:translate-x-1">→</span>
-          </Link>
+          {showProductsLink && (
+            <Link
+              href="/products"
+              className="group mt-6 inline-flex items-center gap-2 text-[13px] font-medium tracking-wide text-signal transition-colors duration-300 hover:text-signal-bright"
+            >
+              See All Products
+              <span aria-hidden className="transition-transform duration-500 ease-cinema group-hover:translate-x-1">→</span>
+            </Link>
+          )}
         </Reveal>
 
         {/* the studio panel */}
