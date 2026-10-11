@@ -76,7 +76,7 @@ export const HERO = {
   body: 'Meet GoPilot, Your #1 GeoAgent. One platform. 10,000+ datasets. Hundreds of AI models. One natural-language interface.',
   // Value-forward acquisition CTA (§12) — this targets new users, so it names the
   // free tokens rather than "sign in". Points at the SaaS app via GOPILOT_APP_URL.
-  primary: { label: 'Sign-up free. Get 500 tokens', href: GOPILOT_APP_URL },
+  primary: { label: 'Sign-up free. Get 50,000 tokens', href: GOPILOT_APP_URL },
   //secondary: { label: 'Explore RASID', href: '#gopilot' },
   scrollHint: 'Scroll to descend',
 } as const;
@@ -263,7 +263,7 @@ export const PRICING_SECTION = {
       name: 'Free',
       price: '€0',
       cadence: 'per month',
-      tokens: '500',
+      tokens: '50,000',
       unit: 'tokens',
       cta: 'Sign up free',
       featured: false,
@@ -282,7 +282,7 @@ export const PRICING_SECTION = {
       name: 'Pro',
       price: '€149',
       cadence: 'per month',
-      tokens: '5,000',
+      tokens: '500,000',
       unit: 'tokens',
       cta: 'Start Pro',
       featured: true,
@@ -304,7 +304,7 @@ export const PRICING_SECTION = {
       name: 'Business',
       price: '€499',
       cadence: 'per month',
-      tokens: '25,000',
+      tokens: '2,500,000',
       unit: 'tokens',
       cta: 'Start Business',
       featured: false,
@@ -983,7 +983,7 @@ export const FAQ = [
 
   {
     q: 'How much does GoPilot cost?',
-    a: 'GoPilot has four plans: Free at €0 per month with 500 tokens, Pro at €149 per month with 5,000 tokens, Business at €499 per month with 25,000 tokens, and Enterprise with custom pricing. Enterprise also provides deployment options including cloud and on-premise environments.',
+    a: 'GoPilot has four plans: Free at €0 per month with 50,000 tokens, Pro at €149 per month with 500,000 tokens, Business at €499 per month with 2,500,000 tokens, and Enterprise with custom pricing. Enterprise also provides deployment options including cloud and on-premise environments.',
   },
 
   {
