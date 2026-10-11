@@ -15,6 +15,22 @@ const nextConfig = {
     // three.js and gsap are large; let Next split them optimally.
     optimizePackageImports: ['motion', 'gsap'],
   },
+  /**
+   * The GoPilot case study was replaced by the GoSuite one (GoPilot is now the
+   * centre of the suite rather than the whole product). Its URL was published
+   * and indexed, so it redirects permanently instead of 404ing. Keep this entry
+   * even after the old URL drops out of search results: external links to it do
+   * not expire.
+   */
+  async redirects() {
+    return [
+      {
+        source: '/case-studies/gopilot-ai-geospatial-agent',
+        destination: '/case-studies/gosuite-agentic-geospatial-platform',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -39,12 +39,21 @@ const matchTeam = (author: string) => {
 };
 
 /* Newest first, so the list stays correctly ordered as papers are appended to
-   the data array in whatever order. Stable sort keeps same-year insertion order. */
-const ordered = [...PUBLICATIONS].sort((a, b) => Number(b.year) - Number(a.year));
+   the data array in whatever order. Not-yet-published work leads: its venue is
+   still ahead of everything listed. Stable sort keeps same-year insertion order. */
+const ordered = [...PUBLICATIONS].sort(
+  (a, b) => Number(!!b.upcoming) - Number(!!a.upcoming) || Number(b.year) - Number(a.year),
+);
+
+/* Only published work goes into the structured data. An upcoming paper has no
+   DOI, no URL and no publication date, so a ScholarlyArticle node for it would
+   be an assertion we can't back with a record Google can fetch. */
+const published = ordered.filter((p) => !p.upcoming);
+const upcomingCount = PUBLICATIONS.length - published.length;
 
 const publicationsJsonLd = {
   '@context': 'https://schema.org',
-  '@graph': ordered.map((p) => ({
+  '@graph': published.map((p) => ({
     '@type': 'ScholarlyArticle',
     headline: p.title,
     name: p.title,
@@ -84,7 +93,7 @@ export default function Publications() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      {PUBLICATIONS.length > 0 && (
+      {published.length > 0 && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(publicationsJsonLd) }}
@@ -100,7 +109,8 @@ export default function Publications() {
               <span className="label text-signal/90">{S.eyebrow}</span>
             </div>
             <span className="label-sm hidden sm:inline">
-              {PUBLICATIONS.length} {PUBLICATIONS.length === 1 ? 'paper' : 'papers'}
+              {published.length} {published.length === 1 ? 'paper' : 'papers'}
+              {upcomingCount > 0 && ` · ${upcomingCount} upcoming`}
             </span>
           </div>
 
@@ -110,7 +120,7 @@ export default function Publications() {
           {/* list */}
           <ol className="mt-14 border-t border-white/[0.08]">
             {ordered.map((p, i) => (
-              <li key={p.url} className="border-b border-white/[0.08] py-8 md:py-10">
+              <li key={p.title} className="border-b border-white/[0.08] py-8 md:py-10">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                   <span className="font-mono text-[11px] tracking-widest text-signal/70">
                     {String(i + 1).padStart(2, '0')}
@@ -122,22 +132,34 @@ export default function Publications() {
                     {p.volume && ` ${p.volume}`}
                     {p.issue && `(${p.issue})`}
                     {p.pages && `, ${p.pages}`}
+                    {p.eventNote && `, ${p.eventNote}`}
                   </span>
                   {/* Type badge: journal article / conference paper / preprint. */}
                   <span className="border border-white/15 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-graphite">
                     {p.type.replace('-', ' ')}
                   </span>
+                  {p.upcoming && (
+                    <span className="border border-signal/40 bg-signal/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-signal">
+                      Upcoming
+                    </span>
+                  )}
                 </div>
 
                 <h2 className="mt-4 text-[1.15rem] font-medium leading-snug tracking-tight text-chalk md:text-[1.3rem]">
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="transition-colors duration-300 hover:text-signal"
-                  >
-                    {p.title}
-                  </a>
+                  {/* Upcoming papers have nothing to link to yet, so the title is
+                      plain text rather than a dead or placeholder link. */}
+                  {p.url ? (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors duration-300 hover:text-signal"
+                    >
+                      {p.title}
+                    </a>
+                  ) : (
+                    p.title
+                  )}
                 </h2>
 
                 {/* authors — RASID team members emphasised */}
@@ -171,16 +193,22 @@ export default function Publications() {
                 )}
 
                 <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 text-[12px] font-medium tracking-wide text-signal"
-                  >
-                    {/* Say where the link actually goes: the open-access arXiv copy. */}
-                    {p.url.includes('arxiv.org') ? 'View on arXiv' : 'View publication'}
-                    <span aria-hidden className="transition-transform duration-500 ease-cinema group-hover:translate-x-1">→</span>
-                  </a>
+                  {p.url ? (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2 text-[12px] font-medium tracking-wide text-signal"
+                    >
+                      {/* Say where the link actually goes: the open-access arXiv copy. */}
+                      {p.url.includes('arxiv.org') ? 'View on arXiv' : 'View publication'}
+                      <span aria-hidden className="transition-transform duration-500 ease-cinema group-hover:translate-x-1">→</span>
+                    </a>
+                  ) : (
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-graphite">
+                      Not yet published · link to follow
+                    </span>
+                  )}
                   {p.pdfUrl && (
                     <a
                       href={p.pdfUrl}

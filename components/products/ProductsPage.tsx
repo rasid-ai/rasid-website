@@ -43,7 +43,8 @@ export default function ProductsPage() {
           wrapper carries #gopilot to keep the anchor resolvable server-side
           (nav, footer and llms.txt all point at /products#gopilot). */}
       <div id="gopilot">
-        <GoPilotStudio />
+        {/* No "See All Products" link here: this is that page. */}
+        <GoPilotStudio showProductsLink={false} />
       </div>
 
       {/* GoServers and Plugins carry their own ids (#mcps, #plugins) */}
