@@ -614,6 +614,16 @@ export const TEAM_SECTION = {
       linkedin: 'https://www.linkedin.com/in/amira-el-halabi-6b3b77351/',
       email: 'amira@rasid.ai',
     },
+    {
+      name: 'Maytham Ismail',
+      role: 'Fintech Analyst',
+      initials: 'MI',
+      photo: '/team/member-7.webp',
+      expertise: 'Fintech & Finance',
+      bio: 'Covers the financial side of RASID’s work, from market analysis to fintech applications.',
+      linkedin: 'https://www.linkedin.com/in/maytham-ismail-cfa/',
+      email: 'maytham@rasid.ai',
+    },
   ] as {
     name: string;
     role: string;
