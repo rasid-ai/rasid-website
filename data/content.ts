@@ -480,6 +480,7 @@ export const PARTNERS_SECTION = {
     { name: 'AOAD', slug: 'aoad', logo: '/partners/aoad.png' },
     { name: 'FRED Engineering', slug: 'fred', logo: '/partners/fred.png' },
     { name: 'UNDP Regional Bureau for Arab States', slug: 'undp-rbas', logo: '/partners/undp-rbas.png' },
+    { name: 'Wozify', slug: 'wozify', logo: '/partners/wozify.png' },
   ] as { name: string; slug: string; logo?: string }[],
 } as const;
 
