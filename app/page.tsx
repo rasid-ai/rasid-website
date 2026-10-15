@@ -9,7 +9,7 @@ import Footer from '@/components/final/Footer';
  *
  *   Act I    Hero        Earth → region → target → dive → imagery
  *   Act II   GoPilot     the question, the agent, the answer
- *   …         (product · services · pricing · team · proof · partners · contact)
+ *   …         (product · services · team · proof · partners · contact)
  *
  * Act I is server-rendered as the shell (its copy is real HTML, so the page has
  * meaningful content and LCP text without waiting on WebGL). Everything in the
