@@ -4,7 +4,7 @@ import { CASE_STUDIES } from '@/data/content';
 /**
  * sitemap.xml — served by Next at /sitemap.xml.
  *
- * Only real, indexable routes are listed; in-page hash anchors (/#pricing,
+ * Only real, indexable routes are listed; in-page hash anchors (/#team,
  * /products#mcps, …) are NOT separate URLs. Draft case studies are excluded
  * until they're published (they render noindex). Keep in sync with app routes.
  */

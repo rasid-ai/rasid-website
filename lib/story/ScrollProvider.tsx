@@ -107,7 +107,7 @@ export default function ScrollProvider({ children }: { children: ReactNode }) {
       ScrollTrigger.refresh();
       setReady(true);
 
-      /* Arrived with a hash (e.g. from /services → '/#pricing')? Converge on the
+      /* Arrived with a hash (e.g. from /services → '/#team')? Converge on the
          section as the lazy/pinned sections mount and heights settle.
          history.scrollRestoration is manual, so this doesn't fight a restored
          position. */

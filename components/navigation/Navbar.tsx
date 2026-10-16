@@ -13,7 +13,7 @@ import RasidMark from './RasidMark';
  * Navbar — transparent at rest, condensing into a translucent bar on scroll.
  *
  * Structure: Products (dropdown) · Services (dropdown + /services page) ·
- * Pricing · Team · Contact Us. Anchor hrefs are written as '/#id' so a link
+ * Company (dropdown). Anchor hrefs are written as '/#id' so a link
  * works from any route:
  *   - on the home page ('/') we intercept and smooth-scroll to the section
  *     (with a header-height offset, plus one delayed re-resolve so lazily
@@ -321,7 +321,7 @@ export default function Navbar() {
   );
 }
 
-/** A top-level nav entry: a link (Services, Pricing…) or a hover trigger (Products). */
+/** A top-level nav entry: a link (Services…) or a hover trigger (Products, Company). */
 function NavTop({
   label,
   href,

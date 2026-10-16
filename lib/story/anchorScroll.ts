@@ -18,7 +18,7 @@ import type Lenis from 'lenis';
  * remaining corrections immediately — otherwise the re-aim loop yanks the reader
  * back to the target every time they try to scroll away.
  *
- * `hash` is a selector like '#pricing'. `offset` clears the fixed header.
+ * `hash` is a selector like '#team'. `offset` clears the fixed header.
  * (`immediate` is accepted for API compatibility; the jump is always instant.)
  */
 export function convergeScroll(

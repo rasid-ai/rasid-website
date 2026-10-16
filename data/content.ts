@@ -9,7 +9,7 @@
  * External destinations — the single source of truth for every product CTA.
  *
  * ▸ GOPILOT_APP_URL — the GoPilot SaaS application ("Launch GoPilot" / "Sign up").
- *   Every CTA on the site (navbar, hero, pricing, final, footer) reads this one
+ *   Every CTA on the site (navbar, hero, final, footer) reads this one
  *   constant, so relocating the app is a one-line change here. Note the app has
  *   its own domain, app.gopilot.earth: it is NOT a rasid.ai subdomain. The old
  *   app.rasid.ai/try-gopilot still 301s here, but link to the live host directly
@@ -48,7 +48,6 @@ export const NAV = {
         { label: 'AI Consultancy', href: '/services#ai-consultancy', note: 'Custom AI, OCR & advisory' },
       ],
     },
-    { label: 'Pricing', href: '/#pricing' },
     {
       // No href: 'Company' is a dropdown trigger, not a page. Children mix full
       // routes (About, Case Studies) with home-page sections (Team, Contact) —
@@ -481,6 +480,7 @@ export const PARTNERS_SECTION = {
     { name: 'AOAD', slug: 'aoad', logo: '/partners/aoad.png' },
     { name: 'FRED Engineering', slug: 'fred', logo: '/partners/fred.png' },
     { name: 'UNDP Regional Bureau for Arab States', slug: 'undp-rbas', logo: '/partners/undp-rbas.png' },
+    { name: 'Wozify', slug: 'wozify', logo: '/partners/wozify.png' },
   ] as { name: string; slug: string; logo?: string }[],
 } as const;
 
@@ -819,7 +819,6 @@ export const FOOTER = {
         { label: 'Case studies', href: '/case-studies' },
         { label: 'Publications', href: '/publications' },
         { label: 'Team', href: '/#team' },
-        { label: 'Pricing', href: '/#pricing' },
         { label: 'Contact Us', href: '/#contact' },
         { label: 'LinkedIn', href: 'https://www.linkedin.com/company/rasid-ai/' },
         { label: 'YouTube', href: 'https://www.youtube.com/@RASIDAI' },

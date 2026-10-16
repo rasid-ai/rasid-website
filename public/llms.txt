@@ -42,7 +42,7 @@ Context Protocol (MCP) as GoServers, and inside QGIS and ArcGIS Pro via plugins.
 - [All publications](https://rasid.ai/publications)
 
 ## Pricing
-- [Pricing](https://rasid.ai/#pricing): Free (€0/mo, 500 tokens); Pro (€149/mo, 5,000 tokens); Business (€499/mo, 25,000 tokens); Enterprise (custom, on-prem/cloud + MCP connector). Tokens are shared across GoPilot, GoBox, and MCP/API services.
+- [Pricing FAQ](https://rasid.ai/about): Free (€0/mo, 50,000 tokens); Pro (€149/mo, 500,000 tokens); Business (€499/mo, 2,500,000 tokens); Enterprise (custom, on-prem/cloud + MCP connector). Tokens are shared across GoPilot, GoBox, and MCP/API services.
 
 ## Company
 - [Team](https://rasid.ai/#team): Geospatial scientists, ML engineers and GIS specialists. Led by Dr. Ali J. Ghandour (R&D) and Reda Haidar (commercial).
